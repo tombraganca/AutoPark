@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CardRegitros extends StatelessWidget {
+class CardRegistros extends StatelessWidget {
   final String title;
   final String registro;
   final String date;
-  const CardRegitros({
+  const CardRegistros({
     super.key,
     required this.title,
     required this.registro,
@@ -21,12 +21,14 @@ class CardRegitros extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.10,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: const [Icon(Icons.south_outlined)],
             ),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.7,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title),

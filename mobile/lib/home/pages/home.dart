@@ -1,17 +1,29 @@
+import 'package:auto_park/core/domain/entities/registros_entity.dart';
+import 'package:auto_park/home/cubit/home_cubit.dart';
+import 'package:auto_park/home/cubit/home_state.dart';
+import 'package:auto_park/home/pages/registros_page.dart';
+import 'package:auto_park/home/widgets/selector_page.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/cards_registros.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/items_drawer.dart';
 
-class Home extends StatelessWidget {
-  Home({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final List<String> listItemsDrawer = [
-    ' Meus Registros',
+    'Meus Registros',
     'Vagas Disponíveis',
     'Meus Veículos',
   ];
+
   @override
   Widget build(BuildContext context) {
+    HomeCubit homeCubit = BlocProvider.of<HomeCubit>(context);
     return Scaffold(
       drawer: SizedBox(
         width: MediaQuery.of(context).size.width * 0.6,
@@ -70,11 +82,14 @@ class Home extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    ItemsDrawer(
-                      label: 'Minha Conta',
-                      onPressed: () {},
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: ItemsDrawer(
+                        label: 'Minha Conta',
+                        onPressed: () {},
+                      ),
                     ),
                     const Icon(Icons.person)
                   ],
@@ -90,33 +105,33 @@ class Home extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CardRegitros(
-              date: '10/03/2023',
-              registro: 'Registrada em 8:00',
-              title: 'Entrada',
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CardRegitros(
-              date: '10/03/2023',
-              registro: 'Registrada em 8:00',
-              title: 'Entrada',
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CardRegitros(
-              date: '10/03/2023',
-              registro: 'Registrada em 8:00',
-              title: 'Entrada',
-            ),
-          )
-        ],
+      body: BlocBuilder<HomeCubit, HomeState>(
+        bloc: homeCubit,
+        builder: (context, state) {
+          if (state.statusHome == StatusHome.initial) {
+            homeCubit.init();
+          }
+          return Column(
+            children: [
+              SelectorPage(
+                homeCubit: homeCubit,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.77,
+                child: Visibility(
+                  visible: state.statusHome != StatusHome.loadingList,
+                  replacement: Column(children: const [
+                    CircularProgressIndicator(),
+                    Text('Carregando a lista...')
+                  ]),
+                  child: RegistrosPage(
+                    listaRegistros: state.listRegistros!,
+                  ),
+                ),
+              )
+            ],
+          );
+        },
       ),
     );
   }

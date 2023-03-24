@@ -7,11 +7,18 @@ class ItemsDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: () => onPressed(),
-        child: Text(
-          label,
-          style: const TextStyle(color: Colors.white),
-        ));
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: TextButton(
+              onPressed: () => onPressed(),
+              child: Text(
+                label,
+                style: const TextStyle(color: Colors.white),
+              )),
+        ),
+      ],
+    );
   }
 }
