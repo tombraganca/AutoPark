@@ -1,16 +1,16 @@
-import 'package:auto_park/home/cubit/home_cubit.dart';
-import 'package:auto_park/home/cubit/home_state.dart';
+import 'package:auto_park/vagas/cubit/vagas_cubit.dart';
+import 'package:auto_park/vagas/cubit/vagas_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SelectorPage extends StatelessWidget {
-  final HomeCubit homeCubit;
-  const SelectorPage({super.key, required this.homeCubit});
+class SelectorVagasPage extends StatelessWidget {
+  final VagasCubit vagasCubit;
+  const SelectorVagasPage({super.key, required this.vagasCubit});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
-      bloc: homeCubit,
+    return BlocBuilder<VagasCubit, VagasState>(
+      bloc: vagasCubit,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -23,11 +23,12 @@ class SelectorPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: () => homeCubit.changeList(SelectList.hoje),
+                  onTap: () =>
+                      vagasCubit.changeList(SelectListVagas.disponivel),
                   child: Container(
                     width: MediaQuery.of(context).size.width / 3.2,
                     decoration: BoxDecoration(
-                      color: state.selectList == SelectList.hoje
+                      color: state.selectListVagas == SelectListVagas.disponivel
                           ? Colors.grey[700]
                           : null,
                       border: Border.all(width: 1.0, color: Colors.white),
@@ -38,9 +39,9 @@ class SelectorPage extends StatelessWidget {
                     ),
                     child: const Tab(
                       child: Text(
-                        'Hoje',
+                        'Diponível',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -48,28 +49,11 @@ class SelectorPage extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => homeCubit.changeList(SelectList.ultimaSemana),
+                  onTap: () => vagasCubit.changeList(SelectListVagas.todas),
                   child: Container(
                     width: MediaQuery.of(context).size.width / 3.2,
                     decoration: BoxDecoration(
-                      color: state.selectList == SelectList.ultimaSemana
-                          ? Colors.grey[700]
-                          : null,
-                      border: Border.all(width: 1.0, color: Colors.white),
-                    ),
-                    child: const Tab(
-                      child: Text('Última semana',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () => homeCubit.changeList(SelectList.todos),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width / 3.2,
-                    decoration: BoxDecoration(
-                      color: state.selectList == SelectList.todos
+                      color: state.selectListVagas == SelectListVagas.todas
                           ? Colors.grey[700]
                           : null,
                       border: Border.all(width: 1.0, color: Colors.white),
@@ -82,7 +66,7 @@ class SelectorPage extends StatelessWidget {
                       child: Text(
                         'Todos',
                         style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold),
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

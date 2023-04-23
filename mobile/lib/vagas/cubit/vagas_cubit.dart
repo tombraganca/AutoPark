@@ -18,6 +18,8 @@ class VagasCubit extends Cubit<VagasState> {
 Map<SelectListVagas, List<VagaEntity>> mapListMock = {
   SelectListVagas.disponivel: [
     VagaEntity(
+      tipoVaga: TipoVaga.idoso,
+      isAvailable: false,
       description: 'Vaga localizada na parte esquerda do primeiro andar',
       name: 'A1',
       reportes: [
@@ -27,6 +29,8 @@ Map<SelectListVagas, List<VagaEntity>> mapListMock = {
       ],
     ),
     VagaEntity(
+      tipoVaga: TipoVaga.pcd,
+      isAvailable: true,
       description: 'Vaga localizada na parte direita do primeiro andar',
       name: 'A2',
       reportes: [
@@ -38,6 +42,8 @@ Map<SelectListVagas, List<VagaEntity>> mapListMock = {
   ],
   SelectListVagas.todas: [
     VagaEntity(
+      tipoVaga: TipoVaga.idoso,
+      isAvailable: true,
       description: 'Vaga localizada na parte esquerda do primeiro andar',
       name: 'A1',
       reportes: [
@@ -47,6 +53,8 @@ Map<SelectListVagas, List<VagaEntity>> mapListMock = {
       ],
     ),
     VagaEntity(
+      tipoVaga: TipoVaga.comun,
+      isAvailable: false,
       description: 'Vaga localizada na parte direita do primeiro andar',
       name: 'A2',
       reportes: [

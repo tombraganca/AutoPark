@@ -16,11 +16,17 @@ class Login extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Center(
+                    child: Image.asset(
+                  'assets/images/logo.png',
+                  width: MediaQuery.of(context).size.height * 0.3,
+                  height: MediaQuery.of(context).size.width * 0.7,
+                )),
                 const Center(
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 35),
                     child: Text(
-                      'Bem vindo ao Auto Park',
+                      'Bem-Vindo ao Auto Park',
                       style: TextStyle(
                         fontSize: 22,
                       ),
@@ -79,7 +85,7 @@ class Login extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => Home(),
+                                      builder: (context) => const Home(),
                                     ),
                                   );
                                 },
@@ -117,6 +123,12 @@ class Login extends StatelessWidget {
                         onPressed: () {},
                         child: Text('Cadastre-se',
                             style: TextStyle(color: Colors.purple[200])))
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text('Versão: 1.0.0'),
                   ],
                 )
               ],

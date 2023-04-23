@@ -1,11 +1,10 @@
-import 'package:auto_park/core/domain/entities/registros_entity.dart';
 import 'package:auto_park/home/cubit/home_cubit.dart';
 import 'package:auto_park/home/cubit/home_state.dart';
 import 'package:auto_park/home/pages/registros_page.dart';
 import 'package:auto_park/home/widgets/selector_page.dart';
+import 'package:auto_park/vagas/pages/vagas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../widgets/items_drawer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -15,15 +14,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late HomeCubit homeCubit;
   final List<String> listItemsDrawer = [
     'Meus Registros',
     'Vagas Disponíveis',
     'Meus Veículos',
   ];
+  @override
+  void initState() {
+    homeCubit = BlocProvider.of<HomeCubit>(context);
+    homeCubit.init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    HomeCubit homeCubit = BlocProvider.of<HomeCubit>(context);
     return Scaffold(
       drawer: SizedBox(
         width: MediaQuery.of(context).size.width * 0.6,
@@ -59,14 +64,28 @@ class _HomeState extends State<Home> {
                 height: MediaQuery.of(context).size.height * 0.75,
                 child: ListView.separated(
                     itemBuilder: (context, index) {
-                      return ItemsDrawer(
-                        label: listItemsDrawer[index],
-                        onPressed: () {},
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: GestureDetector(
+                          onTap: () {
+                            if (listItemsDrawer[index]
+                                .contains('Vagas Disponíveis')) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Vagas()));
+                            }
+                          },
+                          child: Text(
+                            listItemsDrawer[index],
+                          ),
+                        ),
                       );
                     },
                     separatorBuilder: (context, index) {
                       return const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                         child: Divider(
                           color: Colors.white,
                           height: 2,
@@ -79,20 +98,23 @@ class _HomeState extends State<Home> {
                 color: Colors.white,
                 height: 2,
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: ItemsDrawer(
-                        label: 'Minha Conta',
-                        onPressed: () {},
+              GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        child: Text(
+                          'Sair',
+                          style: TextStyle(fontSize: 22),
+                        ),
                       ),
-                    ),
-                    const Icon(Icons.person)
-                  ],
+                      Icon(Icons.exit_to_app)
+                    ],
+                  ),
                 ),
               )
             ],
@@ -104,13 +126,16 @@ class _HomeState extends State<Home> {
           'Registros',
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.person),
+          ),
+        ],
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
         bloc: homeCubit,
         builder: (context, state) {
-          if (state.statusHome == StatusHome.initial) {
-            homeCubit.init();
-          }
           return Column(
             children: [
               SelectorPage(
@@ -121,7 +146,9 @@ class _HomeState extends State<Home> {
                 child: Visibility(
                   visible: state.statusHome != StatusHome.loadingList,
                   replacement: Column(children: const [
-                    CircularProgressIndicator(),
+                    CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.white)),
                     Text('Carregando a lista...')
                   ]),
                   child: RegistrosPage(
