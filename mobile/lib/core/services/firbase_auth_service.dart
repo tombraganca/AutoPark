@@ -1,6 +1,7 @@
+import 'package:auto_park/core/domain/entities/user_entity.dart';
+
 abstract class FirebaseAuthService {
-  Future<Map<String, dynamic>> auth(String email, String password);
-  Future<Map<String, dynamic>> create(String email, String password);
-  Future<Stream<Map<String, dynamic>>> read();
-  Future<void> delete();
+  Future<UserEntity> auth(String email, String password);
+  Future<bool> create(String email, String password);
+  Future<bool> delete();
 }

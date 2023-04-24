@@ -6,7 +6,9 @@ class VagaEntity {
   final List<String> reportes;
   final bool isAvailable;
   final TipoVaga tipoVaga;
+  final int id;
   VagaEntity({
+    required this.id,
     required this.name,
     required this.reportes,
     required this.description,

@@ -1,12 +1,14 @@
 import 'package:auto_park/core/domain/entities/vaga_entity.dart';
 
 class VagaDto extends VagaEntity {
-  VagaDto(
-      {required super.name,
-      required super.reportes,
-      required super.description,
-      required super.isAvailable,
-      required super.tipoVaga});
+  VagaDto({
+    required super.name,
+    required super.reportes,
+    required super.description,
+    required super.isAvailable,
+    required super.tipoVaga,
+    required super.id,
+  });
 
   factory VagaDto.fromJson(Map<String, dynamic> json) {
     return VagaDto(
@@ -15,6 +17,7 @@ class VagaDto extends VagaEntity {
       description: json['description'],
       isAvailable: json['isAvailable'],
       tipoVaga: json['tipovaga'],
+      id: json['id'],
     );
   }
 
@@ -25,6 +28,7 @@ class VagaDto extends VagaEntity {
       'description': super.description,
       'isAvailable': super.isAvailable,
       'tipoVaga': super.tipoVaga,
+      'id': super.id,
     };
   }
 }

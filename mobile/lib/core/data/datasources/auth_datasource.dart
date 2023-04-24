@@ -1,32 +1,59 @@
-import 'package:auto_park/core/services/firbase_auth_service.dart';
+import 'dart:convert';
+import 'package:auto_park/core/data/dtos/user_dto.dart';
+import 'package:auto_park/core/domain/entities/user_entity.dart';
+import 'package:auto_park/core/failures/auth/auth_failure.dart';
+import 'package:auto_park/core/services/http_connections_service.dart';
+import 'package:http/http.dart';
 
 abstract class AuthDataSource {
-  Future<Map<String, dynamic>> auth(String email, String password);
-  Future<Map<String, dynamic>> create(String email, String password);
-  Future<void> delete();
-  Future<Stream<Map<String, dynamic>>> read();
+  Future<UserEntity> auth(String email, String password);
+  Future<bool> create(String email, String password);
+  Future<bool> delete(String email, String password);
 }
 
 class AuthDataSourceImp implements AuthDataSource {
-  final FirebaseAuthService _firebaseAuthService;
-  AuthDataSourceImp(this._firebaseAuthService);
+  final HttpConnectionsService _httpConnectionsService;
+  AuthDataSourceImp(this._httpConnectionsService);
   @override
-  Future<Map<String, dynamic>> auth(String email, String password) async {
-    return await _firebaseAuthService.auth(email, password);
+  Future<UserEntity> auth(String email, String password) async {
+    try {
+      Response response = await _httpConnectionsService
+          .post('auth', {'login': email, 'senha': password});
+      if (response.statusCode == 200) {
+        return UserDto.fromJson(jsonDecode(response.body));
+      } else {
+        throw AuthFailure('Error ao logar');
+      }
+    } catch (e) {
+      throw AuthFailure(e.toString());
+    }
   }
 
   @override
-  Future<Map<String, dynamic>> create(String email, String password) async {
-    return await _firebaseAuthService.create(email, password);
+  Future<bool> create(String email, String password) async {
+    try {
+      Response response = await _httpConnectionsService
+          .post('auth', {'login': email, 'senha': password});
+      if (response.statusCode == 200) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw AuthFailure(e.toString());
+    }
   }
 
   @override
-  Future<void> delete() async {
-    return await _firebaseAuthService.delete();
-  }
-
-  @override
-  Future<Stream<Map<String, dynamic>>> read() async {
-    return await _firebaseAuthService.read();
+  Future<bool> delete(String email, String password) async {
+    try {
+      Response response = await _httpConnectionsService
+          .delete('auth', {'login': email, 'senha': password});
+      if (response.statusCode == 200) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw AuthFailure(e.toString());
+    }
   }
 }

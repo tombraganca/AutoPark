@@ -29,13 +29,16 @@ Map<SelectList, List<RegistroEntity>> mapListMock = {
       date: '10/03/2023',
       registro: 'Registrada em 8:00',
       title: 'Entrada',
+      id: 1,
     ),
     RegistroEntity(
+      id: 1,
       date: '10/03/2023',
       registro: 'Registrada em 8:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '10/03/2023',
       registro: 'Registrada em 8:00',
       title: 'Entrada',
@@ -43,26 +46,31 @@ Map<SelectList, List<RegistroEntity>> mapListMock = {
   ],
   SelectList.todos: [
     RegistroEntity(
+      id: 1,
       date: '12/06/2024',
       registro: 'Registrada em 8:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '12/06/2024',
       registro: 'Registrada em 8:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '12/06/2024',
       registro: 'Registrada em 8:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '12/06/2024',
       registro: 'Registrada em 8:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '12/06/2024',
       registro: 'Registrada em 8:00',
       title: 'Entrada',
@@ -70,46 +78,55 @@ Map<SelectList, List<RegistroEntity>> mapListMock = {
   ],
   SelectList.ultimaSemana: [
     RegistroEntity(
+      id: 1,
       date: '23/04/2025',
       registro: 'Registrada em 11:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '23/04/2025',
       registro: 'Registrada em 11:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '23/04/2025',
       registro: 'Registrada em 11:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '23/04/2025',
       registro: 'Registrada em 11:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '23/04/2025',
       registro: 'Registrada em 11:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '23/04/2025',
       registro: 'Registrada em 11:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '23/04/2025',
       registro: 'Registrada em 11:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '23/04/2025',
       registro: 'Registrada em 11:00',
       title: 'Entrada',
     ),
     RegistroEntity(
+      id: 1,
       date: '23/04/2025',
       registro: 'Registrada em 11:00',
       title: 'Entrada',

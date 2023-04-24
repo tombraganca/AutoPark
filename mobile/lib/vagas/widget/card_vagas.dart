@@ -17,7 +17,9 @@ class CardVagas extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
               left: BorderSide(
-                  color: vagaEntity.isAvailable ? Colors.green : Colors.red,
+                  color: vagaEntity.isAvailable
+                      ? const Color.fromARGB(255, 0, 73, 25)
+                      : Colors.red,
                   width: 10)),
         ),
         child: Row(
