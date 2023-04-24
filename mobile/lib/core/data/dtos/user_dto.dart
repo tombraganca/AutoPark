@@ -1,6 +1,5 @@
 import 'package:auto_park/core/data/dtos/vehicle_dto.dart';
 import 'package:auto_park/core/domain/entities/user_entity.dart';
-import 'package:auto_park/core/domain/entities/vehicle_entity.dart';
 
 class UserDto extends UserEntity {
   UserDto(
@@ -13,8 +12,10 @@ class UserDto extends UserEntity {
         phoneNumber: json['phoneNumber'],
         name: json['name'],
         vehicleEntity: json['vehicle'] != null
-            ? VehicleDto.fromJson(json['vehicle'])
-            : VehicleEntity.empty());
+            ? (json['vehicle'] as List<dynamic>)
+                .map((e) => VehicleDto.fromJson(e))
+                .toList()
+            : []);
   }
   Map<String, dynamic> toJson() {
     return {
