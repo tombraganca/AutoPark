@@ -1,10 +1,30 @@
-version: "3.7"
+version: '3.9'
 services:
-  auto-park-api:
-    build:
-      context: .
-      dockerfile: Dockerfile.developement
-    container_name: auto-park-api
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    hostname: postgres
     ports:
-      - "3000:3000"
-    restart: always
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: autopark
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # autopark-api:
+  #   stdin_open: true
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.development
+  #   container_name: autopark-api
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - "3000:3000"
+  #   restart: always
+
+volumes:
+  postgres-data:

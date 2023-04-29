@@ -9,7 +9,7 @@ interface ICars {
   };
 }
 
-export class User {
+export class Account {
   id!: string;
   name!: string;
   email!: string;
@@ -20,7 +20,7 @@ export class User {
   deleted_at!: Date;
 
   constructor(
-    props: Omit<User, "id" | "created_at" | "updated_at" | "deleted_at">,
+    props: Omit<Account, "id" | "created_at" | "updated_at" | "deleted_at">,
     id?: string
   ) {
     Object.assign(this, props);
