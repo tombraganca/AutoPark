@@ -1,22 +1,22 @@
 import { env } from 'process';
-import fastify from "fastify";
-import cors from '@fastify/cors'
+import express from 'express';
+import cors from 'cors';
+
+import router from './router';
 
 const PORT = Number(env.PORT) || 3000;
-const server = fastify();
 
-server.register(cors);
+const app = express();
+app.use(express.json());
+app.use(cors());
 
-server.get("/", async (request, reply) => {
-  return { hello: "world" };
+app.get('/', (request, response) => {
+    response.json({ message: 'Hello World!' });
 });
 
+app.use(router);
 
-server.listen({ port: PORT }, (err, address) => {
-  if (err) {
-    server.log.error(err);
-    process.exit(1);
-  }
-  server.log.info(`server listening on ${address}`);
-  console.log(`server listening on ${address}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
+
