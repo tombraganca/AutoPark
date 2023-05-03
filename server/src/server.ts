@@ -7,8 +7,11 @@ import router from './router';
 const PORT = Number(env.PORT) || 3000;
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
+
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (request, response) => {
     response.json({ message: 'Hello World!' });
