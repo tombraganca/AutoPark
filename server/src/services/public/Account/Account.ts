@@ -22,7 +22,7 @@ export async function createAccount(props: {
     }
 }
 
-export async function loginAccount(props: {email:string, password:string}) {
+export async function loginAccount(props: { email: string, password: string }) {
     const auth = getAuth(app);
     try {
         const userCredential = await signInWithEmailAndPassword(
@@ -37,5 +37,16 @@ export async function loginAccount(props: {email:string, password:string}) {
             errorCode: error.code,
             errorMessage: error.message,
         };
+    }
+}
+
+export async function getToken() {
+    const auth = getAuth(app);
+    const user = auth.currentUser;
+    if (user) {
+        const token = await user.getIdToken();
+        return token;
+    } else {
+        return null;
     }
 }

@@ -1,5 +1,5 @@
 import express, { request } from "express";
-import { createAccount, loginAccount } from "./Account";
+import { createAccount, getToken, loginAccount } from "./Account";
 
 const router = express();
 
@@ -27,6 +27,14 @@ router.post("/login", (request, response) => {
     }
 
     loginAccount(data).then((result) => {
+        response.status(200).json(result);
+    }).catch((error) => {
+        response.status(500).json(error);
+    });
+});
+
+router.get("/token", (request, response) => {
+    getToken().then((result) => {
         response.status(200).json(result);
     }).catch((error) => {
         response.status(500).json(error);
