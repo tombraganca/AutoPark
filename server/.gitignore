@@ -3,4 +3,5 @@ package-lock.json
 dist
 .env
 src/integrations/firebase/credentials.json
+src/integrations/firebase/serviceAccountKey.json
 ```
