@@ -1,10 +1,16 @@
 import express from 'express';
-import publicRoutes from './services/public/routes';
-import privateRoutes from './services/private/routes';
+import authUserRouter from "./useCases/authenticateUser/router";
+import createUserRouter from "./useCases/creareUser/router";
+import createCarRouter from "./useCases/createCar/router";
+import listCarRouter from "./useCases/listCar/router";
+import refreshTokenRouter from "./useCases/refreshTokenUser/router";
 
 const router = express();
 
-router.use(publicRoutes);
-router.use(privateRoutes)
+router.use(createUserRouter);
+router.use(authUserRouter);
+router.use(createCarRouter);
+router.use(listCarRouter);
+router.use(refreshTokenRouter)
 
 export default router;

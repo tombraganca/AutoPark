@@ -1,31 +1,31 @@
-import { Request, Response } from "express";
-import { admin } from "../providers/firebase/config";
+import { NextFunction, Request, Response } from "express";
+import { verify } from "jsonwebtoken";
 
 
-export default class Middleware {
-    static async decodeToken(request: Request, response: Response, next: any) {
 
-        try {
-            const token = request.headers.authorization?.split(" ")[1];
-            if (!token) {
-                return response.status(401).json({
-                    message: "Token not found"
-                });
-            }
+export default class AuthenticatedMiddleware {
+    static async ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
+        const authToken = request.headers.authorization;
 
-            const decodedToken = await admin.auth().verifyIdToken(token);
-
-            if (!decodedToken.uid) {
-                throw new Error("Invalid token");
-            }
-
-            request.body.uid = decodedToken.uid;
-            next();
-
-        } catch (error) {
+        if (!authToken) {
             return response.status(401).json({
-                message: "Invalid token"
+                status: "Error",
+                message: "Token is missing"
             });
         }
+
+        const [, token] = authToken.split(" ");
+
+        try {
+            const decodedToken = verify(token, "fb4e6935-9de5-4d33-b256-e956ad5cf8a1");
+            request.body.userid = decodedToken.sub;
+            return next();
+        } catch (error) {
+            return response.status(401).json({
+                status: "Error",
+                message: "Token invalid"
+            });
+        }
+
     }
 }

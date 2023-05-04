@@ -1,23 +1,28 @@
 import { env } from 'process';
-import express from 'express';
+import "express-async-errors";
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 
 import router from './router';
-
 const PORT = Number(env.PORT) || 3000;
-
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(router);
 
-app.use(express.urlencoded({ extended: true }));
+app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
+    return response.json({
+        status: "Error",
+        message: error.message
+    })
+});
+
 
 app.get('/', (request, response) => {
     response.json({ message: 'Hello World!' });
 });
 
-app.use(router);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
