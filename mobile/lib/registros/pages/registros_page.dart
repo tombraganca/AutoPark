@@ -64,9 +64,9 @@ class _RegistrosPageState extends State<RegistrosPage> {
                     child: ListView.separated(
                         itemBuilder: (context, index) {
                           return CardRegistros(
-                              title: state.listRegistros![index].title,
-                              registro: state.listRegistros![index].registro,
-                              date: state.listRegistros![index].date);
+                              title: state.listRegistros[index].title,
+                              registro: state.listRegistros[index].registro,
+                              date: state.listRegistros[index].date);
                         },
                         separatorBuilder: (context, index) {
                           return const Padding(
@@ -77,7 +77,7 @@ class _RegistrosPageState extends State<RegistrosPage> {
                             ),
                           );
                         },
-                        itemCount: state.listRegistros!.length),
+                        itemCount: state.listRegistros.length),
                   ),
                 )
               ],
