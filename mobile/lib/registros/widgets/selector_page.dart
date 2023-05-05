@@ -1,16 +1,16 @@
-import 'package:auto_park/home/cubit/home_cubit.dart';
-import 'package:auto_park/home/cubit/home_state.dart';
+import 'package:auto_park/registros/cubit/registros_cubit.dart';
+import 'package:auto_park/registros/cubit/registros_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectorPage extends StatelessWidget {
-  final HomeCubit homeCubit;
-  const SelectorPage({super.key, required this.homeCubit});
+  final RegistrosCubit registrosCubit;
+  const SelectorPage({super.key, required this.registrosCubit});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
-      bloc: homeCubit,
+    return BlocBuilder<RegistrosCubit, RegistrosState>(
+      bloc: registrosCubit,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -23,7 +23,7 @@ class SelectorPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: () => homeCubit.changeList(SelectList.hoje),
+                  onTap: () => registrosCubit.changeList(SelectList.hoje),
                   child: Container(
                     width: MediaQuery.of(context).size.width / 3.2,
                     decoration: BoxDecoration(
@@ -48,7 +48,8 @@ class SelectorPage extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => homeCubit.changeList(SelectList.ultimaSemana),
+                  onTap: () =>
+                      registrosCubit.changeList(SelectList.ultimaSemana),
                   child: Container(
                     width: MediaQuery.of(context).size.width / 3.2,
                     decoration: BoxDecoration(
@@ -65,7 +66,7 @@ class SelectorPage extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => homeCubit.changeList(SelectList.todos),
+                  onTap: () => registrosCubit.changeList(SelectList.todos),
                   child: Container(
                     width: MediaQuery.of(context).size.width / 3.2,
                     decoration: BoxDecoration(

@@ -1,135 +1,37 @@
-import 'package:auto_park/core/domain/entities/registros_entity.dart';
+import 'package:auto_park/core/domain/entities/user_entity.dart';
 import 'package:auto_park/home/cubit/home_state.dart';
+import 'package:auto_park/registros/pages/registros_page.dart';
+import 'package:auto_park/vagas/pages/vagas.dart';
+import 'package:auto_park/veiculos/pages/veiculos.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum SelectList { hoje, ultimaSemana, todos }
-
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit()
-      : super(HomeState(
-            statusHome: StatusHome.initial, selectList: SelectList.hoje));
-  void init() {
+  UserEntity? userEntity;
+  HomeCubit() : super(HomeState(statusHome: StatusHome.initial));
+  void changeContentHome(int index) {
     emit(state.copyWith(
-        listRegistros: mapListMock[SelectList.hoje],
-        statusHome: StatusHome.loadingList));
-    emit(state.copyWith(statusHome: StatusHome.loadedList));
+        indexCurrentContentHome: index,
+        contentCurrentWidget: contentsHome(index),
+        titleContentCurrentWidget: currentTitleWidget(index)));
   }
 
-  void changeList(SelectList selectList) => emit(state.copyWith(
-      selectList: selectList,
-      listRegistros: mapListMock[selectList],
-      statusHome: state.statusHome == StatusHome.loadedList
-          ? StatusHome.refrashLoadedList
-          : StatusHome.loadedList));
-}
+  void setUser(UserEntity userEntity) => this.userEntity = userEntity;
+  Widget contentsHome(int index) {
+    Map<int, Widget> mapContents = {
+      0: Vagas(userEntity: userEntity!),
+      1: RegistrosPage(userEntity: userEntity!),
+      2: Veiculos(userEntity: userEntity!),
+    };
+    return mapContents[index] ?? Vagas(userEntity: userEntity!);
+  }
 
-Map<SelectList, List<RegistroEntity>> mapListMock = {
-  SelectList.hoje: [
-    RegistroEntity(
-      date: '10/03/2023',
-      registro: 'Registrada em 8:00',
-      title: 'Entrada',
-      id: 1,
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '10/03/2023',
-      registro: 'Registrada em 8:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '10/03/2023',
-      registro: 'Registrada em 8:00',
-      title: 'Entrada',
-    ),
-  ],
-  SelectList.todos: [
-    RegistroEntity(
-      id: 1,
-      date: '12/06/2024',
-      registro: 'Registrada em 8:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '12/06/2024',
-      registro: 'Registrada em 8:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '12/06/2024',
-      registro: 'Registrada em 8:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '12/06/2024',
-      registro: 'Registrada em 8:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '12/06/2024',
-      registro: 'Registrada em 8:00',
-      title: 'Entrada',
-    ),
-  ],
-  SelectList.ultimaSemana: [
-    RegistroEntity(
-      id: 1,
-      date: '23/04/2025',
-      registro: 'Registrada em 11:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '23/04/2025',
-      registro: 'Registrada em 11:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '23/04/2025',
-      registro: 'Registrada em 11:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '23/04/2025',
-      registro: 'Registrada em 11:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '23/04/2025',
-      registro: 'Registrada em 11:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '23/04/2025',
-      registro: 'Registrada em 11:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '23/04/2025',
-      registro: 'Registrada em 11:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '23/04/2025',
-      registro: 'Registrada em 11:00',
-      title: 'Entrada',
-    ),
-    RegistroEntity(
-      id: 1,
-      date: '23/04/2025',
-      registro: 'Registrada em 11:00',
-      title: 'Entrada',
-    ),
-  ]
-};
+  String currentTitleWidget(int index) {
+    Map<int, String> mapTitles = {
+      0: 'Vagas',
+      1: 'Registros',
+      2: 'Veiculos',
+    };
+    return mapTitles[index] ?? 'Vagas';
+  }
+}

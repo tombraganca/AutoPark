@@ -3,29 +3,44 @@ import 'package:auto_park/core/domain/entities/vaga_entity.dart';
 import 'package:auto_park/vagas/cubit/vagas_cubit.dart';
 import 'package:equatable/equatable.dart';
 
-enum StatusVagas { initial, loadedList, refrashLoadedList }
-
 class VagasState extends Equatable {
   final StatusVagas statusVagas;
   final SelectListVagas? selectListVagas;
-  final List<VagaEntity> listVagas;
+  final Map<SelectListVagas, List<VagaEntity>> maplistVagas;
+  final List<VagaEntity> listSelected;
 
   @override
-  List<Object?> get props => [statusVagas];
+  List<Object?> get props =>
+      [statusVagas, maplistVagas, selectListVagas, listSelected];
   const VagasState(
       {required this.statusVagas,
       this.selectListVagas,
-      this.listVagas = const []});
+      this.listSelected = const [],
+      this.maplistVagas = const {
+        SelectListVagas.disponivel: [],
+        SelectListVagas.todas: [],
+      }});
 
   VagasState copyWith({
     StatusVagas? statusVagas,
     SelectListVagas? selectListVagas,
-    List<VagaEntity>? listVagas,
+    List<VagaEntity>? listSelected,
+    Map<SelectListVagas, List<VagaEntity>>? maplistVagas,
   }) {
     return VagasState(
       statusVagas: statusVagas ?? this.statusVagas,
       selectListVagas: selectListVagas ?? this.selectListVagas,
-      listVagas: listVagas ?? this.listVagas,
+      maplistVagas: maplistVagas ?? this.maplistVagas,
+      listSelected: listSelected ?? this.listSelected,
     );
   }
+}
+
+enum StatusVagas {
+  initial,
+  buscandoVagas,
+  errorBuscarVagas,
+  sucessoBuscarVagas,
+  selectList,
+  refrashselectList
 }

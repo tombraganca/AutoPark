@@ -9,18 +9,20 @@ class CardVagas extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-        Radius.circular(10),
-      )),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
       child: Container(
         height: 70,
         decoration: BoxDecoration(
           border: Border(
-              left: BorderSide(
-                  color: vagaEntity.isAvailable
-                      ? const Color.fromARGB(255, 0, 73, 25)
-                      : Colors.red,
-                  width: 10)),
+            left: BorderSide(
+                color: vagaEntity.isAvailable
+                    ? const Color.fromARGB(255, 0, 73, 25)
+                    : Colors.red,
+                width: 10),
+          ),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +34,11 @@ class CardVagas extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(vagaEntity.name),
+                  Text(
+                    vagaEntity.name,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                   Text(vagaEntity.description),
                 ],
               ),

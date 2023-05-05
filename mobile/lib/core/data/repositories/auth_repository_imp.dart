@@ -18,18 +18,19 @@ class AuthRepositoryImp implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> create(String email, String password) async {
+  Future<Either<Failure, bool>> create(
+      String email, String password, String name) async {
     try {
-      return Right(await _authDataSource.create(email, password));
+      return Right(await _authDataSource.create(email, password, name));
     } on Failure catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<Failure, bool>> delete(String email, String password) async {
+  Future<Either<Failure, bool>> delete() async {
     try {
-      return Right(await _authDataSource.delete(email, password));
+      return Right(await _authDataSource.delete());
     } on Failure catch (e) {
       return Left(e);
     }

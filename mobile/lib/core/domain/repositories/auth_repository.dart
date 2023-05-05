@@ -4,6 +4,7 @@ import 'package:either_dart/either.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, UserEntity>> auth(String email, String password);
-  Future<Either<Failure, bool>> create(String email, String password);
-  Future<Either<Failure, bool>> delete(String email, String password);
+  Future<Either<Failure, bool>> create(
+      String email, String password, String name);
+  Future<Either<Failure, bool>> delete();
 }

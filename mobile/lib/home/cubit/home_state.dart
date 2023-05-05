@@ -1,29 +1,42 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:auto_park/core/domain/entities/registros_entity.dart';
-import 'package:auto_park/home/cubit/home_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
-enum StatusHome { loadingList, loadedList, initial, refrashLoadedList }
-
-class HomeState {
-  final List<RegistroEntity>? listRegistros;
+class HomeState extends Equatable {
   final StatusHome statusHome;
-  final SelectList selectList;
-
-  HomeState({
-    required this.statusHome,
-    this.listRegistros = const [],
-    required this.selectList,
-  });
+  final int indexCurrentContentHome;
+  final String titleContentCurrentWidget;
+  Widget contentCurrentWidget;
+  HomeState(
+      {required this.statusHome,
+      this.titleContentCurrentWidget = 'Vagas',
+      this.indexCurrentContentHome = 0,
+      this.contentCurrentWidget = const SizedBox.shrink()});
+  @override
+  List<Object?> get props => [
+        statusHome,
+        indexCurrentContentHome,
+        contentCurrentWidget,
+        titleContentCurrentWidget
+      ];
 
   HomeState copyWith({
-    List<RegistroEntity>? listRegistros,
     StatusHome? statusHome,
-    SelectList? selectList,
+    int? indexCurrentContentHome,
+    Widget? contentCurrentWidget,
+    String? titleContentCurrentWidget,
   }) {
     return HomeState(
-      listRegistros: listRegistros ?? this.listRegistros,
       statusHome: statusHome ?? this.statusHome,
-      selectList: selectList ?? this.selectList,
+      indexCurrentContentHome:
+          indexCurrentContentHome ?? this.indexCurrentContentHome,
+      contentCurrentWidget: contentCurrentWidget ?? this.contentCurrentWidget,
+      titleContentCurrentWidget:
+          titleContentCurrentWidget ?? this.titleContentCurrentWidget,
     );
   }
+}
+
+enum StatusHome {
+  initial,
+  loadingList,
 }

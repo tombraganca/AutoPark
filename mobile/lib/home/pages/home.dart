@@ -1,29 +1,31 @@
+import 'package:auto_park/core/domain/entities/user_entity.dart';
 import 'package:auto_park/home/cubit/home_cubit.dart';
 import 'package:auto_park/home/cubit/home_state.dart';
-import 'package:auto_park/home/pages/registros_page.dart';
-import 'package:auto_park/home/widgets/selector_page.dart';
 import 'package:auto_park/vagas/pages/vagas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:line_icons/line_icons.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final UserEntity userEntity;
+  const Home({super.key, required this.userEntity});
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  late HomeCubit homeCubit;
+  final HomeCubit homeCubit = GetIt.I.get<HomeCubit>();
   final List<String> listItemsDrawer = [
     'Meus Registros',
     'Vagas Disponíveis',
     'Meus Veículos',
   ];
+
   @override
   void initState() {
-    homeCubit = BlocProvider.of<HomeCubit>(context);
-    homeCubit.init();
+    homeCubit.setUser(widget.userEntity);
     super.initState();
   }
 
@@ -73,7 +75,8 @@ class _HomeState extends State<Home> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Vagas()));
+                                      builder: (context) => Vagas(
+                                          userEntity: homeCubit.userEntity!)));
                             }
                           },
                           child: Text(
@@ -99,7 +102,8 @@ class _HomeState extends State<Home> {
                 height: 2,
               ),
               GestureDetector(
-                onTap: () => Navigator.of(context).pop(),
+                onTap: () =>
+                    Navigator.of(context).popUntil((route) => route.isFirst),
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: Row(
@@ -122,8 +126,13 @@ class _HomeState extends State<Home> {
         ),
       ),
       appBar: AppBar(
-        title: const Text(
-          'Registros',
+        title: BlocBuilder<HomeCubit, HomeState>(
+          bloc: homeCubit,
+          builder: (context, state) {
+            return Text(
+              state.titleContentCurrentWidget,
+            );
+          },
         ),
         centerTitle: true,
         actions: [
@@ -134,29 +143,27 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
+          bloc: homeCubit,
+          builder: (context, state) {
+            return state.contentCurrentWidget;
+          }),
+      bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
         bloc: homeCubit,
         builder: (context, state) {
-          return Column(
-            children: [
-              SelectorPage(
-                homeCubit: homeCubit,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.77,
-                child: Visibility(
-                  visible: state.statusHome != StatusHome.loadingList,
-                  replacement: Column(children: const [
-                    CircularProgressIndicator(
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(Colors.white)),
-                    Text('Carregando a lista...')
-                  ]),
-                  child: RegistrosPage(
-                    listaRegistros: state.listRegistros!,
-                  ),
-                ),
-              )
+          return BottomNavigationBar(
+            currentIndex: state.indexCurrentContentHome,
+            selectedFontSize: 10,
+            unselectedFontSize: 9,
+            type: BottomNavigationBarType.fixed,
+            items: const [
+              BottomNavigationBarItem(
+                  label: 'Vagas', icon: Icon(Icons.local_parking)),
+              BottomNavigationBarItem(
+                  label: 'Registros', icon: Icon(Icons.history)),
+              BottomNavigationBarItem(
+                  label: 'Veículos', icon: Icon(LineIcons.car))
             ],
+            onTap: (int index) => homeCubit.changeContentHome(index),
           );
         },
       ),

@@ -7,8 +7,8 @@ abstract class AuthUseCase {
   Future<Either<Failure, UserEntity>> auth(
       {required String email, required String password});
   Future<Either<Failure, bool>> create(
-      {required String email, required String password});
-  Future<Either<Failure, bool>> delete(String email, String password);
+      {required String email, required String password, required String name});
+  Future<Either<Failure, bool>> delete();
 }
 
 class AuthUseCaseImp implements AuthUseCase {
@@ -22,12 +22,14 @@ class AuthUseCaseImp implements AuthUseCase {
 
   @override
   Future<Either<Failure, bool>> create(
-      {required String email, required String password}) async {
-    return await _authRepository.create(email, password);
+      {required String email,
+      required String password,
+      required String name}) async {
+    return await _authRepository.create(email, password, name);
   }
 
   @override
-  Future<Either<Failure, bool>> delete(String email, String password) async {
-    return await _authRepository.delete(email, password);
+  Future<Either<Failure, bool>> delete() async {
+    return await _authRepository.delete();
   }
 }
