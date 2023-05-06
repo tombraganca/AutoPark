@@ -1,10 +1,30 @@
 import 'package:auto_park/core/injects/inject_container.dart';
 import 'package:flutter/material.dart';
 import 'login/pages/login.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await injectContainer();
+  await Firebase.initializeApp();
+
+  FirebaseMessaging.instance.getToken().then((value) => print("GetToken :  $value"));
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+    print("onMessage : $message");
+  });
+
+  FirebaseMessaging.instance.getInitialMessage().then(
+    (RemoteMessage? message) {
+      if (message != null) {
+        print("getInitialMessage : $message");
+     }
+    }
+  );
+  
   runApp(const MyApp());
 }
 
