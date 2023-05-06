@@ -1,8 +1,9 @@
 import { sign } from "jsonwebtoken";
+import { config } from "../../config/config"; 
 
 export class GenerateTokenProvider {
     async execute(accountId: string) {
-        const token = sign({}, "fb4e6935-9de5-4d33-b256-e956ad5cf8a1", {
+        const token = sign({}, config.jwtSecret, {
             subject: accountId,
             expiresIn: "1d"
         });

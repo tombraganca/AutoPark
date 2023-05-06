@@ -1,11 +1,14 @@
 import { MessagingProvider } from "../../providers/messaging/MessagingProvider";
 import { client } from "../../providers/prisma/client";
+import { v4 as uuid } from 'uuid';
 
 interface IPayloadNotification {
     body: {
         accessType: 'in' | 'out';
         plate: string;
         date: string;
+        model: string;
+        manufacturer: string;
     }
     token: string;
     accoundId: string;
@@ -41,14 +44,16 @@ export class PushNotificationUseCase {
 
             const message = {
                 notification: {
-                    title: 'Solicitação de novo acesso',
-                    body: 'Uma nova solicitação de acesso foi realizada.'
+                    title: 'Verificação de acesso!!',
+                    body: 'Detectamos que o veículo abaixxo deseja entrar no estacionamento. Clique aqui e responda para abrir a cancela.'
                 },
                 data: {
-                    orderId: '123456',
-                    orderDate: '2021-09-01',
+                    orderId: uuid(),
+                    orderDate: new Date().toISOString(), // '2021-08-21T18:02:00.000Z',
                     accessType: body.accessType,
                     plate: body.plate,
+                    model: body.model,
+                    manufacturer: body.manufacturer,
                 },
                 token: token
             };

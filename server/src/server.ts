@@ -1,10 +1,10 @@
-import { env } from 'process';
+import { config } from './config/config';
 import "express-async-errors";
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-
 import router from './router';
-const PORT = Number(env.PORT) || 3000;
+
+const PORT = config.port;
 const app = express();
 
 app.use(express.json());

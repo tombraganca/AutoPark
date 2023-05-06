@@ -17,6 +17,7 @@ model Account {
   password     String
   Car          Car[]
   RefreshToken RefreshToken[]
+  AccountToken AccountToken[]
 
   @@map("accounts")
 }
@@ -47,4 +48,14 @@ model Access {
   type  String
 
   @@map("accesses")
+}
+
+model AccountToken {
+  id        String  @id @default(uuid())
+  token     String
+  device    String
+  accountId String
+  Account   Account @relation(fields: [accountId], references: [id])
+
+  @@map("account_tokens")
 }
