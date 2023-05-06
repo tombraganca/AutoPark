@@ -7,7 +7,7 @@ class RegistrosState extends Equatable {
   final StatusRegistros statusRegistros;
   final SelectList selectList;
 
-  RegistrosState({
+  const RegistrosState({
     required this.statusRegistros,
     this.listRegistros = const [],
     required this.selectList,

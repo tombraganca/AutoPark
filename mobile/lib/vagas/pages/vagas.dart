@@ -36,21 +36,39 @@ class _VagasState extends State<Vagas> {
           builder: (context, state) {
             return Column(
               children: [
+                // SegmentedButton(
+                //   segments: const [
+                //     ButtonSegment(
+                //         label: Text('Disponível'),
+                //         value: SelectListVagas.disponivel),
+                //     ButtonSegment(
+                //       label: Text('Todas'),
+                //       value: SelectListVagas.todas,
+                //     ),
+                //   ],
+                //   selected: {state.selectListVagas},
+                //   onSelectionChanged: (value) =>
+                //       vagasCubit.changeList(value.first!),
+                // ),
                 SizedBox(
                   height: availableHeight * 0.15,
                   child: SelectorVagas(
                     vagasCubit: vagasCubit,
                   ),
                 ),
-                SizedBox(
-                  height: availableHeight * 0.80,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    itemCount: state.listSelected.length,
-                    itemBuilder: (context, index) {
-                      return CardVagas(vagaEntity: state.listSelected[index]);
-                    },
+                Visibility(
+                  visible: state.statusVagas == StatusVagas.buscandoVagas,
+                  replacement: SizedBox(
+                    height: availableHeight * 0.80,
+                    child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      itemCount: state.listSelected.length,
+                      itemBuilder: (context, index) {
+                        return CardVagas(vagaEntity: state.listSelected[index]);
+                      },
+                    ),
                   ),
+                  child: const Center(child: CircularProgressIndicator()),
                 ),
               ],
             );

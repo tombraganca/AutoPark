@@ -16,6 +16,11 @@ class HomeCubit extends Cubit<HomeState> {
         titleContentCurrentWidget: currentTitleWidget(index)));
   }
 
+  void setIndexInit(int index) => emit(state.copyWith(
+      indexCurrentContentHome: index,
+      contentCurrentWidget: contentsHome(index),
+      titleContentCurrentWidget: currentTitleWidget(index)));
+
   void setUser(UserEntity userEntity) => this.userEntity = userEntity;
   Widget contentsHome(int index) {
     Map<int, Widget> mapContents = {

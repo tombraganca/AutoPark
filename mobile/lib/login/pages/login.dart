@@ -127,8 +127,8 @@ class _LoginState extends State<Login> with Validators {
                                   child: Visibility(
                                     visible: state.statusLogin !=
                                         StatusLogin.autenticandoLogin,
-                                    replacement:
-                                        const CircularProgressIndicator(),
+                                    replacement: const Center(
+                                        child: CircularProgressIndicator()),
                                     child: ElevatedButton(
                                       onPressed: () async {
                                         if (formKey.currentState!.validate()) {

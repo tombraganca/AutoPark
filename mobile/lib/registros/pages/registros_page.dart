@@ -23,6 +23,7 @@ class _RegistrosPageState extends State<RegistrosPage> {
   @override
   void initState() {
     registrosCubit.setUser(widget.userEntity);
+    registrosCubit.init();
     super.initState();
   }
 

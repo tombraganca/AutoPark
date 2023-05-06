@@ -8,7 +8,7 @@ enum SelectList { hoje, ultimaSemana, todos }
 class RegistrosCubit extends Cubit<RegistrosState> {
   UserEntity? userEntity;
   RegistrosCubit()
-      : super(RegistrosState(
+      : super(const RegistrosState(
             statusRegistros: StatusRegistros.initial,
             selectList: SelectList.hoje));
 

@@ -37,10 +37,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       darkTheme: ThemeData(
-        colorScheme: ColorScheme.dark(
+        colorScheme: const ColorScheme.dark(
           primary: Colors.black,
           secondary: Color.fromARGB(255, 208, 188, 255),
         ),
+        bottomNavigationBarTheme:
+            BottomNavigationBarThemeData(backgroundColor: Colors.black),
         brightness: Brightness.dark,
         inputDecorationTheme: const InputDecorationTheme(
           errorBorder:

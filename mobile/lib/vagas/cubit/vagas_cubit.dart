@@ -40,7 +40,10 @@ class VagasCubit extends Cubit<VagasState> {
       emit(state.copyWith(
           statusVagas: StatusVagas.sucessoBuscarVagas,
           maplistVagas: map,
-          listSelected: map[SelectListVagas.disponivel]));
+          selectListVagas: SelectListVagas.disponivel,
+          listSelected: listVagas.isEmpty
+              ? mapListMock[SelectListVagas.disponivel]
+              : map[SelectListVagas.disponivel]));
     });
   }
 }
@@ -76,7 +79,7 @@ Map<SelectListVagas, List<VagaEntity>> mapListMock = {
       tipoVaga: TipoVaga.pcd,
       isAvailable: true,
       description: 'Vaga localizada na parte direita do primeiro andar',
-      name: 'A2',
+      name: 'A3',
       reportes: [
         'Existe um saco de batatas no local da vaga que impossibilita o uso da vaga',
         'Um motorista acefalóide parou o carro em duas vagas impossibilitando o uso da vaga',
@@ -88,7 +91,7 @@ Map<SelectListVagas, List<VagaEntity>> mapListMock = {
       tipoVaga: TipoVaga.pcd,
       isAvailable: true,
       description: 'Vaga localizada na parte direita do primeiro andar',
-      name: 'A2',
+      name: 'A4',
       reportes: [
         'Existe um saco de batatas no local da vaga que impossibilita o uso da vaga',
         'Um motorista acefalóide parou o carro em duas vagas impossibilitando o uso da vaga',
@@ -100,7 +103,7 @@ Map<SelectListVagas, List<VagaEntity>> mapListMock = {
       tipoVaga: TipoVaga.pcd,
       isAvailable: true,
       description: 'Vaga localizada na parte direita do primeiro andar',
-      name: 'A2',
+      name: 'A5',
       reportes: [
         'Existe um saco de batatas no local da vaga que impossibilita o uso da vaga',
         'Um motorista acefalóide parou o carro em duas vagas impossibilitando o uso da vaga',
@@ -123,10 +126,70 @@ Map<SelectListVagas, List<VagaEntity>> mapListMock = {
     ),
     VagaEntity(
       id: 1,
+      tipoVaga: TipoVaga.pcd,
+      isAvailable: true,
+      description: 'Vaga localizada na parte direita do primeiro andar',
+      name: 'A2',
+      reportes: [
+        'Existe um saco de batatas no local da vaga que impossibilita o uso da vaga',
+        'Um motorista acefalóide parou o carro em duas vagas impossibilitando o uso da vaga',
+        ''
+      ],
+    ),
+    VagaEntity(
+      id: 1,
+      tipoVaga: TipoVaga.pcd,
+      isAvailable: true,
+      description: 'Vaga localizada na parte direita do primeiro andar',
+      name: 'A3',
+      reportes: [
+        'Existe um saco de batatas no local da vaga que impossibilita o uso da vaga',
+        'Um motorista acefalóide parou o carro em duas vagas impossibilitando o uso da vaga',
+        ''
+      ],
+    ),
+    VagaEntity(
+      id: 1,
+      tipoVaga: TipoVaga.pcd,
+      isAvailable: true,
+      description: 'Vaga localizada na parte direita do primeiro andar',
+      name: 'A4',
+      reportes: [
+        'Existe um saco de batatas no local da vaga que impossibilita o uso da vaga',
+        'Um motorista acefalóide parou o carro em duas vagas impossibilitando o uso da vaga',
+        ''
+      ],
+    ),
+    VagaEntity(
+      id: 1,
+      tipoVaga: TipoVaga.pcd,
+      isAvailable: true,
+      description: 'Vaga localizada na parte direita do primeiro andar',
+      name: 'A5',
+      reportes: [
+        'Existe um saco de batatas no local da vaga que impossibilita o uso da vaga',
+        'Um motorista acefalóide parou o carro em duas vagas impossibilitando o uso da vaga',
+        ''
+      ],
+    ),
+    VagaEntity(
+      id: 1,
+      tipoVaga: TipoVaga.idoso,
+      isAvailable: true,
+      description: 'Vaga localizada na parte esquerda do primeiro andar',
+      name: 'A6',
+      reportes: [
+        'Existe um saco de batatas no local da vaga que impossibilita o uso da vaga',
+        'Um motorista acefalóide parou o carro em duas vagas impossibilitando o uso da vaga',
+        ''
+      ],
+    ),
+    VagaEntity(
+      id: 1,
       tipoVaga: TipoVaga.comun,
       isAvailable: false,
       description: 'Vaga localizada na parte direita do primeiro andar',
-      name: 'A2',
+      name: 'A7',
       reportes: [
         'Existe um saco de batatas no local da vaga que impossibilita o uso da vaga',
         'Um motorista acefalóide parou o carro em duas vagas impossibilitando o uso da vaga',

@@ -26,6 +26,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     homeCubit.setUser(widget.userEntity);
+    homeCubit.setIndexInit(0);
     super.initState();
   }
 
@@ -152,7 +153,7 @@ class _HomeState extends State<Home> {
         builder: (context, state) {
           return BottomNavigationBar(
             currentIndex: state.indexCurrentContentHome,
-            selectedFontSize: 10,
+            selectedFontSize: 15,
             unselectedFontSize: 9,
             type: BottomNavigationBarType.fixed,
             items: const [

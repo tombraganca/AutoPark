@@ -14,6 +14,5 @@ void injectVagas(GetIt getIt) {
 
   getIt.registerLazySingleton<VagasUseCase>(() => VagasUseCaseImp(getIt()));
 
-  getIt.registerLazySingleton<VagasCubit>(
-      () => VagasCubit(vagasUseCase: getIt()));
+  getIt.registerFactory<VagasCubit>(() => VagasCubit(vagasUseCase: getIt()));
 }

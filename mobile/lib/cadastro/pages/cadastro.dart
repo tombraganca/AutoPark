@@ -3,6 +3,7 @@ import 'package:auto_park/cadastro/cubit/cadastro_state.dart';
 import 'package:auto_park/core/functions/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 
 class Cadastro extends StatefulWidget {
@@ -34,15 +35,12 @@ class _CadastroState extends State<Cadastro> with Validators {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Center(
-                  child: Image.asset(
-                'assets/images/logo.png',
-                width: MediaQuery.of(context).size.height * 0.3,
-                height: MediaQuery.of(context).size.width * 0.5,
-              )),
-            ),
+            Center(
+                child: SvgPicture.asset(
+              'assets/images/cadastro.svg',
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.3,
+            )),
             BlocConsumer<CadastroCubit, CadastroState>(
               bloc: cadastroCubit,
               listener: (context, state) {
