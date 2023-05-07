@@ -1,0 +1,21 @@
+FROM node:alpine
+
+# Set working directory
+WORKDIR /app
+
+COPY ./server/package*.json ./
+COPY ./server/prisma ./prisma/
+
+COPY ./server/.developement.env ./
+
+COPY ./server/tsconfig.json ./
+COPY ./server/ .
+
+# Install dependencies
+RUN rm -rf .env && mv .developement.env .env
+RUN npm install
+RUN npx prisma generate
+
+EXPOSE 3000
+
+CMD npx prisma migrate dev && npm run dev

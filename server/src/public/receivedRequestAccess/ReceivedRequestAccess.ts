@@ -48,7 +48,7 @@ export class ReceivedRequestAccess {
                 body: 'Detectamos que o veículo abaixo deseja entrar no estacionamento. Clique aqui e responda para abrir a cancela.'
             },
             data: {
-                orderId: uuid(),
+                orderId:  new Date().getDate().toString(),
                 orderDate: new Date().toISOString(), // '2021-08-21T18:02:00.000Z',
                 accessType: accessType,
                 plate: car.plate,

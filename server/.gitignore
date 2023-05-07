@@ -2,6 +2,7 @@ node_modules
 package-lock.json
 dist
 .env
+.developement.env
 src/integrations/firebase/credentials.json
 src/integrations/firebase/serviceAccountKey.json
 ```
