@@ -7,7 +7,7 @@ import 'package:auto_park/core/services/http_connections_service.dart';
 import 'package:http/http.dart';
 
 abstract class AuthDataSource {
-  Future<UserEntity> auth(String email, String password);
+  Future<UserDto> auth(String email, String password);
   Future<bool> create(String email, String password, String name);
   Future<bool> delete();
 }
@@ -16,7 +16,7 @@ class AuthDataSourceImp implements AuthDataSource {
   final HttpConnectionsService _httpConnectionsService;
   AuthDataSourceImp(this._httpConnectionsService);
   @override
-  Future<UserEntity> auth(String email, String password) async {
+  Future<UserDto> auth(String email, String password) async {
     try {
       Response response = await _httpConnectionsService
           .post('login', {'email': email, 'password': password});

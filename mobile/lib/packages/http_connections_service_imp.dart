@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:auto_park/core/config/server_config.dart';
 import 'package:auto_park/core/services/http_connections_service.dart';
 import 'package:http/http.dart' as http;

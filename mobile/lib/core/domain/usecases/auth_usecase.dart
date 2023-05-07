@@ -1,10 +1,11 @@
+import 'package:auto_park/core/data/dtos/user_dto.dart';
 import 'package:auto_park/core/domain/entities/user_entity.dart';
 import 'package:auto_park/core/domain/repositories/auth_repository.dart';
 import 'package:auto_park/core/failures/failure.dart';
 import 'package:either_dart/either.dart';
 
 abstract class AuthUseCase {
-  Future<Either<Failure, UserEntity>> auth(
+  Future<Either<Failure, UserDto>> auth(
       {required String email, required String password});
   Future<Either<Failure, bool>> create(
       {required String email, required String password, required String name});
@@ -15,7 +16,7 @@ class AuthUseCaseImp implements AuthUseCase {
   final AuthRepository _authRepository;
   AuthUseCaseImp(this._authRepository);
   @override
-  Future<Either<Failure, UserEntity>> auth(
+  Future<Either<Failure, UserDto>> auth(
       {required String email, required String password}) async {
     return await _authRepository.auth(email, password);
   }

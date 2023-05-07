@@ -3,7 +3,6 @@ import 'package:auto_park/core/domain/entities/vehicle_entity.dart';
 class VehicleDto extends VehicleEntity {
   VehicleDto(
       {required super.id,
-      required super.name,
       required super.marca,
       required super.modelo,
       required super.placa});
@@ -11,7 +10,6 @@ class VehicleDto extends VehicleEntity {
   factory VehicleDto.fromJson(Map<String, dynamic> json) {
     return VehicleDto(
         id: json['ownerId'] ?? '',
-        name: json['name'] ?? "",
         marca: json['manufacturer'] ?? "",
         modelo: json['model'] ?? '',
         placa: json['plate'] ?? '');
@@ -19,7 +17,6 @@ class VehicleDto extends VehicleEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      'name': super.name,
       'marca': super.marca,
       'modelo': super.modelo,
       'placa': super.placa,
@@ -27,6 +24,6 @@ class VehicleDto extends VehicleEntity {
   }
 
   factory VehicleDto.empty() {
-    return VehicleDto(id: '', name: '', marca: '', modelo: '', placa: '');
+    return VehicleDto(id: '', marca: '', modelo: '', placa: '');
   }
 }

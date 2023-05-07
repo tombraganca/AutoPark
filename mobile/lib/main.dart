@@ -1,30 +1,16 @@
 import 'package:auto_park/core/injects/inject_container.dart';
+import 'package:auto_park/core/services/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'login/pages/login.dart';
+import 'package:get_it/get_it.dart';
+import 'features/login/pages/login.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await injectContainer();
   await Firebase.initializeApp();
-
-  FirebaseMessaging.instance.getToken().then((value) => print("GetToken :  $value"));
-
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-    print("onMessage : $message");
-  });
-
-  FirebaseMessaging.instance.getInitialMessage().then(
-    (RemoteMessage? message) {
-      if (message != null) {
-        print("getInitialMessage : $message");
-     }
-    }
-  );
-  
+  await GetIt.I.get<FirebaseMessagingService>().initialize();
+  print(await GetIt.I.get<FirebaseMessagingService>().getDeviceFirebaseToken());
   runApp(const MyApp());
 }
 
@@ -42,7 +28,7 @@ class MyApp extends StatelessWidget {
           secondary: Color.fromARGB(255, 208, 188, 255),
         ),
         bottomNavigationBarTheme:
-            BottomNavigationBarThemeData(backgroundColor: Colors.black),
+            const BottomNavigationBarThemeData(backgroundColor: Colors.black),
         brightness: Brightness.dark,
         inputDecorationTheme: const InputDecorationTheme(
           errorBorder:
