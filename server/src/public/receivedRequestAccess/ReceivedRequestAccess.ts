@@ -10,7 +10,6 @@ interface IPayloadNotification {
 
 export class ReceivedRequestAccess {
     async execute({ plate, accessType }: IPayloadNotification) {
-        ///encontrar o dono do carro
         const car = await client.car.findFirst({
             where: {
                 plate: plate
@@ -19,6 +18,25 @@ export class ReceivedRequestAccess {
 
         if (!car) {
             return { status: 'Error', message: 'Car not found' }
+        }
+
+        const lastAccess = await client.access.findFirst({
+            where: {
+                plate: car.plate
+            },
+            orderBy: {
+                date: 'desc'
+            }
+        });
+
+        if (lastAccess?.type === 'in' && accessType === 'in') {
+            console.error('Car already inside')
+            return { status: 'Error', message: 'Car already inside' }
+        }
+
+        if (lastAccess?.type === 'out' && accessType === 'out') {
+            console.error('Car already outside')
+            return { status: 'Error', message: 'Car already outside' }
         }
 
         const account = await client.account.findFirst({
@@ -31,7 +49,7 @@ export class ReceivedRequestAccess {
             return { status: 'Error', message: 'User not found' }
         }
 
-        ///encontrar o token do dono do carro
+        //encontrar o token do dono do carro
         const token = await client.accountToken.findFirst({
             where: {
                 accountId: account.id
@@ -48,7 +66,7 @@ export class ReceivedRequestAccess {
                 body: 'Detectamos que o veículo abaixo deseja entrar no estacionamento. Clique aqui e responda para abrir a cancela.'
             },
             data: {
-                orderId:  new Date().getDate().toString(),
+                orderId: new Date().getDate().toString(),
                 orderDate: new Date().toISOString(), // '2021-08-21T18:02:00.000Z',
                 accessType: accessType,
                 plate: car.plate,

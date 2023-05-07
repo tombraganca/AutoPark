@@ -7,6 +7,7 @@ import refreshTokenRouter from "./useCases/refreshTokenUser/router";
 import pushNotificationRouter from "./useCases/pushNotification/router";
 import createTokenUser from "./useCases/createTokenUser/router";
 import receivedRequestAccessRouter from "./public/receivedRequestAccess/router"
+import createAccessRegisterRouter from "./useCases/createAccessRegister/router";
 
 const router = express();
 
@@ -18,5 +19,6 @@ router.use(refreshTokenRouter);
 router.use(pushNotificationRouter);
 router.use(createTokenUser);
 router.use(receivedRequestAccessRouter);
+router.use(createAccessRegisterRouter);
 
 export default router;

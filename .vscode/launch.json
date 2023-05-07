@@ -1,0 +1,24 @@
+//run attach mode npm run dev:debug
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/index.js",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+        },
+        {
+            "name": "Attach",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+        }
+    ]
+}
