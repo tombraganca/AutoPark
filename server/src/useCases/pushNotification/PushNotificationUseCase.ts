@@ -48,7 +48,7 @@ export class PushNotificationUseCase {
                     body: 'Detectamos que o veículo abaixxo deseja entrar no estacionamento. Clique aqui e responda para abrir a cancela.'
                 },
                 data: {
-                    orderId: uuid(),
+                    orderId: new Date().getDate().toString(),
                     orderDate: new Date().toISOString(), // '2021-08-21T18:02:00.000Z',
                     accessType: body.accessType,
                     plate: body.plate,

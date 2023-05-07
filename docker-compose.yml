@@ -16,5 +16,16 @@ services:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  auto-park:
+    build:
+      context: .
+      dockerfile: ./dockerfile/Dockerfile.api
+    container_name: auto-park-api
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
 volumes:
   postgres-data:
