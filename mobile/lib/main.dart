@@ -10,7 +10,6 @@ void main() async {
   await injectContainer();
   await Firebase.initializeApp();
   await GetIt.I.get<FirebaseMessagingService>().initialize();
-  print(await GetIt.I.get<FirebaseMessagingService>().getDeviceFirebaseToken());
   runApp(const MyApp());
 }
 

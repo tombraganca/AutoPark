@@ -1,4 +1,5 @@
 import 'package:auto_park/core/injects/inject_auth.dart';
+import 'package:auto_park/core/injects/inject_fcm.dart';
 import 'package:auto_park/core/injects/inject_firebase_messaging.dart';
 import 'package:auto_park/core/injects/inject_home.dart';
 import 'package:auto_park/core/injects/inject_http.dart';
@@ -11,9 +12,10 @@ import 'package:get_it/get_it.dart';
 
 Future<void> injectContainer() async {
   GetIt getIt = GetIt.instance;
-  injectUser(getIt);
   injectHttp(getIt);
+  injectUser(getIt);
   injectAuth(getIt);
+  injectFcm(getIt);
   injectHome(getIt);
   injectVeiculos(getIt);
   injectRegistros(getIt);

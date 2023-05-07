@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:auto_park/core/data/dtos/vaga_dto.dart';
 import 'package:auto_park/core/domain/entities/vaga_entity.dart';
+import 'package:auto_park/core/failures/vagas/vagas_failure.dart';
 import 'package:auto_park/core/services/http_connections_service.dart';
 import 'package:http/http.dart';
 
@@ -29,7 +30,7 @@ class VagasDataSourceImp implements VagasDataSource {
       }
       return [];
     } catch (e) {
-      throw e.toString();
+      throw VagasFailure(e.toString());
     }
   }
 }

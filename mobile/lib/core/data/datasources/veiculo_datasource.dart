@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:auto_park/core/data/dtos/vehicle_dto.dart';
 import 'package:auto_park/core/domain/entities/vehicle_entity.dart';
+import 'package:auto_park/core/failures/veiculos/veiculo_failure.dart';
 import 'package:auto_park/core/services/http_connections_service.dart';
 import 'package:http/http.dart';
 
@@ -56,7 +57,7 @@ class VehicleDataSourceImp implements VehicleDataSource {
       }
       return [];
     } catch (e) {
-      throw e.toString();
+      throw VeiculosFailure(e.toString());
     }
   }
 }

@@ -5,10 +5,7 @@ class AuthFailure extends Failure {
 }
 
 class AuthFailureLoginExists extends AuthFailure {
-  AuthFailureLoginExists()
-      : super(
-          'Login já existente !',
-        );
+  AuthFailureLoginExists() : super('Login já existente');
 }
 
 class AuthFailurePasswordInvalid extends AuthFailure {

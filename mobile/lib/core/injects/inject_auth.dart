@@ -10,8 +10,10 @@ void injectAuth(GetIt getIt) {
   getIt.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImp(getIt()));
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(getIt()));
   getIt.registerLazySingleton<AuthUseCase>(() => AuthUseCaseImp(getIt()));
-  getIt.registerFactory<LoginCubit>(() =>
-      LoginCubit(authUseCase: getIt(), firebaseMessagingService: getIt()));
+  getIt.registerFactory<LoginCubit>(() => LoginCubit(
+      authUseCase: getIt(),
+      firebaseMessagingService: getIt(),
+      fcmUseCase: getIt()));
   getIt.registerFactory<CadastroCubit>(
       () => CadastroCubit(authUseCase: getIt()));
 }
