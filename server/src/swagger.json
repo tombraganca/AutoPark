@@ -39,6 +39,8 @@
                     "Account"
                 ],
                 "requestBody": {
+                    "description": "Objeto de criação de conta",
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -60,7 +62,22 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Conta criada com sucesso"
+                        "description": "Conta criada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "refreshToken": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Erro ao criar conta"
@@ -85,6 +102,74 @@
                         "type": "string"
                     },
                     "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "AccountToken": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "token": {
+                        "type": "string"
+                    },
+                    "device": {
+                        "type": "string"
+                    },
+                    "accountId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Car": {
+                "type": "object",
+                "properties": {
+                    "plate": {
+                        "type": "string"
+                    },
+                    "model": {
+                        "type": "string"
+                    },
+                    "manufacturer": {
+                        "type": "string"
+                    },
+                    "ownerId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "refreshToken": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "expiresIn": {
+                        "type": "integer"
+                    },
+                    "accountId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Access": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "carId": {
+                        "type": "string"
+                    },
+                    "plate": {
+                        "type": "string"
+                    },
+                    "type": {
                         "type": "string"
                     }
                 }

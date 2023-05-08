@@ -39,4 +39,13 @@ export class ConnectionMoqtt {
         console.log("Client is offline")
     }
 
+    public send(message: string) {
+        this.client.publish(this.topicName, message, { qos: 1 }, (err) => {
+            if (err) {
+                console.log("Error sending message", err)
+            }
+            console.log("Message sent")
+        })
+    }
+
 }

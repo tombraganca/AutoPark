@@ -16,15 +16,27 @@ services:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
 
-  auto-park:
+  auto-park-api:
     build:
-      context: .
-      dockerfile: ./dockerfile/Dockerfile.api
+      context: ./server
+      dockerfile: ./Dockerfile.api
     container_name: auto-park-api
     depends_on:
       - postgres
     ports:
       - "3000:3000"
+    restart: always
+
+  # service in python for stream images
+  auto-park-stream:
+    build:
+      context: ./CamStreaming
+      dockerfile: ./Dockerfile.stream
+    container_name: auto-park-stream
+    depends_on:
+      - auto-park-api
+    ports:
+      - "8000:8000"
     restart: unless-stopped
 
 volumes:

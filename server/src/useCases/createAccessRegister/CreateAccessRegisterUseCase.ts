@@ -1,4 +1,5 @@
 import { client } from "../../providers/prisma/client";
+import { connectMqtt } from "../../providers/mqttProvider/server";
 
 interface ICreateAccessRegisterRequestDTO {
     date: Date;
@@ -22,6 +23,8 @@ export class CreateAccessRegisterUseCase {
                 }
             });
 
+            // Do Post in mqtt broker
+            connectMqtt.send('open');
             return accessRegister;
         } catch (error: any) {
             throw new Error(error.message);

@@ -1,0 +1,23 @@
+#server in python 3.9
+FROM python:3.9-alpine
+
+WORKDIR /app
+
+# set a directory for the app
+COPY . .
+
+# copy all the files to the container
+
+# install dependencies
+RUN pip install -r requirements/requirements.txt --no-cache-dir
+RUN rm -rf .env && mv .developement.env .env
+
+
+# tell the port number the container should expose
+EXPOSE 8000
+
+# run the command
+CMD ["python3", "./src/app.py"]
+
+
+

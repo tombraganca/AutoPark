@@ -30,3 +30,14 @@ Instala todas as dependências necessárias para a aplicação.
 <code>npm run dev</code>
 
 Isso irá subir um servidos na porta localhost:3000
+
+<hr>
+
+# Swagger
+
+Todas as requisições estão sendo documentada e, caso você esteja com o serviço rodando, podem ser acessadas <a href="http://localhost:3000/api-docs/#/"> AQUI</a>.
+
+Em sua maioria é utiolizado validação de autenticação. No entanto existem apis de testes que permite a vizualização de alguns dados.
+
+<img src="./assets/swagger.png" title="Print da tela do swagger">
+

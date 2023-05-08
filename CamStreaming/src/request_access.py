@@ -1,5 +1,6 @@
 import re
 import requests
+import os
 
 
 class Request_access:
@@ -18,7 +19,8 @@ class Request_access:
         self.accessType = accessType
 
     def do_request(self):
-        url = 'http://localhost:3000/request-access'
+        url = os.getenv("AUTO_PARK_API_URL") + '/request-access'
+        print(url)
         dados = {'plate': self.plate, 'accessType': self.accessType}
         response = requests.post(url, json=dados)
         return response.json()

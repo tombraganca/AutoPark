@@ -3,13 +3,13 @@ FROM node:alpine
 # Set working directory
 WORKDIR /app
 
-COPY ./server/package*.json ./
-COPY ./server/prisma ./prisma/
+COPY ./package*.json ./
+COPY ./prisma ./prisma/
 
-COPY ./server/.developement.env ./
+COPY ./.developement.env ./
 
-COPY ./server/tsconfig.json ./
-COPY ./server/ .
+COPY ./tsconfig.json ./
+COPY ./ .
 
 # Install dependencies
 RUN rm -rf .env && mv .developement.env .env
