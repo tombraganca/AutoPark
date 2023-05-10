@@ -4,5 +4,6 @@ dotenv.config();
 export const config = {
     port: process.env.PORT,
     brokerUrl: process.env.BROKER_URL,
-    jwtSecret: process.env.JWT_SECRET || 'secret'
+    jwtSecret: process.env.JWT_SECRET || 'secret',
+    mqttTopic: process.env.MQTT_TOPIC || 'test/autopark',
 }
