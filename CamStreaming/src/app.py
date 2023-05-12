@@ -11,7 +11,6 @@ print("Loading environment variables")
 
 PORT = int(os.getenv("PORT"))
 
-
 @app.route("/test", methods=["GET"])
 def hello_world():
     print("Hello World")

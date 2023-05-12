@@ -1,9 +1,10 @@
 import re
-import requests
-import os
+import api_service
 
 
 class Request_access:
+
+    service = api_service.Api_service()
 
     def __init__(self, plate, accessType):
         # REGEX to validate plate
@@ -19,8 +20,9 @@ class Request_access:
         self.accessType = accessType
 
     def do_request(self):
-        url = os.getenv("AUTO_PARK_API_URL") + '/request-access'
-        print(url)
-        dados = {'plate': self.plate, 'accessType': self.accessType}
-        response = requests.post(url, json=dados)
-        return response.json()
+        print('Requesting access for plate: ' + self.plate)
+        
+        return self.service.post('/request-access', {
+            'plate': self.plate,
+            'accessType': self.accessType
+        })
