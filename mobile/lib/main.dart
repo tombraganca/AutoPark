@@ -1,8 +1,8 @@
 import 'package:auto_park/core/injects/inject_container.dart';
+import 'package:auto_park/core/rotas/routes_app.dart';
 import 'package:auto_park/core/services/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'features/login/pages/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -10,12 +10,13 @@ void main() async {
   await injectContainer();
   await Firebase.initializeApp();
   await GetIt.I.get<FirebaseMessagingService>().initialize();
-  runApp(const MyApp());
+  print(await GetIt.I.get<FirebaseMessagingService>().getDeviceFirebaseToken());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  final RoutesApp _routesApp = RoutesApp();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,7 +52,9 @@ class MyApp extends StatelessWidget {
       ),
       theme: ThemeData(brightness: Brightness.light),
       themeMode: ThemeMode.dark,
-      home: const Login(),
+      onGenerateRoute: _routesApp.generateRoute,
+      navigatorKey: _routesApp.navigatorGlobalKey,
+      initialRoute: 'LOGIN',
     );
   }
 }

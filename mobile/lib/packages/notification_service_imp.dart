@@ -9,6 +9,7 @@ import 'package:get_it/get_it.dart';
 
 class NotificationServiceImp with ToastMessages implements NotificationService {
   late FlutterLocalNotificationsPlugin localNotificationsPlugin;
+  NotificationDto _notificationDto = NotificationDto.empty();
   NotificationServiceImp() {
     localNotificationsPlugin = FlutterLocalNotificationsPlugin();
     initializeNotifications();
@@ -47,8 +48,9 @@ class NotificationServiceImp with ToastMessages implements NotificationService {
   @override
   void onSelectNotification(String? payload) {
     if (payload != null && payload.isNotEmpty) {
-      Navigator.pushNamed(
-          RoutesApp.navigatorKey!.currentContext!, payload.toUpperCase());
+      Navigator.pushReplacementNamed(
+          RoutesApp.navigatorKey!.currentContext!, payload.toUpperCase(),
+          arguments: _notificationDto);
     }
   }
 
@@ -71,6 +73,7 @@ class NotificationServiceImp with ToastMessages implements NotificationService {
       android: androidNotificationDetails,
       iOS: iosNotificationDetails,
     );
+    _notificationDto = notificationDto;
     localNotificationsPlugin.show(
       int.tryParse(notificationDto.id) ?? 1,
       notificationDto.title,

@@ -41,4 +41,5 @@ class HomeCubit extends Cubit<HomeState> {
     };
     return mapTitles[index] ?? 'Vagas';
   }
+  
 }

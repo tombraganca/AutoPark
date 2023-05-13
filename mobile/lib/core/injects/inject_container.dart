@@ -3,6 +3,7 @@ import 'package:auto_park/core/injects/inject_fcm.dart';
 import 'package:auto_park/core/injects/inject_firebase_messaging.dart';
 import 'package:auto_park/core/injects/inject_home.dart';
 import 'package:auto_park/core/injects/inject_http.dart';
+import 'package:auto_park/core/injects/inject_notificacao.dart';
 import 'package:auto_park/core/injects/inject_notification_service.dart';
 import 'package:auto_park/core/injects/inject_registros.dart';
 import 'package:auto_park/core/injects/inject_user.dart';
@@ -22,4 +23,5 @@ Future<void> injectContainer() async {
   injectVagas(getIt);
   injectFirebaseMessaging(getIt);
   injectNotificationService(getIt);
+  initInjectNotificacao(getIt);
 }

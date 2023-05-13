@@ -1,13 +1,18 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:auto_park/core/data/dtos/notification_dto.dart';
+import 'package:auto_park/core/domain/entities/vehicle_entity.dart';
+import 'package:auto_park/core/rotas/routes_app.dart';
 import 'package:auto_park/features/home/cubit/home_cubit.dart';
 import 'package:auto_park/features/home/cubit/home_state.dart';
-import 'package:auto_park/features/vagas/pages/vagas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:line_icons/line_icons.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  Future<dynamic> Function()? showDialogAcesso;
+  Home({super.key, this.showDialogAcesso});
 
   @override
   State<Home> createState() => _HomeState();
@@ -15,15 +20,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final HomeCubit homeCubit = GetIt.I.get<HomeCubit>();
-  final List<String> listItemsDrawer = [
-    'Meus Registros',
-    'Vagas Disponíveis',
-    'Meus Veículos',
-  ];
 
   @override
   void initState() {
     homeCubit.setIndexInit(0);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.showDialogAcesso != null) {
+        widget.showDialogAcesso!();
+      }
+    });
     super.initState();
   }
 
@@ -34,6 +39,7 @@ class _HomeState extends State<Home> {
         width: MediaQuery.of(context).size.width * 0.6,
         child: Drawer(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -61,64 +67,27 @@ class _HomeState extends State<Home> {
                 height: 3,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.75,
-                child: ListView.separated(
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: GestureDetector(
-                          onTap: () {
-                            if (listItemsDrawer[index]
-                                .contains('Vagas Disponíveis')) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Vagas(
-                                          userEntity: homeCubit.userEntity)));
-                            }
-                          },
-                          child: Text(
-                            listItemsDrawer[index],
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context)
+                        .popUntil((route) => route.isFirst),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5),
+                            child: Text(
+                              'Sair',
+                              style: TextStyle(fontSize: 22),
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                        child: Divider(
-                          color: Colors.white,
-                          height: 2,
-                        ),
-                      );
-                    },
-                    itemCount: listItemsDrawer.length),
-              ),
-              const Divider(
-                color: Colors.white,
-                height: 2,
-              ),
-              GestureDetector(
-                onTap: () =>
-                    Navigator.of(context).popUntil((route) => route.isFirst),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: Text(
-                          'Sair',
-                          style: TextStyle(fontSize: 22),
-                        ),
+                          Icon(Icons.exit_to_app)
+                        ],
                       ),
-                      Icon(Icons.exit_to_app)
-                    ],
-                  ),
-                ),
-              )
+                    ),
+                  )),
             ],
           ),
         ),
@@ -135,7 +104,20 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).pushReplacementNamed(
+              'NOTIFICACAO',
+              arguments: NotificationDto(
+                  id: '1',
+                  title: 'title',
+                  body: 'body',
+                  vehicleEntity: VehicleEntity(
+                      id: '1',
+                      marca: 'Toyota',
+                      modelo: 'Corrola',
+                      placa: 'BBA1234'),
+                  datahora: '2023/05/12',
+                  tipoDeAcesso: 'Entrada'),
+            ),
             icon: const Icon(Icons.person),
           ),
         ],

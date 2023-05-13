@@ -1,5 +1,4 @@
 import 'package:auto_park/core/data/dtos/notification_dto.dart';
-import 'package:auto_park/core/data/dtos/user_dto.dart';
 import 'package:auto_park/core/domain/entities/vehicle_entity.dart';
 import 'package:auto_park/core/functions/toasts.dart';
 import 'package:auto_park/core/injects/userSingleton/user_global_singleton.dart';
@@ -13,6 +12,7 @@ class FirebaseMessagingServiceImp
     with ToastMessages
     implements FirebaseMessagingService {
   final NotificationService _notificationService;
+  NotificationDto _notificationDto = NotificationDto.empty();
   FirebaseMessagingServiceImp(
     this._notificationService,
   );
@@ -36,21 +36,20 @@ class FirebaseMessagingServiceImp
     FirebaseMessaging.onMessage.listen(
       ((message) {
         if (message.notification != null) {
-          _notificationService.showNotification(
-            NotificationDto(
-              id: message.data['orderId'] ?? '',
-              body: message.notification!.body!,
-              title: message.notification!.title!,
-              datahora: message.data['orderDate'] ?? '',
-              tipoDeAcesso: message.data['accessType'] ?? '',
-              vehicleEntity: VehicleEntity(
-                id: '',
-                marca: message.data['manufacturer'] ?? '',
-                modelo: message.data['model'] ?? '',
-                placa: message.data['plate'] ?? '',
-              ),
+          _notificationDto = NotificationDto(
+            id: message.data['orderId'] ?? '',
+            body: message.notification!.body!,
+            title: message.notification!.title!,
+            datahora: message.data['orderDate'] ?? '',
+            tipoDeAcesso: message.data['accessType'] ?? '',
+            vehicleEntity: VehicleEntity(
+              id: '',
+              marca: message.data['manufacturer'] ?? '',
+              modelo: message.data['model'] ?? '',
+              placa: message.data['plate'] ?? '',
             ),
           );
+          _notificationService.showNotification(_notificationDto);
         }
       }),
     );
@@ -62,7 +61,8 @@ class FirebaseMessagingServiceImp
 
   void _goToPageAfterMessage(RemoteMessage message) {
     if (GetIt.I.get<UserDtoGlobal>().getUser().token.isNotEmpty) {
-      RoutesApp.navigatorKey!.currentState!.pushNamed('NOTIFICACAO');
+      RoutesApp.navigatorKey!.currentState!
+          .pushReplacementNamed('NOTIFICACAO', arguments: _notificationDto);
     } else {
       showMessageError('Realize o login para prosseguir');
     }

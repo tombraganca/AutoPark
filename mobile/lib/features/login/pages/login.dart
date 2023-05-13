@@ -56,11 +56,7 @@ class _LoginState extends State<Login> with Validators {
                       bloc: loginCubit,
                       listener: (context, state) {
                         if (state.statusLogin == StatusLogin.sucessoLogin) {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const Home(),
-                            ),
-                          );
+                          Navigator.of(context).pushNamed('HOME');
                         }
                       },
                       builder: (context, state) {
@@ -158,10 +154,8 @@ class _LoginState extends State<Login> with Validators {
                   children: [
                     const Text('Ainda não e cliente?'),
                     TextButton(
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Cadastro())),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, 'CADASTRO'),
                         child: Text('Cadastre-se',
                             style: TextStyle(color: Colors.purple[200])))
                   ],
