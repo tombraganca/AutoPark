@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import request_access
 from dotenv import load_dotenv
 import os
@@ -11,10 +11,12 @@ print("Loading environment variables")
 
 PORT = int(os.getenv("PORT"))
 
-@app.route("/test", methods=["GET"])
+@app.route("/test", methods=["POST"])
 def hello_world():
+    data = request.get_json()
     print("Hello World")
-    new_request = request_access.Request_access('ABC1234', 'in')
+    new_request = request_access.Request_access(data['plate'], data['accessType'])
+    print(data['plate'], data['accessType'])
     new_request.do_request()
     print("Request sent")
     return {"status": "ok"}

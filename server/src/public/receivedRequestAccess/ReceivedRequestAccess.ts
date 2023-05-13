@@ -1,6 +1,5 @@
 import { MessagingProvider } from "../../providers/messaging/MessagingProvider";
 import { client } from "../../providers/prisma/client";
-import { v4 as uuid } from 'uuid';
 
 
 interface IPayloadNotification {
@@ -79,6 +78,6 @@ export class ReceivedRequestAccess {
         await notificationProvider.send(message);
 
         return { status: 'Success', message: 'Notification sent' }
-
+        
     }
 }

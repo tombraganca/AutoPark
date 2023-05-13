@@ -3,7 +3,7 @@ import { MqttClient, IConnackPacket } from "mqtt"
 export class ConnectionMoqtt {
 
     private client: MqttClient;
-    private topicName = 'test/autopark'
+    private topicName = 'autopark/access'
 
     constructor(client: MqttClient) {
         this.client = client;
@@ -40,7 +40,7 @@ export class ConnectionMoqtt {
     }
 
     public send(message: string) {
-        this.client.publish(this.topicName, message, { qos: 1 }, (err) => {
+        this.client.publish(`${this.topicName}`, message, { qos: 1 }, (err) => {
             if (err) {
                 console.log("Error sending message", err)
             }

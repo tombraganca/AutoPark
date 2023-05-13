@@ -19,6 +19,6 @@ interface IPayload {
 }
 export class MessagingProvider {
     async send(payload: IPayload): Promise<string> {
-        return await admin.messaging().send(payload)
+        return await admin.messaging().send(payload);
     }
 }
