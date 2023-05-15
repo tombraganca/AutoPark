@@ -58,8 +58,8 @@ class NotificationServiceImp with ToastMessages implements NotificationService {
   void showNotification(NotificationDto notificationDto) {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
-      'auhappy',
-      'auhappy_name',
+      'default_notification_channel_id',
+      'autopark_name',
       importance: Importance.max,
       priority: Priority.max,
       enableVibration: true,

@@ -53,9 +53,9 @@ class _RegistrosPageState extends State<RegistrosPage> {
                   child: Visibility(
                     visible:
                         state.statusRegistros != StatusRegistros.loadingList,
-                    replacement: Column(
+                    replacement: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         CircularProgressIndicator(
                             valueColor:
                                 AlwaysStoppedAnimation<Color>(Colors.white)),

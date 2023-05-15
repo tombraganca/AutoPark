@@ -1,3 +1,4 @@
+import 'package:auto_park/core/injects/inject_answer_notification.dart';
 import 'package:auto_park/core/injects/inject_auth.dart';
 import 'package:auto_park/core/injects/inject_fcm.dart';
 import 'package:auto_park/core/injects/inject_firebase_messaging.dart';
@@ -24,4 +25,5 @@ Future<void> injectContainer() async {
   injectFirebaseMessaging(getIt);
   injectNotificationService(getIt);
   initInjectNotificacao(getIt);
+  initInjectAnswerNotificacao(getIt);
 }

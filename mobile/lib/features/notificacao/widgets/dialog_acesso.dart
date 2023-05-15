@@ -99,7 +99,8 @@ class DialogAcesso {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () => notificacaoCubit.answerNotificacao(
+                              true, notificationDto.vehicleEntity.placa),
                           label: const Text(
                             'Sim, sou eu',
                             style: TextStyle(color: Colors.white),
@@ -111,7 +112,8 @@ class DialogAcesso {
                           ),
                         ),
                         ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () => notificacaoCubit.answerNotificacao(
+                              false, notificationDto.vehicleEntity.placa),
                           label: const Text('Não, não permitir',
                               style: TextStyle(color: Colors.white)),
                           icon: const Icon(

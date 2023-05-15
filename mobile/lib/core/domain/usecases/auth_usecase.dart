@@ -1,5 +1,4 @@
 import 'package:auto_park/core/data/dtos/user_dto.dart';
-import 'package:auto_park/core/domain/entities/user_entity.dart';
 import 'package:auto_park/core/domain/repositories/auth_repository.dart';
 import 'package:auto_park/core/failures/failure.dart';
 import 'package:either_dart/either.dart';

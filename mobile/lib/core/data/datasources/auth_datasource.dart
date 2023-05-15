@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:auto_park/core/data/dtos/user_dto.dart';
-import 'package:auto_park/core/domain/entities/user_entity.dart';
 import 'package:auto_park/core/failures/auth/auth_failure.dart';
 import 'package:auto_park/core/services/http_connections_service.dart';
 import 'package:http/http.dart';

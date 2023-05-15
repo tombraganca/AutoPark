@@ -20,9 +20,9 @@ class CardRegistros extends StatelessWidget {
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.10,
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [Icon(Icons.south_outlined)],
+              children: [Icon(Icons.south_outlined)],
             ),
           ),
           SizedBox(

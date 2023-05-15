@@ -1,8 +1,6 @@
 // ignore_for_file: must_be_immutable
-
 import 'package:auto_park/core/data/dtos/notification_dto.dart';
 import 'package:auto_park/core/domain/entities/vehicle_entity.dart';
-import 'package:auto_park/core/rotas/routes_app.dart';
 import 'package:auto_park/features/home/cubit/home_cubit.dart';
 import 'package:auto_park/features/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
@@ -49,9 +47,9 @@ class _HomeState extends State<Home> {
                   child: DrawerHeader(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).padding.top),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
+                      children: [
                         Icon(
                           Icons.directions_car_rounded,
                           color: Colors.purple,
@@ -73,9 +71,9 @@ class _HomeState extends State<Home> {
                         .popUntil((route) => route.isFirst),
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.1,
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: const [
+                        children: [
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 5),
                             child: Text(

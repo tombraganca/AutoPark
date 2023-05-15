@@ -1,6 +1,4 @@
-import 'package:auto_park/features/cadastro/pages/cadastro.dart';
 import 'package:auto_park/core/functions/validators.dart';
-import 'package:auto_park/features/home/pages/home.dart';
 import 'package:auto_park/features/login/cubit/login_cubit.dart';
 import 'package:auto_park/features/login/cubit/login_state.dart';
 import 'package:flutter/material.dart';
@@ -160,9 +158,9 @@ class _LoginState extends State<Login> with Validators {
                             style: TextStyle(color: Colors.purple[200])))
                   ],
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text('Versão: 1.0.0'),
                   ],
                 )
