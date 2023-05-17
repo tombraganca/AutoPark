@@ -1,35 +1,32 @@
 # AutoPark
 Auto Park é um estacionamento autônomo que acomoda os carros nas vagas disponíveis e utiliza IA para validar o cadastro dos carros
 
-Design:
-https://www.figma.com/file/bK3G5ll5rnHdS2LEwv4ed3/AutoPark?node-id=0%3A1&t=yP3H130RSt0GWJXg-1
+[Design](https://www.figma.com/file/bK3G5ll5rnHdS2LEwv4ed3/AutoPark?node-id=0%3A1&t=yP3H130RSt0GWJXg-1)
 
-## Arquitetura do projeto:
-
-<img src="assets/Sem título-2023-04-22-1137.png" title="Imagem que representa o fluxo de entrada de um carro no estacionamento."/>
 
 ## Iniciando o projeto
 
-### Prerequisitos
+O Projeto em si é composto por 3 container que executados simutâneamente geram todas as funcionalidades necessárias para que um park autonomo possa existir.
+
+São eles:
+
+## **autopark-api**
+
+É um container que executa todas as todas de requisões http, tanto publicas quanto privadas e faz o acesso ao banco de dados utilizando o ORM Prisma.
+
+## **postgres**
+
+É uma instância que roda um banco de dados PostgreSql.
+
+## **auto-park-stream**
+
+Cointener que controla toda a questão de processamento de imagem e comunica como a API /request-access quando requisitada.
+
+## Prerequisitos
 
 - <a href="https://docs.docker.com/engine/install/">Docker compose</a>
 - <a href="https://nodejs.org/en/download">Node</a>
 - <a href="https://docs.flutter.dev/get-started/install">Flutter</a>
-
-
-O projeto possui três serviços organizados das seguintes formas:
-
-### autopark-api
-
-É um container que executa todas as todas de requisões http, tanto publicas quanto privadas e faz o acesso ao banco de dados utilizando o ORM Prisma.
-
-### postgres
-
-É uma instância que roda um banco de dados PostgreSql.
-
-### auto--park-stream
-
-Cointener que controla toda a questão de processamento de imagem e comunica como a API /request-access quando requisitada.
 
 
 
