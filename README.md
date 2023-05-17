@@ -1,14 +1,14 @@
 # AutoPark
 Auto Park é um estacionamento autônomo que acomoda os carros nas vagas disponíveis e utiliza IA para validar o cadastro dos carros
 
-Modelo:
+Design:
 https://www.figma.com/file/bK3G5ll5rnHdS2LEwv4ed3/AutoPark?node-id=0%3A1&t=yP3H130RSt0GWJXg-1
 
 ## Arquitetura do projeto:
 
 <img src="assets/Sem título-2023-04-22-1137.png" title="Imagem que representa o fluxo de entrada de um carro no estacionamento."/>
 
-## Executando a aplicação
+## Iniciando o projeto
 
 ### Prerequisitos
 
@@ -16,22 +16,45 @@ https://www.figma.com/file/bK3G5ll5rnHdS2LEwv4ed3/AutoPark?node-id=0%3A1&t=yP3H1
 - <a href="https://nodejs.org/en/download">Node</a>
 - <a href="https://docs.flutter.dev/get-started/install">Flutter</a>
 
-<code>docker compose up</code>
 
-Isso irá criar uma instância do postgres na sua máquina.
+O projeto possui três serviços organizados das seguintes formas:
 
-<code>cd server &&
-npm install &&
-npx prisma generate
-</code>
+### autopark-api
 
-Instala todas as dependências necessárias para a aplicação.
+É um container que executa todas as todas de requisões http, tanto publicas quanto privadas e faz o acesso ao banco de dados utilizando o ORM Prisma.
 
-<code>npm run dev</code>
+### postgres
 
-Isso irá subir um servidos na porta localhost:3000
+É uma instância que roda um banco de dados PostgreSql.
 
-<hr>
+### auto--park-stream
+
+Cointener que controla toda a questão de processamento de imagem e comunica como a API /request-access quando requisitada.
+
+
+
+Para inicializar o projeto é necessário rodar todas as instancias utilizando o docker. Então garanta que o tenha o docker compose instalado na sua maquina.
+
+As instâncias auto-park-stream e auto-park-api precisam de um documento proprio chamado _.developement.env_. Este arquivo contem informações de constantes bases para que a aplicação possa iniciar.
+
+Vá até a pasta _/environment_ e copie os arquivos _api.developement.env_ e cole na pasta _server_ e o renomeie para **".developement.env"**
+
+```bash
+mv environment/api.developement.env server/.developement.env
+```
+
+Agora, na mesma pasta _/environment_ e copie o outro arquivo _stream.developement.env_ e cole na pasta _CamStreaming_ e renomeie para **".developement.env"**
+
+```bash
+mv environment/stream.developement.env CamStreaming/.developement.env
+```
+
+Agora podemos executar os containers.
+
+```bash
+make #inicia o projeto
+```
+<img src="./assets/docker-terminal.png">
 
 # Swagger
 
