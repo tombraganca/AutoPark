@@ -17,4 +17,7 @@ class NotificacaoCubit extends Cubit<NotificacaoState> {
       emit(state.copyWith(statusNotificacao: StatusNotificacao.sucesso));
     });
   }
+
+  void reloadList() =>
+      emit(state.copyWith(statusNotificacao: StatusNotificacao.initial));
 }

@@ -15,7 +15,7 @@ class AnswerNotificationDataSourceImp implements AnswerNotificationDataSource {
   Future<void> answerNotification(String placa, bool answer) async {
     try {
       Response response = await _httpConnectionsService.post(
-        'request-access',
+        'access',
         {
           'accessType': answer ? 'in' : 'out',
           'plate': placa,

@@ -1,4 +1,14 @@
 abstract class HttpConnectionsService {
+  String token = '';
+
+  void setToken(String token);
+
+  String getToken() {
+    return token;
+  }
+
+  void setTokenDefaultHeaders(String token);
+
   Future get(
     String path, {
     Map<String, String>? headers,

@@ -12,29 +12,59 @@ class CardVeiculo extends StatelessWidget {
       child: SizedBox(
         height: 90,
         child: Card(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  vehicleEntity.modelo,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.65,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        vehicleEntity.modelo,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Marca: ${vehicleEntity.marca}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text('Placa: ${vehicleEntity.placa}'),
+                    ),
+                  ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  'Marca: ${vehicleEntity.marca}',
-                  style: const TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.1,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.edit,
+                      color: Color.fromARGB(255, 208, 188, 255),
+                    ),
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text('Placa: ${vehicleEntity.placa}'),
-              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.1,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                ),
+              )
             ],
           ),
         ),

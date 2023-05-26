@@ -4,8 +4,30 @@ import 'package:auto_park/core/services/http_connections_service.dart';
 import 'package:http/http.dart' as http;
 
 class HttpConnectiosServiceImp extends HttpConnectionsService {
-  final String token = '';
-  final defaultHeaders = {'Content-Type': 'application/json'};
+  Map<String, String> defaultHeaders = {};
+
+  HttpConnectiosServiceImp() {
+    defaultHeaders = {
+      "Content-Type": "application/json; charset=UTF-8 ",
+      "Authorization": "Bearer ${super.token}"
+    };
+  }
+  @override
+  String getToken() {
+    return super.token;
+  }
+
+  @override
+  void setTokenDefaultHeaders(String token) {
+    defaultHeaders = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': "Bearer ${super.token}"
+    };
+  }
+
+  @override
+  void setToken(String token) => super.token = token;
+
   @override
   Future<http.Response> get(String path, {Map<String, String>? headers}) async {
     try {

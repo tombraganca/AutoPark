@@ -17,7 +17,7 @@ class VagasDataSourceImp implements VagasDataSource {
   Future<List<VagaEntity>> getVagas(String token) async {
     try {
       Response response = await _httpConnectionsService.get(
-        'vagas',
+        'vacancies',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token'

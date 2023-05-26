@@ -29,7 +29,11 @@ class VeiculosCubit extends Cubit<VeiculosState> with ToastMessages {
     var result = await vehicleUseCase.addVehicle(
         marca, modelo, placa, userEntity!.token);
     result.fold((left) {
-      emit(state.copyWith(statusVeiculos: StatusVeiculos.errorAddVeiculo));
+      emit(state.copyWith(
+          erroMsg: left.msg.contains('exists')
+              ? 'Este veículo ja foi cadastrado.'
+              : 'Não foi possível realizar cadastro.',
+          statusVeiculos: StatusVeiculos.errorAddVeiculo));
     }, (succes) {
       emit(state.copyWith(
           statusVeiculos: StatusVeiculos.reloadListVechicles,
@@ -41,4 +45,7 @@ class VeiculosCubit extends Cubit<VeiculosState> with ToastMessages {
       showMessagePositive('Carro adicionado com sucesso.');
     });
   }
+
+  void reloadList() =>
+      emit(state.copyWith(statusVeiculos: StatusVeiculos.initial));
 }

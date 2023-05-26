@@ -29,11 +29,13 @@ class VehicleDataSourceImp implements VehicleDataSource {
         },
       );
       if (response.statusCode == 200) {
-        return jsonDecode(response.body)['ownerId']!.isNotEmpty;
+        final body = jsonDecode(response.body);
+        if (body['ownerId'] != null) return true;
+        if (body['status'] != null) throw VeiculosFailure(body['message']);
       }
       return false;
     } catch (e) {
-      throw e.toString();
+      throw VeiculosFailure(e.toString());
     }
   }
 

@@ -3,6 +3,7 @@ import 'package:auto_park/core/domain/usecases/fcm_usecase.dart';
 import 'package:auto_park/core/functions/toasts.dart';
 import 'package:auto_park/core/injects/userSingleton/user_global_singleton.dart';
 import 'package:auto_park/core/services/firebase_messaging.dart';
+import 'package:auto_park/core/services/http_connections_service.dart';
 import 'package:auto_park/features/login/cubit/login_state.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,8 @@ class LoginCubit extends Cubit<LoginState> with ToastMessages {
       emit(state.copyWith(statusLogin: StatusLogin.falhaLogin));
     }, (user) {
       GetIt.I.get<UserDtoGlobal>().setUser(user);
+      GetIt.I.get<HttpConnectionsService>().setToken(user.token);
+      GetIt.I.get<HttpConnectionsService>().setTokenDefaultHeaders(user.token);
       showMessagePositive('Login realizado com sucesso !!');
       emit(state.copyWith(statusLogin: StatusLogin.sucessoLogin));
     });
