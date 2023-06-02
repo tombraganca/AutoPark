@@ -62,7 +62,7 @@ model AccountToken {
 
 model Vacancies {
   id          String  @id @default(uuid())
-  title       String
+  title       String  @unique
   description String
   type        String
   situation   String?

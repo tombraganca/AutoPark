@@ -1,10 +1,10 @@
 import { client } from "../../providers/prisma/client";
 
 export class UpdateVacancyUseCase {
-    execute({ id, title, description, type, situation }: any) {
-        const vacancy = client.vacancies.update({
+    async execute({ title, description, type, situation }: any) {
+        const vacancy = await client.vacancies.update({
             where: {
-                id
+                title
             },
             data: {
                 title,
@@ -12,6 +12,8 @@ export class UpdateVacancyUseCase {
                 type,
                 situation
             }
-        })
+        });
+
+        return vacancy;
     }
 }

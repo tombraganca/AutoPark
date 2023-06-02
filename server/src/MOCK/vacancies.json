@@ -1,0 +1,72 @@
+[
+    {
+        "title": "A",
+        "description": "Primeira esquerda",
+        "id": "1",
+        "type": "normal",
+        "situation": "free"
+    },
+    {
+        "title": "B",
+        "description": "Primeira esquerda",
+        "id": "2",
+        "type": "normal",
+        "situation": "free"
+    },
+    {
+        "title": "C",
+        "description": "Primeira esquerda",
+        "id": "3",
+        "type": "deficient",
+        "situation": "free"
+    },
+    {
+        "title": "D",
+        "description": "Primeira esquerda",
+        "id": "4",
+        "type": "deficient",
+        "situation": "free"
+    },
+    {
+        "title": "E",
+        "description": "Primeira esquerda",
+        "id": "5",
+        "type": "senior",
+        "situation": "free"
+    },
+    {
+        "title": "F",
+        "description": "Primeira esquerda",
+        "id": "6",
+        "type": "senior",
+        "situation": "free"
+    },
+    {
+        "title": "G",
+        "description": "Primeira esquerda",
+        "id": "7",
+        "type": "normal",
+        "situation": "free"
+    },
+    {
+        "title": "H",
+        "description": "Primeira esquerda",
+        "id": "8",
+        "type": "normal",
+        "situation": "busy"
+    },
+    {
+        "title": "I",
+        "description": "Primeira esquerda",
+        "id": "9",
+        "type": "normal",
+        "situation": "busy"
+    },
+    {
+        "title": "J",
+        "description": "Primeira esquerda",
+        "id": "10",
+        "type": "normal",
+        "situation": "busy"
+    }
+]
