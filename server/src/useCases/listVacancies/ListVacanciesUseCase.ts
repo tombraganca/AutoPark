@@ -5,7 +5,7 @@ export class ListVacanciesUseCase {
 
     async execute(filter: 'all' | 'available') {
 
-        const situation = filter === 'all' ? '' : 'available';
+        const situation = filter === 'all' ? null : 'free';
 
         try {
             // const vacancies = await client.vacancies.findMany({
