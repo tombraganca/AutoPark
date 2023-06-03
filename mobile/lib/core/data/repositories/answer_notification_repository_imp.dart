@@ -7,7 +7,7 @@ class AnswerNotificationRepositoryImp implements AnswerNotificationRepository {
   final AnswerNotificationDataSource _answerNotificationDataSource;
   AnswerNotificationRepositoryImp(this._answerNotificationDataSource);
   @override
-  Future<Either<Failure, void>> answerNotification(
+  Future<Either<Failure, bool>> answerNotification(
       String placa, bool answer) async {
     try {
       return Right(await _answerNotificationDataSource.answerNotification(

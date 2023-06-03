@@ -8,14 +8,19 @@ class NotificacaoCubit extends Cubit<NotificacaoState> {
       : super(NotificacaoState(statusNotificacao: StatusNotificacao.initial));
 
   Future<void> answerNotificacao(bool answer, String placa) async {
+    bool registerSucess = false;
     emit(state.copyWith(statusNotificacao: StatusNotificacao.enviando));
     var result = await answerNotificationUseCase.answerNotification(
         placa: placa, answer: answer);
     result.fold((failure) {
       emit(state.copyWith(statusNotificacao: StatusNotificacao.falha));
     }, (sucess) {
-      emit(state.copyWith(statusNotificacao: StatusNotificacao.sucesso));
+      registerSucess = sucess;
     });
+    emit(state.copyWith(
+        statusNotificacao: registerSucess
+            ? StatusNotificacao.sucesso
+            : StatusNotificacao.falha));
   }
 
   void reloadList() =>
