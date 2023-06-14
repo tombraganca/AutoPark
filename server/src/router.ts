@@ -10,6 +10,7 @@ import receivedRequestAccessRouter from "./public/receivedRequestAccess/router"
 import createAccessRegisterRouter from "./useCases/createAccessRegister/router";
 import listVacanciesRouter from "./useCases/listVacancies/router";
 import createVacancyRouter from "./useCases/createVacancies/router";
+import listRegistersRouter from "./useCases/listRegisters/router"
 
 const router = express();
 
@@ -24,5 +25,6 @@ router.use(receivedRequestAccessRouter);
 router.use(createAccessRegisterRouter);
 router.use(listVacanciesRouter);
 router.use(createVacancyRouter);
+router.use(listRegistersRouter);
 
 export default router;

@@ -18,6 +18,7 @@ model Account {
   Car          Car[]
   RefreshToken RefreshToken[]
   AccountToken AccountToken[]
+  Access       Access[]
 
   @@map("accounts")
 }
@@ -42,10 +43,12 @@ model Car {
 }
 
 model Access {
-  id    String   @id @default(uuid())
-  date  DateTime
-  plate String
-  type  String
+  id      String   @id @default(uuid())
+  date    DateTime
+  plate   String
+  type    String
+  owner   Account  @relation(fields: [ownerId], references: [id])
+  ownerId String
 
   @@map("accesses")
 }
