@@ -3,7 +3,7 @@ import { CreateAccessRegisterUseCase } from "./CreateAccessRegisterUseCase";
 
 export class CreateAccessRegisterController {
     async handle(request: Request, response: Response) {
-        const { accessType, plate } = request.body;
+        const { accessType, plate, userid } = request.body;
 
         if (!accessType || !plate) {
             return response.status(400).json({ message: 'Invalid data' });
@@ -15,7 +15,8 @@ export class CreateAccessRegisterController {
             const accessRegister = await createAccessRegisterUseCase.execute({
                 accessType,
                 plate,
-                date: new Date()
+                date: new Date(),
+                ownerId: userid
             });
             return response.status(201).json(accessRegister);
         } catch (error: any) {

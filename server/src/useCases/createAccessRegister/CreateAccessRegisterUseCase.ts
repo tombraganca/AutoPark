@@ -1,14 +1,15 @@
 import { client } from "../../providers/prisma/client";
-import { connectMqtt } from "../../providers/mqttProvider/server";
+import { connectMqtt } from "../../providers/mqttProvider/mqttServer";
 
 interface ICreateAccessRegisterRequestDTO {
     date: Date;
     accessType: string;
     plate: string;
+    ownerId: string;
 }
 
 export class CreateAccessRegisterUseCase {
-    async execute({ date, accessType, plate }: ICreateAccessRegisterRequestDTO) {
+    async execute({ date, accessType, plate, ownerId }: ICreateAccessRegisterRequestDTO) {
         if (!date || !accessType || !plate) {
             throw new Error('Invalid data')
         }
@@ -19,7 +20,8 @@ export class CreateAccessRegisterUseCase {
                 data: {
                     date,
                     type: accessType,
-                    plate
+                    plate,
+                    ownerId
                 }
             });
 
