@@ -13,7 +13,7 @@ export class ConnectionMoqtt {
         console.log("Connected to broker", connack)
         this.client.subscribe(this.topicName, { qos: 1 }, (err, granted) => {
             if (err) {
-                console.log("Error subscribing to topic", err)
+                console.error("Error subscribing to topic", err)
             }
             console.log("Subscribed to topic", granted)
         })
@@ -42,7 +42,7 @@ export class ConnectionMoqtt {
     public send(message: string) {
         this.client.publish(`${this.topicName}`, message, { qos: 1 }, (err) => {
             if (err) {
-                console.log("Error sending message", err)
+                console.error("Error sending message", err)
             }
             console.log("Message sent")
         })

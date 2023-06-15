@@ -21,7 +21,6 @@ app.use((error: Error, request: Request, response: Response, next: NextFunction)
     })
 });
 
-
 app.get('/', (request, response) => {
     response.json({ message: 'Hello World!' });
 });

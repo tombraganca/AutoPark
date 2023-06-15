@@ -1,9 +1,7 @@
 import mqtt from 'mqtt';
-import { config } from '../../config/config';
 import { ConnectionMoqtt } from './Connection';
 
 
-console.log(config.brokerUrl);
 const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 const client = mqtt.connect('mqtt://test.mosquitto.org', { clientId, reconnectPeriod: 1 });
 
