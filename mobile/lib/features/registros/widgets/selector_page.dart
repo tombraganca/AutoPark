@@ -18,14 +18,14 @@ class SelectorPage extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
             ),
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery.sizeOf(context).width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
                   onTap: () => registrosCubit.changeList(SelectList.hoje),
                   child: Container(
-                    width: MediaQuery.of(context).size.width / 3.2,
+                    width: MediaQuery.sizeOf(context).width / 3.2,
                     decoration: BoxDecoration(
                       color: state.selectList == SelectList.hoje
                           ? Colors.grey[700]
@@ -51,7 +51,7 @@ class SelectorPage extends StatelessWidget {
                   onTap: () =>
                       registrosCubit.changeList(SelectList.ultimaSemana),
                   child: Container(
-                    width: MediaQuery.of(context).size.width / 3.2,
+                    width: MediaQuery.sizeOf(context).width / 3.2,
                     decoration: BoxDecoration(
                       color: state.selectList == SelectList.ultimaSemana
                           ? Colors.grey[700]
@@ -68,7 +68,7 @@ class SelectorPage extends StatelessWidget {
                 InkWell(
                   onTap: () => registrosCubit.changeList(SelectList.todos),
                   child: Container(
-                    width: MediaQuery.of(context).size.width / 3.2,
+                    width: MediaQuery.sizeOf(context).width / 3.2,
                     decoration: BoxDecoration(
                       color: state.selectList == SelectList.todos
                           ? Colors.grey[700]

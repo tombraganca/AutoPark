@@ -26,7 +26,7 @@ class _CadastroState extends State<Cadastro> with Validators {
   TextEditingController nomeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final availableHeight = MediaQuery.of(context).size.height -
+    final availableHeight = MediaQuery.sizeOf(context).height -
         (appBar.preferredSize.height + MediaQuery.of(context).padding.top);
     return Scaffold(
       appBar: appBar,
@@ -38,8 +38,8 @@ class _CadastroState extends State<Cadastro> with Validators {
             Center(
                 child: SvgPicture.asset(
               'assets/images/cadastro.svg',
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.3,
+              width: MediaQuery.sizeOf(context).width,
+              height: MediaQuery.sizeOf(context).height * 0.3,
             )),
             BlocConsumer<CadastroCubit, CadastroState>(
               bloc: cadastroCubit,

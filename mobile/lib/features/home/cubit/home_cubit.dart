@@ -6,22 +6,36 @@ import 'package:auto_park/features/vagas/pages/vagas.dart';
 import 'package:auto_park/features/veiculos/pages/veiculos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   UserEntity userEntity = GetIt.I.get<UserDtoGlobal>().getUser();
-  HomeCubit() : super(HomeState(statusHome: StatusHome.initial));
+  HomeCubit() : super(const HomeState(statusHome: StatusHome.initial));
   void changeContentHome(int index) {
-    emit(state.copyWith(
-        indexCurrentContentHome: index,
-        contentCurrentWidget: contentsHome(index),
-        titleContentCurrentWidget: currentTitleWidget(index)));
+    if (index == 3) {
+      emit(state.copyWith(statusHome: StatusHome.exitApp));
+    } else {
+      emit(state.copyWith(
+          indexCurrentContentHome: index,
+          contentCurrentWidget: contentsHome(index),
+          titleContentCurrentWidget: currentTitleWidget(index)));
+    }
   }
 
   void setIndexInit(int index) => emit(state.copyWith(
       indexCurrentContentHome: index,
       contentCurrentWidget: contentsHome(index),
       titleContentCurrentWidget: currentTitleWidget(index)));
+
+  Future<void> getPermissionNotification() async {
+    PermissionStatus permissionStatus = await Permission.notification.request();
+    if (permissionStatus.isDenied || permissionStatus.isPermanentlyDenied) {
+      Fluttertoast.showToast(msg: 'Habilite as notificações !! ');
+      openAppSettings();
+    }
+  }
 
   void setUser(UserEntity userEntity) => this.userEntity = userEntity;
   Widget contentsHome(int index) {
@@ -41,5 +55,4 @@ class HomeCubit extends Cubit<HomeState> {
     };
     return mapTitles[index] ?? 'Vagas';
   }
-  
 }

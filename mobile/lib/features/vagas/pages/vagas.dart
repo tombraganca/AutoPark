@@ -21,12 +21,13 @@ class _VagasState extends State<Vagas> {
   void initState() {
     vagasCubit.setUser(widget.userEntity);
     vagasCubit.getVagas();
+    vagasCubit.changeList(SelectListVagas.disponivel);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final availableHeight = (MediaQuery.of(context).size.height -
+    final availableHeight = (MediaQuery.sizeOf(context).height -
         (AppBar().preferredSize.height +
             MediaQuery.of(context).padding.top +
             kBottomNavigationBarHeight));
@@ -36,20 +37,6 @@ class _VagasState extends State<Vagas> {
           builder: (context, state) {
             return Column(
               children: [
-                // SegmentedButton(
-                //   segments: const [
-                //     ButtonSegment(
-                //         label: Text('Disponível'),
-                //         value: SelectListVagas.disponivel),
-                //     ButtonSegment(
-                //       label: Text('Todas'),
-                //       value: SelectListVagas.todas,
-                //     ),
-                //   ],
-                //   selected: {state.selectListVagas},
-                //   onSelectionChanged: (value) =>
-                //       vagasCubit.changeList(value.first!),
-                // ),
                 SizedBox(
                   height: availableHeight * 0.15,
                   child: SelectorVagas(
@@ -68,7 +55,21 @@ class _VagasState extends State<Vagas> {
                       },
                     ),
                   ),
-                  child: const Center(child: CircularProgressIndicator()),
+                  child: SizedBox(
+                    height: availableHeight * 0.8,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                          child: Text('Carregando as vagas...'),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ],
             );

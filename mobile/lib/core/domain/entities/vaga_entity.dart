@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 class VagaEntity {
   final String name;
   final String description;
-  final List<String> reportes;
-  final bool isAvailable;
+  final String situacao;
   final TipoVaga tipoVaga;
   final int id;
   VagaEntity({
     required this.id,
     required this.name,
-    required this.reportes,
     required this.description,
-    required this.isAvailable,
+    required this.situacao,
     required this.tipoVaga,
   });
 
@@ -20,7 +18,7 @@ class VagaEntity {
     Map<TipoVaga, IconData> map = {
       TipoVaga.idoso: Icons.elderly_rounded,
       TipoVaga.pcd: Icons.accessible_outlined,
-      TipoVaga.comun: Icons.local_parking,
+      TipoVaga.commun: Icons.local_parking,
     };
     return map[tipoVaga]!;
   }
@@ -29,5 +27,5 @@ class VagaEntity {
 enum TipoVaga {
   pcd,
   idoso,
-  comun,
+  commun,
 }

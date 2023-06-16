@@ -18,9 +18,11 @@ class CardVagas extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             left: BorderSide(
-                color: vagaEntity.isAvailable
+                color: vagaEntity.situacao.toLowerCase().contains('free')
                     ? const Color.fromARGB(255, 0, 73, 25)
-                    : Colors.red,
+                    : vagaEntity.situacao.toLowerCase().contains('busy')
+                        ? Colors.red
+                        : Colors.orange,
                 width: 10),
           ),
         ),
@@ -29,7 +31,7 @@ class CardVagas extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.50,
+              width: MediaQuery.sizeOf(context).width * 0.50,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,

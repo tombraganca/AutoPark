@@ -18,15 +18,16 @@ class SelectorVagas extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
             ),
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery.sizeOf(context).width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: () =>
-                      vagasCubit.changeList(SelectListVagas.disponivel),
+                  onTap: () {
+                    vagasCubit.changeList(SelectListVagas.disponivel);
+                  },
                   child: Container(
-                    width: MediaQuery.of(context).size.width / 2.2,
+                    width: MediaQuery.sizeOf(context).width / 2.2,
                     decoration: BoxDecoration(
                       color: state.selectListVagas == SelectListVagas.disponivel
                           ? Colors.grey[700]
@@ -49,9 +50,11 @@ class SelectorVagas extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => vagasCubit.changeList(SelectListVagas.todas),
+                  onTap: () {
+                    vagasCubit.changeList(SelectListVagas.todas);
+                  },
                   child: Container(
-                    width: MediaQuery.of(context).size.width / 2.2,
+                    width: MediaQuery.sizeOf(context).width / 2.2,
                     decoration: BoxDecoration(
                       color: state.selectListVagas == SelectListVagas.todas
                           ? Colors.grey[700]

@@ -24,24 +24,20 @@ class VagasCubit extends Cubit<VagasState> {
 
   Future<void> getVagas() async {
     emit(state.copyWith(statusVagas: StatusVagas.buscandoVagas));
-    var result = vagasUseCase.getVagas(userEntity!.token);
+    var result = await vagasUseCase.getVagas(userEntity!.token);
     result.fold((left) {
       emit(state.copyWith(statusVagas: StatusVagas.errorBuscarVagas));
     }, (listVagas) {
-      Map<SelectListVagas, List<VagaEntity>> map = {
-        SelectListVagas.disponivel: [],
-        SelectListVagas.todas: [],
-      };
-      listVagas.map((e) {
-        e.isAvailable
-            ? map[SelectListVagas.disponivel]!.add(e)
-            : map[SelectListVagas.todas]!.add(e);
-      });
       emit(state.copyWith(
-          statusVagas: StatusVagas.sucessoBuscarVagas,
-          maplistVagas: map,
-          selectListVagas: SelectListVagas.disponivel,
-          listSelected: map[SelectListVagas.disponivel]));
+        statusVagas: StatusVagas.sucessoBuscarVagas,
+        maplistVagas: {
+          SelectListVagas.disponivel: listVagas
+              .where(
+                  (element) => element.situacao.toLowerCase().contains('free'))
+              .toList(),
+          SelectListVagas.todas: listVagas,
+        },
+      ));
     });
   }
 }

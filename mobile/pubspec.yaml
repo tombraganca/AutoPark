@@ -47,6 +47,8 @@ dependencies:
   flutter_svg: ^2.0.5
   flutter_local_notifications: ^14.0.0+1
   firebase_analytics: ^10.4.0
+  intl: ^0.18.1
+  permission_handler: ^10.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

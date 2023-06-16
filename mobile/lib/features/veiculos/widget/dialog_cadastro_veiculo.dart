@@ -28,7 +28,7 @@ class DialogCadastroVeiculo with Validators {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.50,
+                      height: MediaQuery.sizeOf(context).height * 0.50,
                       child: Visibility(
                         visible: state.statusVeiculos ==
                             StatusVeiculos.adicionandoVeiculo,
@@ -85,7 +85,7 @@ class DialogCadastroVeiculo with Validators {
                                 ),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.7,
+                                width: MediaQuery.sizeOf(context).width * 0.7,
                                 child: ElevatedButton(
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()) {

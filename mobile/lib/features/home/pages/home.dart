@@ -22,6 +22,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     homeCubit.setIndexInit(0);
+    homeCubit.getPermissionNotification();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.showDialogAcesso != null) {
         widget.showDialogAcesso!();
@@ -33,63 +34,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.6,
-        child: Drawer(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  child: DrawerHeader(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).padding.top),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(
-                          Icons.directions_car_rounded,
-                          color: Colors.purple,
-                        ),
-                        Text('Auto Park')
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const Divider(
-                color: Colors.white,
-                height: 3,
-              ),
-              SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.75,
-                  child: GestureDetector(
-                    onTap: () => Navigator.of(context)
-                        .popUntil((route) => route.isFirst),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 5),
-                            child: Text(
-                              'Sair',
-                              style: TextStyle(fontSize: 22),
-                            ),
-                          ),
-                          Icon(Icons.exit_to_app)
-                        ],
-                      ),
-                    ),
-                  )),
-            ],
-          ),
-        ),
-      ),
       appBar: AppBar(
         title: BlocBuilder<HomeCubit, HomeState>(
           bloc: homeCubit,
@@ -100,28 +44,14 @@ class _HomeState extends State<Home> {
           },
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.of(context).pushReplacementNamed(
-              'NOTIFICACAO',
-              arguments: NotificationDto(
-                  id: '1',
-                  title: 'title',
-                  body: 'body',
-                  vehicleEntity: VehicleEntity(
-                      id: '1',
-                      marca: 'Toyota',
-                      modelo: 'Corrola',
-                      placa: 'BBA1234'),
-                  datahora: '2023/05/12',
-                  tipoDeAcesso: 'Entrada'),
-            ),
-            icon: const Icon(Icons.person),
-          ),
-        ],
       ),
-      body: BlocBuilder<HomeCubit, HomeState>(
+      body: BlocConsumer<HomeCubit, HomeState>(
           bloc: homeCubit,
+          listener: ((context, state) {
+            if (state.statusHome == StatusHome.exitApp) {
+              Navigator.popAndPushNamed(context, 'LOGIN');
+            }
+          }),
           builder: (context, state) {
             return state.contentCurrentWidget;
           }),
@@ -139,7 +69,9 @@ class _HomeState extends State<Home> {
               BottomNavigationBarItem(
                   label: 'Registros', icon: Icon(Icons.history)),
               BottomNavigationBarItem(
-                  label: 'Veículos', icon: Icon(LineIcons.car))
+                  label: 'Veículos', icon: Icon(LineIcons.car)),
+              BottomNavigationBarItem(
+                  label: 'Sair', icon: Icon(Icons.exit_to_app_rounded))
             ],
             onTap: (int index) => homeCubit.changeContentHome(index),
           );

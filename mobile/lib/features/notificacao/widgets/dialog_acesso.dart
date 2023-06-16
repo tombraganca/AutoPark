@@ -13,7 +13,6 @@ class DialogAcesso {
   final NotificationDto notificationDto;
   final BuildContext context;
   DialogAcesso({required this.notificationDto, required this.context});
-
   show() => showDialog(
       context: context,
       builder: (context) {
@@ -22,8 +21,11 @@ class DialogAcesso {
           builder: (context, state) {
             return Dialog(
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.6,
-                width: MediaQuery.of(context).size.width * 0.8,
+                height: (state.statusNotificacao == StatusNotificacao.falha ||
+                        state.statusNotificacao == StatusNotificacao.sucesso)
+                    ? MediaQuery.sizeOf(context).height * 0.3
+                    : MediaQuery.sizeOf(context).height * 0.6,
+                width: MediaQuery.sizeOf(context).width * 0.8,
                 child: BlocBuilder<NotificacaoCubit, NotificacaoState>(
                   bloc: notificacaoCubit,
                   builder: (context, state) {
@@ -49,12 +51,12 @@ class DialogAcesso {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 17),
                                 child: SizedBox(
-                                  width: MediaQuery.of(context).size.width,
+                                  width: MediaQuery.sizeOf(context).width,
                                   child: Row(
                                     children: [
                                       SizedBox(
                                         width:
-                                            MediaQuery.of(context).size.width *
+                                            MediaQuery.sizeOf(context).width *
                                                 0.6,
                                         child: Column(
                                           children: [
@@ -87,12 +89,12 @@ class DialogAcesso {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 20),
                                 child: SizedBox(
-                                  width: MediaQuery.of(context).size.width,
+                                  width: MediaQuery.sizeOf(context).width,
                                   child: Row(
                                     children: [
                                       SizedBox(
                                         width:
-                                            MediaQuery.of(context).size.width *
+                                            MediaQuery.sizeOf(context).width *
                                                 0.6,
                                         child: Column(
                                           children: [
@@ -165,7 +167,7 @@ class DialogAcesso {
                               children: [
                                 const Icon(
                                   Icons.check_circle_outline_rounded,
-                                  size: 48,
+                                  size: 72,
                                   color: Colors.green,
                                 ),
                                 const Padding(

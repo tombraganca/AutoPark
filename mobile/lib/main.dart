@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      locale: const Locale('pt_Br'),
       darkTheme: ThemeData(
         colorScheme: const ColorScheme.dark(
           primary: Colors.black,

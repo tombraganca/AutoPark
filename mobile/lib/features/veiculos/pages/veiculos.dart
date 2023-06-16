@@ -26,7 +26,7 @@ class _VeiculosState extends State<Veiculos> {
 
   @override
   Widget build(BuildContext context) {
-    final availableHeight = (MediaQuery.of(context).size.height -
+    final availableHeight = (MediaQuery.sizeOf(context).height -
         (AppBar().preferredSize.height +
             MediaQuery.of(context).padding.top +
             kBottomNavigationBarHeight));
@@ -49,7 +49,7 @@ class _VeiculosState extends State<Veiculos> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.95,
+                        width: MediaQuery.sizeOf(context).width * 0.95,
                         height: availableHeight * 0.08,
                         child: ElevatedButton(
                             onPressed: () => DialogCadastroVeiculo(

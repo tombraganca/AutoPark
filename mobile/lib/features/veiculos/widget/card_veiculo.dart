@@ -15,7 +15,7 @@ class CardVeiculo extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.65,
+                width: MediaQuery.sizeOf(context).width * 0.65,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class CardVeiculo extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.1,
+                  width: MediaQuery.sizeOf(context).width * 0.1,
                   child: IconButton(
                     onPressed: () {},
                     icon: const Icon(
@@ -56,7 +56,7 @@ class CardVeiculo extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.1,
+                width: MediaQuery.sizeOf(context).width * 0.1,
                 child: IconButton(
                   onPressed: () {},
                   icon: const Icon(

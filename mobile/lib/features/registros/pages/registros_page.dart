@@ -23,13 +23,13 @@ class _RegistrosPageState extends State<RegistrosPage> {
   @override
   void initState() {
     registrosCubit.setUser(widget.userEntity);
-    registrosCubit.init();
+    registrosCubit.gerRegistros();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final availableHeight = (MediaQuery.of(context).size.height -
+    final availableHeight = (MediaQuery.sizeOf(context).height -
         (AppBar().preferredSize.height +
             MediaQuery.of(context).padding.top +
             kBottomNavigationBarHeight));
@@ -59,14 +59,17 @@ class _RegistrosPageState extends State<RegistrosPage> {
                         CircularProgressIndicator(
                             valueColor:
                                 AlwaysStoppedAnimation<Color>(Colors.white)),
-                        Text('Carregando a lista...')
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                          child: Text('Carregando a lista...'),
+                        )
                       ],
                     ),
                     child: ListView.separated(
                         itemBuilder: (context, index) {
                           return CardRegistros(
                               title: state.listRegistros[index].title,
-                              registro: state.listRegistros[index].registro,
+                              //  registro: state.listRegistros[index].registro,
                               date: state.listRegistros[index].date);
                         },
                         separatorBuilder: (context, index) {

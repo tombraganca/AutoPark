@@ -25,15 +25,15 @@ class _LoginState extends State<Login> with Validators {
         child: Padding(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.sizeOf(context).height,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
                     child: Image.asset(
                   'assets/images/logo.png',
-                  width: MediaQuery.of(context).size.height * 0.3,
-                  height: MediaQuery.of(context).size.width * 0.5,
+                  width: MediaQuery.sizeOf(context).height * 0.3,
+                  height: MediaQuery.sizeOf(context).width * 0.5,
                 )),
                 const Center(
                   child: Padding(
@@ -54,7 +54,7 @@ class _LoginState extends State<Login> with Validators {
                       bloc: loginCubit,
                       listener: (context, state) {
                         if (state.statusLogin == StatusLogin.sucessoLogin) {
-                          Navigator.of(context).pushNamed('HOME');
+                          Navigator.of(context).pushReplacementNamed('HOME');
                         }
                       },
                       builder: (context, state) {
@@ -114,8 +114,7 @@ class _LoginState extends State<Login> with Validators {
                                     top: 25),
                                 child: SizedBox(
                                   height: 40,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.8,
+                                  width: MediaQuery.sizeOf(context).width * 0.8,
                                   child: Visibility(
                                     visible: state.statusLogin !=
                                         StatusLogin.autenticandoLogin,

@@ -5,8 +5,9 @@ class HomeState extends Equatable {
   final StatusHome statusHome;
   final int indexCurrentContentHome;
   final String titleContentCurrentWidget;
-  Widget contentCurrentWidget;
-  HomeState(
+  final Widget contentCurrentWidget;
+
+  const HomeState(
       {required this.statusHome,
       this.titleContentCurrentWidget = 'Vagas',
       this.indexCurrentContentHome = 0,
@@ -16,7 +17,7 @@ class HomeState extends Equatable {
         statusHome,
         indexCurrentContentHome,
         contentCurrentWidget,
-        titleContentCurrentWidget
+        titleContentCurrentWidget,
       ];
 
   HomeState copyWith({
@@ -24,6 +25,7 @@ class HomeState extends Equatable {
     int? indexCurrentContentHome,
     Widget? contentCurrentWidget,
     String? titleContentCurrentWidget,
+    int? countToExit,
   }) {
     return HomeState(
       statusHome: statusHome ?? this.statusHome,
@@ -39,4 +41,5 @@ class HomeState extends Equatable {
 enum StatusHome {
   initial,
   loadingList,
+  exitApp,
 }

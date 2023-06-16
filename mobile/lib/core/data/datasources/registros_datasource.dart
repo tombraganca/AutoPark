@@ -15,9 +15,9 @@ class RegistrosDataSourceImp implements RegistrosDataSource {
   @override
   Future<List<RegistroDto>> getRegistros() async {
     try {
-      Response response = await _httpConnectionsService.get('listAccess');
+      Response response = await _httpConnectionsService.get('access');
       if (response.statusCode == 200) {
-        return (jsonDecode(response.body)[''] as List<dynamic>)
+        return (jsonDecode(response.body) as List<dynamic>)
             .map((e) => RegistroDto.fromJson(e))
             .toList();
       }
