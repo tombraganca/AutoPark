@@ -24,7 +24,7 @@ class RoutesApp {
         case 'HOME':
           return MaterialPageRoute(
             settings: settings,
-            builder: (context) => Home(),
+            builder: (context) => const Home(),
           );
         case 'CADASTRO':
           return MaterialPageRoute(

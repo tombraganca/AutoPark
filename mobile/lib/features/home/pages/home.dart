@@ -1,6 +1,3 @@
-// ignore_for_file: must_be_immutable
-import 'package:auto_park/core/data/dtos/notification_dto.dart';
-import 'package:auto_park/core/domain/entities/vehicle_entity.dart';
 import 'package:auto_park/features/home/cubit/home_cubit.dart';
 import 'package:auto_park/features/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +6,8 @@ import 'package:get_it/get_it.dart';
 import 'package:line_icons/line_icons.dart';
 
 class Home extends StatefulWidget {
-  Future<dynamic> Function()? showDialogAcesso;
-  Home({super.key, this.showDialogAcesso});
+  final Future<dynamic> Function()? showDialogAcesso;
+  const Home({super.key, this.showDialogAcesso});
 
   @override
   State<Home> createState() => _HomeState();

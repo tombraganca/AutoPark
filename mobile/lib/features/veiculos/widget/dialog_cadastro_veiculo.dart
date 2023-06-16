@@ -11,7 +11,7 @@ class DialogCadastroVeiculo with Validators {
   final BuildContext context;
   final VeiculosCubit veiculosCubit;
   DialogCadastroVeiculo({required this.context, required this.veiculosCubit}) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     showDialog(
         context: context,
         builder: (context) {
@@ -39,7 +39,7 @@ class DialogCadastroVeiculo with Validators {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Form(
-                                key: _formKey,
+                                key: formKey,
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -88,7 +88,7 @@ class DialogCadastroVeiculo with Validators {
                                 width: MediaQuery.sizeOf(context).width * 0.7,
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      if (_formKey.currentState!.validate()) {
+                                      if (formKey.currentState!.validate()) {
                                         veiculosCubit.addVeiculo(
                                             placaController.text,
                                             marcaController.text,
