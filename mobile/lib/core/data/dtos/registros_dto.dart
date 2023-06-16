@@ -9,6 +9,7 @@ class RegistroDto extends RegistroEntity {
     required super.title,
     required super.date,
     required super.id,
+    required super.placa,
   });
 
   factory RegistroDto.fromJson(Map<String, dynamic> json) {
@@ -17,6 +18,7 @@ class RegistroDto extends RegistroEntity {
         title: json['type'].toString().toLowerCase().contains('out')
             ? 'Saída'
             : 'Entrada',
+        placa: json['plate'],
         date: DateFormat('yyyy-MM-dd hh:mm:ss')
             .format(DateTime.parse(json['date'].toString())));
   }
@@ -25,6 +27,7 @@ class RegistroDto extends RegistroEntity {
       'title': super.title,
       'date': super.date,
       'id': super.id,
+      'plate': super.placa,
     };
   }
 }

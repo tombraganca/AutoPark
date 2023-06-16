@@ -1,8 +1,6 @@
 import 'package:auto_park/core/domain/entities/user_entity.dart';
-import 'package:auto_park/core/domain/entities/vaga_entity.dart';
 import 'package:auto_park/core/domain/usecases/vagas_usecase.dart';
 import 'package:auto_park/features/vagas/cubit/vagas_state.dart';
-import 'package:either_dart/either.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum SelectListVagas { disponivel, todas }
@@ -37,6 +35,10 @@ class VagasCubit extends Cubit<VagasState> {
               .toList(),
           SelectListVagas.todas: listVagas,
         },
+        selectListVagas: SelectListVagas.disponivel,
+        listSelected: listVagas
+            .where((element) => element.situacao.toLowerCase().contains('free'))
+            .toList(),
       ));
     });
   }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_park/core/domain/entities/registros_entity.dart';
 import 'package:auto_park/core/domain/entities/user_entity.dart';
 import 'package:auto_park/core/domain/usecases/registros_usecase.dart';

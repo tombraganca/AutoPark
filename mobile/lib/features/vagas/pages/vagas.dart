@@ -21,7 +21,6 @@ class _VagasState extends State<Vagas> {
   void initState() {
     vagasCubit.setUser(widget.userEntity);
     vagasCubit.getVagas();
-    vagasCubit.changeList(SelectListVagas.disponivel);
     super.initState();
   }
 

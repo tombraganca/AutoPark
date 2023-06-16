@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 class CardRegistros extends StatelessWidget {
   final String title;
-  // final String registro;
+  final String placa;
   final String date;
   const CardRegistros({
     super.key,
     required this.title,
-
-    /// required this.registro,
+    required this.placa,
     required this.date,
   });
 
@@ -40,7 +39,7 @@ class CardRegistros extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title),
-                //  Text(registro),
+                Text(placa),
                 Text(date),
               ],
             ),

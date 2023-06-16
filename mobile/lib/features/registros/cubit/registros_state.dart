@@ -1,5 +1,4 @@
 import 'package:auto_park/core/domain/entities/registros_entity.dart';
-import 'package:auto_park/features/registros/cubit/registros_cubit.dart';
 import 'package:equatable/equatable.dart';
 
 class RegistrosState extends Equatable {

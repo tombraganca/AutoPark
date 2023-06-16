@@ -69,7 +69,7 @@ class _RegistrosPageState extends State<RegistrosPage> {
                         itemBuilder: (context, index) {
                           return CardRegistros(
                               title: state.listRegistros[index].title,
-                              //  registro: state.listRegistros[index].registro,
+                              placa: state.listRegistros[index].placa,
                               date: state.listRegistros[index].date);
                         },
                         separatorBuilder: (context, index) {
