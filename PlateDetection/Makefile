@@ -16,16 +16,16 @@ mqtt-server-install:
 	docker run -d --name server-eclipse-mqtt-container -p 1883:1883 eclipse-mqtt-img
 
 start:
-	/bin/python3 /home/fernando/project/AutoPark/PlateDetection/src/main.py
+	/bin/python3 src/main.py
 
 publish:
-	/bin/python3 /home/fernando/project/AutoPark/PlateDetection/src/mqtt_mock.py
+	/bin/python3 src/mqtt_mock.py
 
 test0:
-	/bin/python3 /home/fernando/project/AutoPark/PlateDetection/src/test.py 0
+	/bin/python3 src/test.py 0
 
 test1:
-	/bin/python3 /home/fernando/project/AutoPark/PlateDetection/src/test.py 1
+	/bin/python3 src/test.py 1
 
 test2:
-	/bin/python3 /home/fernando/project/AutoPark/PlateDetection/src/test.py 2
+	/bin/python3 src/test.py 2
