@@ -146,6 +146,10 @@ Certifique-se de ter o Docker e Make instalado em seu sistema antes de prossegui
 
 Certifique-se de ler a documentação completa para obter informações detalhadas sobre as opções disponíveis e as configurações necessárias para o projeto.
 
+# Provaveis erros
+
+Altere o datasets_dir contido em `.config/ultralytics/settings.yaml` para `/home/{$user_project_path}/AutoPark/PlateDetection/training/datasets`
+
 
 ## README Criado com ajuda do chat GPT
 
