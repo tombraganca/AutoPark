@@ -1,3 +1,4 @@
-datasets/
+datasets/custom/*
+datasets/runs/*
 run/
 __init__.cpy*

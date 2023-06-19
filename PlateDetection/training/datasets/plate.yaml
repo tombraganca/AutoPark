@@ -1,0 +1,9 @@
+# Train data
+path: ./custom
+train: images/plates
+val: images/plates
+#test: # (optinal)
+
+# Classes
+names:
+  0: plate

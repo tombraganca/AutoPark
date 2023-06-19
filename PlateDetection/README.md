@@ -148,3 +148,5 @@ Certifique-se de ler a documentação completa para obter informações detalhad
 
 
 ## README Criado com ajuda do chat GPT
+
+## [Kaggle dataset](https://www.kaggle.com/datasets/scholngusmaximus/numberplate-bounding-box-india-eu-brazil-us?select=indian_eu_br_us.csv)
