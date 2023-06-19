@@ -2,8 +2,9 @@
 from dotenv import dotenv_values
 from paho.mqtt import client as mqtt_client
 import recognition
-from utils import byte_image_to_png, crop_results
+from utils import byte_image_to_png, crop_results, threshold
 from ocr import validate_ocr
+from datetime import datetime
 
 values = dotenv_values()
 
@@ -11,7 +12,7 @@ broker = values['broker']
 port = int(values['port'])
 topic = values['topic']
 topic_plate = values['topic_plate']
-client_id = values['client_id']
+client_id = values['client_id'] + datetime.now().strftime("%Y%m%d%H%M%S")
 username = values['username']
 password = values['password']
 
@@ -32,7 +33,6 @@ def connect_mqtt() -> mqtt_client:
 
 def publish(client, msg, top):
     result = client.publish(top, msg)
-    # result: [0, 1]
     status = result[0]
     if status == 0:
         print(f"Send `{msg}` to topic `{top}`")
@@ -47,8 +47,8 @@ def subscribe(client: mqtt_client):
         img = byte_image_to_png(msg)
         detection = recognition.evaluate(img, True)
         cropped_results = crop_results(detection, False)
-        for images in cropped_results: 
-            ocr_results  = validate_ocr(images)
+        for image in cropped_results: 
+            ocr_results = validate_ocr(image) + validate_ocr(threshold(image))
             if len(ocr_results) > 0:
                 publish(client, ','.join(ocr_results), topic_plate)
 

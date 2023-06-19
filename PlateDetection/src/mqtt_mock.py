@@ -2,9 +2,9 @@
 import mqtt
 import time
 from dotenv import load_dotenv
+load_dotenv()
 
-
-f = open("./test/post-placa-mercosul3.jpg", "rb")
+f = open("./test/002.jpg", "rb")
 fileContent = f.read()
 byteArr = bytearray(fileContent)
 top = "autopark/cam_0"

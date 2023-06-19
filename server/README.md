@@ -11,7 +11,7 @@ Este serviço faz contato direto com o App Mobile AutoPark, com o CasStreaming A
 Caso você não esteja utilizando o docker para executar a aplicação completa ou queira executar este ambiente em um local remoto do Docker, você precisará:
 
 * Node 16^
-* Uma instância do banco postgres
+* Uma instância do banco postgres(exemplo docker)
 
 Lembre-se que é necesspario ter o arquivo **.env** com todas as variáveis previamente configuradas. Caso tenha alguma duvida entre em contato com os desenvolvedores.
 

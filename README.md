@@ -4,6 +4,7 @@ Auto Park é um estacionamento autônomo que acomoda os carros nas vagas dispon�
 * [Design](https://www.figma.com/file/bK3G5ll5rnHdS2LEwv4ed3/AutoPark?node-id=0%3A1&t=yP3H130RSt0GWJXg-1)
 * [AutoPark Server](./server/README.md)
 * [AutoPark Stream](./CamStreaming/README.md)
+* [Plate Detection](PlateDetection/README.md)
 
 ## Iniciando o projeto
 

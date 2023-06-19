@@ -1,16 +1,28 @@
-[
+[  {
+    "title": "K",
+    "description": "Primeira esquerda",
+    "id": "1",
+    "type": "normal",
+    "center": {"x":  80 , "y": 130},
+    "situation": "free"
+},
     {
         "title": "A",
         "description": "Primeira esquerda",
         "id": "1",
         "type": "normal",
+        "center": {"x":  220 , "y": 133},
+        
         "situation": "free"
     },
+     
     {
         "title": "B",
         "description": "Primeira esquerda",
         "id": "2",
         "type": "normal",
+        "center": {"x":  360 , "y": 136},
+        
         "situation": "free"
     },
     {
@@ -18,6 +30,8 @@
         "description": "Primeira esquerda",
         "id": "3",
         "type": "deficient",
+        "center": {"x":  500 , "y": 139},
+        
         "situation": "free"
     },
     {
@@ -25,6 +39,7 @@
         "description": "Primeira esquerda",
         "id": "4",
         "type": "deficient",
+        "center": {"x":  640 , "y": 142},
         "situation": "free"
     },
     {
@@ -32,11 +47,14 @@
         "description": "Primeira esquerda",
         "id": "5",
         "type": "senior",
+        "center": {"x":  780 , "y": 145},
+
         "situation": "free"
     },
     {
         "title": "F",
         "description": "Primeira esquerda",
+        "center": {"x":  920 , "y": 148},
         "id": "6",
         "type": "senior",
         "situation": "free"
@@ -45,6 +63,7 @@
         "title": "G",
         "description": "Primeira esquerda",
         "id": "7",
+        "center": {"x":  1060 , "y": 151},
         "type": "normal",
         "situation": "free"
     },
@@ -52,21 +71,32 @@
         "title": "H",
         "description": "Primeira esquerda",
         "id": "8",
+        "center": {"x":  1180 , "y": 154},
         "type": "normal",
-        "situation": "busy"
+        "situation": "free"
     },
     {
         "title": "I",
         "description": "Primeira esquerda",
+        "center": {"x":  1300 , "y": 157},
         "id": "9",
         "type": "normal",
-        "situation": "busy"
+        "situation": "free"
     },
     {
         "title": "J",
         "description": "Primeira esquerda",
+        "center": {"x":  1440 , "y": 160},
         "id": "10",
         "type": "normal",
-        "situation": "busy"
+        "situation": "free"
+    },
+    {
+        "title": "L",
+        "description": "Primeira esquerda",
+        "center": {"x":  1600 , "y": 163},
+        "id": "10",
+        "type": "normal",
+        "situation": "free"
     }
 ]

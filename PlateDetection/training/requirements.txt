@@ -1,4 +1,0 @@
-ultralytics==8.0.94
-paho-mqtt==1.6.1
-easyocr==1.6.2
-imutils==0.5.4
