@@ -4,3 +4,5 @@ PlateDetection/training/datasets/yolov8n.pt
 PlateDetection/training/datasets/custom/*
 PlateDetection/training/datasets/runs/*
 Vagas/yolov8n.pt
+Vagas/src/*/__pycache__/__init__.*
+yolov8n.pt

@@ -1,14 +1,13 @@
 import io
 from PIL import Image
 import cv2
-import numpy as np
 import matplotlib.pyplot as plt
 
 
 def byte_image_to_png(message):
     bytes_image = io.BytesIO(message.payload)
-    picture = Image.open(bytes_image)
-    return picture
+    image = Image.open(bytes_image)
+    return image
 
 
 def crop_results(results, verbose=False):
