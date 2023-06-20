@@ -5,6 +5,7 @@ Auto Park é um estacionamento autônomo que acomoda os carros nas vagas dispon�
 * [AutoPark Server](./server/README.md)
 * [AutoPark Stream](./CamStreaming/README.md)
 * [Plate Detection](PlateDetection/README.md)
+* [Vagas Detection](Vagas/README.md)
 
 ## Iniciando o projeto
 
