@@ -13,8 +13,8 @@ load_dotenv()
 tests = [
     './test/001.jpg',
     './test/002.jpg',
-    './test/003.jpg',
     './test/005.jpg',
+    './test/003.jpg',
     './test/006.jpg',
 ]
 
