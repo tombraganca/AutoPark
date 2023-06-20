@@ -1,5 +1,0 @@
-# flask
-flask==2.3
-requests==2.26.0
-python-dotenv==1.0
-
