@@ -7,6 +7,7 @@ import 'package:auto_park/features/notificacao/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 
 class DialogAcesso {
   NotificacaoCubit notificacaoCubit = GetIt.I.get<NotificacaoCubit>();
@@ -106,11 +107,17 @@ class DialogAcesso {
                                             CustomText(
                                                 label: 'Tipo:',
                                                 value: notificationDto
-                                                    .tipoDeAcesso),
+                                                            .tipoDeAcesso ==
+                                                        'in'
+                                                    ? 'Entrada'
+                                                    : 'Saida'),
                                             CustomText(
                                                 label: 'Hora:',
-                                                value:
-                                                    notificationDto.datahora),
+                                                value: DateFormat(
+                                                        'yyyy-MM-dd hh:mm:ss')
+                                                    .format(DateTime.parse(
+                                                        notificationDto
+                                                            .datahora))),
                                           ],
                                         ),
                                       )
@@ -125,7 +132,9 @@ class DialogAcesso {
                                   ElevatedButton.icon(
                                     onPressed: () =>
                                         notificacaoCubit.answerNotificacao(
-                                            true,
+                                            notificationDto.tipoDeAcesso
+                                                    .toLowerCase() ==
+                                                'in',
                                             notificationDto
                                                 .vehicleEntity.placa),
                                     label: const Text(
@@ -142,10 +151,11 @@ class DialogAcesso {
                                   ),
                                   ElevatedButton.icon(
                                     onPressed: () =>
-                                        notificacaoCubit.answerNotificacao(
-                                            false,
-                                            notificationDto
-                                                .vehicleEntity.placa),
+                                        Navigator.of(context).pop(),
+                                    //  notificacaoCubit.answerNotificacao(
+                                    //      false,
+                                    //      notificationDto
+                                    //          .vehicleEntity.placa),
                                     label: const Text('Não, não permitir',
                                         style: TextStyle(color: Colors.white)),
                                     icon: const Icon(
