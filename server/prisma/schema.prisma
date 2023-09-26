@@ -69,17 +69,17 @@ model Vacancies {
   description String
   type        String
   situation   String?
-  busnessId   String
-  parking     Busness @relation(fields: [busnessId], references: [id])
+  businessId  String
+  parking     Business @relation(fields: [businessId], references: [id])
 
   @@map("vacancies")
 }
 
-model Busness {
+model Business {
   id          String  @id @default(uuid())
   name        String  @unique
   location    String
   Vacancies   Vacancies[]
 
-  @@map("busness")
+  @@map("business")
 }
