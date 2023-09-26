@@ -64,6 +64,10 @@ Em sua maioria é utiolizado validação de autenticação. No entanto existem a
 
 <img src="./assets/swagger.png" title="Print da tela do swagger">
 
+
+# Busness Model Canvas
+
+![Alt text](assets/Business%20Model%20Canvas.png)
 # Possiveis melhorias
 
 ## Motocicletas
