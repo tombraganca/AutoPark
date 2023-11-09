@@ -64,11 +64,22 @@ model AccountToken {
 }
 
 model Vacancies {
-  id          String  @id @default(uuid())
-  title       String  @unique
+  id          String   @id @default(uuid())
+  title       String   @unique
   description String
   type        String
   situation   String?
+  businessId  String
+  plateCar    String?
+  Business    Business @relation(fields: [businessId], references: [id])
 
   @@map("vacancies")
+}
+
+model Business {
+  id       String      @id @default(uuid())
+  business String
+  vacancy  Vacancies[]
+
+  @@map("business")
 }
