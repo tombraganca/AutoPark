@@ -64,7 +64,9 @@ CREATE TABLE "vacancies" (
 -- CreateTable
 CREATE TABLE "business" (
     "id" TEXT NOT NULL,
-    "business" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "location" JSONB NOT NULL,
+    "ownerId" TEXT NOT NULL,
 
     CONSTRAINT "business_pkey" PRIMARY KEY ("id")
 );
@@ -89,3 +91,6 @@ ALTER TABLE "account_tokens" ADD CONSTRAINT "account_tokens_accountId_fkey" FORE
 
 -- AddForeignKey
 ALTER TABLE "vacancies" ADD CONSTRAINT "vacancies_businessId_fkey" FOREIGN KEY ("businessId") REFERENCES "business"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "business" ADD CONSTRAINT "business_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "accounts"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

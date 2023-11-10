@@ -19,6 +19,7 @@ model Account {
   RefreshToken RefreshToken[]
   AccountToken AccountToken[]
   Access       Access[]
+  Business     Business[]
 
   @@map("accounts")
 }
@@ -71,14 +72,17 @@ model Vacancies {
   situation   String?
   businessId  String
   plateCar    String?
-  Business    Business @relation(fields: [businessId], references: [id])
+  business    Business @relation(fields: [businessId], references: [id])
 
   @@map("vacancies")
 }
 
 model Business {
   id       String      @id @default(uuid())
-  business String
+  name     String
+  location Json
+  ownerId  String
+  owner    Account     @relation(fields: [ownerId], references: [id])
   vacancy  Vacancies[]
 
   @@map("business")
