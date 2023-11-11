@@ -1,11 +1,14 @@
-[  
-     {
+[
+    {
         "title": "V",
         "description": "Primeira esquerda",
         "id": "1",
         "type": "deficient",
-        "center": {"x":  5 , "y": 170},
-        
+        "center": {
+            "x": 5,
+            "y": 170
+        },
+        "parkingId": "1",
         "situation": "free"
     },
     {
@@ -13,7 +16,11 @@
         "description": "Primeira esquerda",
         "id": "2",
         "type": "deficient",
-        "center": {"x":  60 , "y": 170},
+        "center": {
+            "x": 60,
+            "y": 170
+        },
+        "parkingId": "2",
         "situation": "free"
     },
     {
@@ -21,80 +28,119 @@
         "description": "Primeira esquerda",
         "id": "3",
         "type": "senior",
-        "center": {"x":  120 , "y": 170},
-
+        "center": {
+            "x": 120,
+            "y": 170
+        },
+        "parkingId": "3",
         "situation": "free"
     },
     {
         "title": "V",
         "description": "Primeira esquerda",
-        "center": {"x":  180 , "y": 170},
+        "center": {
+            "x": 180,
+            "y": 170
+        },
         "id": "4",
         "type": "senior",
+        "parkingId": "4",
         "situation": "free"
     },
     {
         "title": "V",
         "description": "Primeira esquerda",
         "id": "5",
-        "center": {"x":  240 , "y": 170},
+        "center": {
+            "x": 240,
+            "y": 170
+        },
         "type": "normal",
+        "parkingId": "5",
         "situation": "free"
     },
     {
         "title": "V",
         "description": "Primeira esquerda",
         "id": "6",
-        "center": {"x":  300 , "y": 170},
+        "center": {
+            "x": 300,
+            "y": 170
+        },
         "type": "normal",
+        "parkingId": "6",
         "situation": "free"
     },
     {
         "title": "V",
         "description": "Primeira esquerda",
-        "center": {"x":  350 , "y": 170},
+        "center": {
+            "x": 350,
+            "y": 170
+        },
         "id": "7",
         "type": "normal",
+        "parkingId": "7",
         "situation": "free"
     },
     {
         "title": "V",
         "description": "Primeira esquerda",
-        "center": {"x":  400 , "y": 170},
+        "center": {
+            "x": 400,
+            "y": 170
+        },
         "id": "8",
         "type": "normal",
+        "parkingId": "8",
         "situation": "free"
     },
     {
         "title": "V",
         "description": "Primeira esquerda",
-        "center": {"x":  450 , "y": 170},
+        "center": {
+            "x": 450,
+            "y": 170
+        },
         "id": "9",
         "type": "normal",
+        "parkingId": "9",
         "situation": "free"
     },
     {
         "title": "V",
         "description": "Primeira esquerda",
-        "center": {"x":  500, "y":  170 },
+        "center": {
+            "x": 500,
+            "y": 170
+        },
         "id": "10",
         "type": "normal",
+        "parkingId": "10",
         "situation": "free"
     },
     {
         "title": "V",
         "description": "Primeira esquerda",
-        "center": {"x":  570, "y":  170 },
+        "center": {
+            "x": 570,
+            "y": 170
+        },
         "id": "11",
         "type": "normal",
+        "parkingId": "11",
         "situation": "free"
     },
     {
         "title": "V",
         "description": "Primeira esquerda",
-        "center": {"x":  630, "y":  170 },
+        "center": {
+            "x": 630,
+            "y": 170
+        },
         "id": "12",
         "type": "normal",
+        "parkingId": "12",
         "situation": "free"
     }
 ]

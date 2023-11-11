@@ -1,11 +1,15 @@
 import { client } from "../../providers/prisma/client";
 import MOCK_VACANCIES from "../../MOCK/vacancies.json";
 
+interface ListVacanciesDTO {
+    filter: "all" | "available";
+    parkingId: string;
+}
 export class ListVacanciesUseCase {
 
-    async execute(filter: 'all' | 'available') {
+    async execute(props: ListVacanciesDTO) {
 
-        const situation = filter === 'all' ? null : 'free';
+        const situation = props.filter === 'all' ? null : 'free';
 
         try {
             // const vacancies = await client.vacancies.findMany({
@@ -15,7 +19,8 @@ export class ListVacanciesUseCase {
             // });
             // return vacancies;
             return MOCK_VACANCIES.filter(v => {
-                if (filter === 'all') return true;
+                if (v.parkingId !== props.parkingId) return false;
+                if (props.filter === 'all') return true;
                 return v.situation === situation;
             });
 
