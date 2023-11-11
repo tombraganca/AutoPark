@@ -18,10 +18,12 @@ class AuthDataSourceImp implements AuthDataSource {
     try {
       Response response = await _httpConnectionsService
           .post('login', {'email': email, 'password': password});
-      if (response.statusCode == 200) {
-        return UserDto.fromJson(jsonDecode(response.body));
-      } else {
+      if (response.statusCode == 200 &&
+          jsonDecode(response.body)['status'] != null &&
+          jsonDecode(response.body)['status'].contains('Error')) {
         throw AuthFailure('Falha ao realizar o login !!');
+      } else {
+        return UserDto.fromJson(jsonDecode(response.body));
       }
     } catch (e) {
       throw AuthFailure(e.toString());

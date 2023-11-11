@@ -1,17 +1,15 @@
-import 'package:auto_park/core/domain/entities/user_entity.dart';
 import 'package:auto_park/core/domain/usecases/vagas_usecase.dart';
+import 'package:auto_park/core/injects/userSingleton/user_global_singleton.dart';
 import 'package:auto_park/features/vagas/cubit/vagas_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 enum SelectListVagas { disponivel, todas }
 
 class VagasCubit extends Cubit<VagasState> {
   final VagasUseCase vagasUseCase;
-  UserEntity? userEntity;
   VagasCubit({required this.vagasUseCase})
       : super(const VagasState(statusVagas: StatusVagas.initial));
-
-  void setUser(UserEntity userEntity) => this.userEntity = userEntity;
 
   void changeList(SelectListVagas selectListVagas) => emit(state.copyWith(
       selectListVagas: selectListVagas,
@@ -20,9 +18,11 @@ class VagasCubit extends Cubit<VagasState> {
           ? StatusVagas.refrashselectList
           : StatusVagas.selectList));
 
-  Future<void> getVagas() async {
+  Future<void> getVagas({required int parkingId}) async {
     emit(state.copyWith(statusVagas: StatusVagas.buscandoVagas));
-    var result = await vagasUseCase.getVagas(userEntity!.token);
+    var result = await vagasUseCase.getVagas(
+        token: GetIt.I.get<UserDtoGlobal>().getUser().token,
+        parkingId: parkingId);
     result.fold((left) {
       emit(state.copyWith(statusVagas: StatusVagas.errorBuscarVagas));
     }, (listVagas) {

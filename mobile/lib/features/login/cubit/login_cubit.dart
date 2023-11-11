@@ -30,7 +30,6 @@ class LoginCubit extends Cubit<LoginState> with ToastMessages {
       GetIt.I.get<UserDtoGlobal>().setUser(user);
       GetIt.I.get<HttpConnectionsService>().setToken(user.token);
       GetIt.I.get<HttpConnectionsService>().setTokenDefaultHeaders(user.token);
-      showMessagePositive('Login realizado com sucesso !!');
       emit(state.copyWith(statusLogin: StatusLogin.sucessoLogin));
     });
     if (GetIt.I.get<UserDtoGlobal>().getUser().token.isNotEmpty) {

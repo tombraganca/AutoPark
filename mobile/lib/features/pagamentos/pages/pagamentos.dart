@@ -1,28 +1,22 @@
-import 'package:auto_park/features/registros/cubit/registros_cubit.dart';
-import 'package:auto_park/features/registros/cubit/registros_state.dart';
-import 'package:auto_park/features/registros/widgets/cards_registros.dart';
-import 'package:auto_park/features/registros/widgets/selector_page.dart';
+import 'package:auto_park/features/pagamentos/cubit/pagamentos_cubit.dart';
+import 'package:auto_park/features/pagamentos/cubit/pagamentos_state.dart';
+import 'package:auto_park/features/pagamentos/widgets/card_pagamentos.dart';
+import 'package:auto_park/features/pagamentos/widgets/selector_pagamentos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegistrosPage extends StatefulWidget {
-  final RegistrosCubit registrosCubit;
-  const RegistrosPage({
-    required this.registrosCubit,
+class Pagamentos extends StatefulWidget {
+  final PagamentosCubit pagamentosCubit;
+  const Pagamentos({
     super.key,
+    required this.pagamentosCubit,
   });
 
   @override
-  State<RegistrosPage> createState() => _RegistrosPageState();
+  State<Pagamentos> createState() => _PagamentosState();
 }
 
-class _RegistrosPageState extends State<RegistrosPage> {
-  @override
-  void initState() {
-    widget.registrosCubit.gerRegistros();
-    super.initState();
-  }
-
+class _PagamentosState extends State<Pagamentos> {
   @override
   Widget build(BuildContext context) {
     final availableHeight = (MediaQuery.sizeOf(context).height -
@@ -31,8 +25,8 @@ class _RegistrosPageState extends State<RegistrosPage> {
             kBottomNavigationBarHeight));
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: BlocBuilder<RegistrosCubit, RegistrosState>(
-        bloc: widget.registrosCubit,
+      body: BlocBuilder<PagamentosCubit, PagamentosState>(
+        bloc: widget.pagamentosCubit,
         builder: (context, state) {
           return SizedBox(
             height: availableHeight,
@@ -40,37 +34,28 @@ class _RegistrosPageState extends State<RegistrosPage> {
               children: [
                 SizedBox(
                   height: availableHeight * 0.15,
-                  child: SelectorPage(
-                    registrosCubit: widget.registrosCubit,
+                  child: SelectorPagamentos(
+                    pagamentosCubit: widget.pagamentosCubit,
                   ),
                 ),
                 SizedBox(
                   height: availableHeight * 0.8,
                   child: Visibility(
                     visible:
-                        state.statusRegistros == StatusRegistros.loadingList,
+                        state.statusPagamentos == StatusPagamentos.loadingList,
                     replacement: Visibility(
-                      visible: state.listRegistros.isEmpty,
-                      replacement: ListView.separated(
+                      visible: state.selectedListPagamentos.isEmpty,
+                      replacement: ListView.builder(
                           itemBuilder: (context, index) {
-                            return CardRegistros(
-                                title: state.listRegistros[index].title,
-                                placa: state.listRegistros[index].placa,
-                                date: state.listRegistros[index].date);
-                          },
-                          separatorBuilder: (context, index) {
-                            return const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              child: Divider(
-                                color: Colors.white,
-                                height: 5,
-                              ),
+                            return CardPagamentos(
+                              pagamentosEntity:
+                                  state.selectedListPagamentos[index],
                             );
                           },
-                          itemCount: state.listRegistros.length),
+                          itemCount: state.selectedListPagamentos.length),
                       child: const Center(
                         child: Text(
-                          'Nenhum registro encontrado',
+                          'Nenhum pagamento encontrado',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),

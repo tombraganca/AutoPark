@@ -4,14 +4,16 @@ import 'package:auto_park/core/failures/failure.dart';
 import 'package:either_dart/either.dart';
 
 abstract class VagasUseCase {
-  Future<Either<Failure, List<VagaEntity>>> getVagas(String token);
+  Future<Either<Failure, List<VagaEntity>>> getVagas(
+      {required int parkingId, required String token});
 }
 
 class VagasUseCaseImp implements VagasUseCase {
   final VagasRepository _vagasRepository;
   VagasUseCaseImp(this._vagasRepository);
   @override
-  Future<Either<Failure, List<VagaEntity>>> getVagas(String token) async {
-    return await _vagasRepository.getVagas(token);
+  Future<Either<Failure, List<VagaEntity>>> getVagas(
+      {required int parkingId, required String token}) async {
+    return await _vagasRepository.getVagas(parkingId: parkingId, token: token);
   }
 }

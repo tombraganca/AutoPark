@@ -2,24 +2,27 @@ import 'package:auto_park/features/home/cubit/home_cubit.dart';
 import 'package:auto_park/features/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:line_icons/line_icons.dart';
 
 class Home extends StatefulWidget {
   final Future<dynamic> Function()? showDialogAcesso;
-  const Home({super.key, this.showDialogAcesso});
+  final HomeCubit homeCubit;
+  const Home({
+    super.key,
+    required this.homeCubit,
+    this.showDialogAcesso,
+  });
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  final HomeCubit homeCubit = GetIt.I.get<HomeCubit>();
-
   @override
   void initState() {
-    homeCubit.setIndexInit(0);
-    homeCubit.getPermissionNotification();
+    widget.homeCubit
+      ..setIndexInit(0)
+      ..getPermissionNotification();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.showDialogAcesso != null) {
         widget.showDialogAcesso!();
@@ -31,9 +34,25 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Container(
+                child: const DrawerHeader(
+              child: null,
+            ))
+          ],
+        ),
+      ),
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.person),
+          ),
+        ],
         title: BlocBuilder<HomeCubit, HomeState>(
-          bloc: homeCubit,
+          bloc: widget.homeCubit,
           builder: (context, state) {
             return Text(
               state.titleContentCurrentWidget,
@@ -42,35 +61,34 @@ class _HomeState extends State<Home> {
         ),
         centerTitle: true,
       ),
-      body: BlocConsumer<HomeCubit, HomeState>(
-          bloc: homeCubit,
-          listener: ((context, state) {
-            if (state.statusHome == StatusHome.exitApp) {
-              Navigator.popAndPushNamed(context, 'LOGIN');
-            }
-          }),
+      body: BlocBuilder<HomeCubit, HomeState>(
+          bloc: widget.homeCubit,
           builder: (context, state) {
             return state.contentCurrentWidget;
           }),
       bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
-        bloc: homeCubit,
+        bloc: widget.homeCubit,
         builder: (context, state) {
           return BottomNavigationBar(
             currentIndex: state.indexCurrentContentHome,
-            selectedFontSize: 15,
-            unselectedFontSize: 9,
+            selectedFontSize: 12,
+            unselectedFontSize: 8,
+            selectedItemColor: Theme.of(context).colorScheme.primary,
+            unselectedItemColor: Colors.white,
             type: BottomNavigationBarType.fixed,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
             items: const [
               BottomNavigationBarItem(
-                  label: 'Vagas', icon: Icon(Icons.local_parking)),
+                  label: 'Estacionamentos', icon: Icon(Icons.local_parking)),
               BottomNavigationBarItem(
                   label: 'Registros', icon: Icon(Icons.history)),
               BottomNavigationBarItem(
                   label: 'Veículos', icon: Icon(LineIcons.car)),
               BottomNavigationBarItem(
-                  label: 'Sair', icon: Icon(Icons.exit_to_app_rounded))
+                  label: 'Pagamentos',
+                  icon: Icon(Icons.monetization_on_outlined))
             ],
-            onTap: (int index) => homeCubit.changeContentHome(index),
+            onTap: (int index) => widget.homeCubit.changeContentHome(index),
           );
         },
       ),

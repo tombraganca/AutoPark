@@ -21,9 +21,9 @@ final AppBar appBar = AppBar(
 class _CadastroState extends State<Cadastro> with Validators {
   final CadastroCubit cadastroCubit = GetIt.I.get<CadastroCubit>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
-  TextEditingController nomeController = TextEditingController();
+  final emailController = TextEditingController();
+  final senhaController = TextEditingController();
+  final nomeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final availableHeight = MediaQuery.sizeOf(context).height -

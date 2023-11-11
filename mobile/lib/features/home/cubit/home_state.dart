@@ -41,5 +41,4 @@ class HomeState extends Equatable {
 enum StatusHome {
   initial,
   loadingList,
-  exitApp,
 }

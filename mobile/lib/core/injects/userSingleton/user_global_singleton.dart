@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_park/core/data/dtos/user_dto.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,7 @@ abstract class UserDtoGlobal extends ChangeNotifier {
 class UserDtoGlobalImp extends UserDtoGlobal {
   @override
   UserDto getUser() {
+    log('getUser,${_user.token}');
     return _user;
   }
 

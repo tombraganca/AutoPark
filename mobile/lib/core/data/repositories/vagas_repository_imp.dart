@@ -8,9 +8,11 @@ class VagasRepositoryImp implements VagasRepository {
   final VagasDataSource _vagasDataSource;
   VagasRepositoryImp(this._vagasDataSource);
   @override
-  Future<Either<Failure, List<VagaEntity>>> getVagas(String token) async {
+  Future<Either<Failure, List<VagaEntity>>> getVagas(
+      {required int parkingId, required String token}) async {
     try {
-      return Right(await _vagasDataSource.getVagas(token));
+      return Right(
+          await _vagasDataSource.getVagas(token: token, parkingId: parkingId));
     } on Failure catch (e) {
       return Left(e);
     }

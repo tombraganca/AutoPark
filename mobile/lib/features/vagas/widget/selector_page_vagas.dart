@@ -30,7 +30,7 @@ class SelectorVagas extends StatelessWidget {
                     width: MediaQuery.sizeOf(context).width / 2.2,
                     decoration: BoxDecoration(
                       color: state.selectListVagas == SelectListVagas.disponivel
-                          ? Colors.grey[700]
+                          ? const Color.fromRGBO(74, 68, 88, 1)
                           : null,
                       border: Border.all(width: 1.0, color: Colors.white),
                       borderRadius: const BorderRadius.only(
@@ -57,7 +57,7 @@ class SelectorVagas extends StatelessWidget {
                     width: MediaQuery.sizeOf(context).width / 2.2,
                     decoration: BoxDecoration(
                       color: state.selectListVagas == SelectListVagas.todas
-                          ? Colors.grey[700]
+                          ? const Color.fromRGBO(74, 68, 88, 1)
                           : null,
                       border: Border.all(width: 1.0, color: Colors.white),
                       borderRadius: const BorderRadius.only(

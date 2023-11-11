@@ -1,26 +1,25 @@
-import 'package:auto_park/core/domain/entities/user_entity.dart';
 import 'package:auto_park/features/veiculos/cubit/veiculos_cubit.dart';
 import 'package:auto_park/features/veiculos/cubit/veiculos_state.dart';
 import 'package:auto_park/features/veiculos/widget/card_veiculo.dart';
 import 'package:auto_park/features/veiculos/widget/dialog_cadastro_veiculo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 class Veiculos extends StatefulWidget {
-  final UserEntity userEntity;
-  const Veiculos({super.key, required this.userEntity});
+  final VeiculosCubit veiculosCubit;
+  const Veiculos({
+    super.key,
+    required this.veiculosCubit,
+  });
 
   @override
   State<Veiculos> createState() => _VeiculosState();
 }
 
 class _VeiculosState extends State<Veiculos> {
-  final VeiculosCubit veiculosCubit = GetIt.I.get<VeiculosCubit>();
   @override
   void initState() {
-    veiculosCubit.setUser(widget.userEntity);
-    veiculosCubit.getVeiculos();
+    widget.veiculosCubit.getVeiculos();
     super.initState();
   }
 
@@ -33,7 +32,7 @@ class _VeiculosState extends State<Veiculos> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: BlocConsumer<VeiculosCubit, VeiculosState>(
-        bloc: veiculosCubit,
+        bloc: widget.veiculosCubit,
         listener: (context, state) {
           if (state.statusVeiculos == StatusVeiculos.reloadListVechicles) {
             Navigator.of(context).pop();
@@ -53,15 +52,16 @@ class _VeiculosState extends State<Veiculos> {
                         height: availableHeight * 0.08,
                         child: ElevatedButton(
                             onPressed: () => DialogCadastroVeiculo(
-                                context: context, veiculosCubit: veiculosCubit),
-                            style: const ButtonStyle(
+                                context: context,
+                                veiculosCubit: widget.veiculosCubit),
+                            style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll<Color>(
-                                  Colors.transparent),
+                                  Theme.of(context).colorScheme.secondary),
                             ),
                             child: const Text(
-                              'Adicionar carro',
+                              'Adicionar veículo',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold),
                             )),

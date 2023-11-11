@@ -7,17 +7,19 @@ import 'package:auto_park/core/services/http_connections_service.dart';
 import 'package:http/http.dart';
 
 abstract class VagasDataSource {
-  Future<List<VagaEntity>> getVagas(String token);
+  Future<List<VagaEntity>> getVagas(
+      {required int parkingId, required String token});
 }
 
 class VagasDataSourceImp implements VagasDataSource {
   final HttpConnectionsService _httpConnectionsService;
   VagasDataSourceImp(this._httpConnectionsService);
   @override
-  Future<List<VagaEntity>> getVagas(String token) async {
+  Future<List<VagaEntity>> getVagas(
+      {required int parkingId, required String token}) async {
     try {
       Response response = await _httpConnectionsService.get(
-        'vacancies?filter=all',
+        'vacancies?filter=all&parkingId?=$parkingId',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token'

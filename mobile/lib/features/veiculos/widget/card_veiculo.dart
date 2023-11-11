@@ -12,6 +12,8 @@ class CardVeiculo extends StatelessWidget {
       child: SizedBox(
         height: 90,
         child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Row(
             children: [
               SizedBox(
@@ -21,7 +23,7 @@ class CardVeiculo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 16),
                       child: Text(
                         vehicleEntity.modelo,
                         style: const TextStyle(
@@ -29,14 +31,14 @@ class CardVeiculo extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 16),
                       child: Text(
                         'Marca: ${vehicleEntity.marca}',
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 16),
                       child: Text('Placa: ${vehicleEntity.placa}'),
                     ),
                   ],

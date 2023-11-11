@@ -1,27 +1,25 @@
-import 'package:auto_park/features/vagas/cubit/vagas_cubit.dart';
-import 'package:auto_park/features/vagas/cubit/vagas_state.dart';
-import 'package:auto_park/features/vagas/widget/selector_page_vagas.dart';
+import 'package:auto_park/features/estacionamentos/cubit/estacionamento_cubit.dart';
+import 'package:auto_park/features/estacionamentos/cubit/estacionamento_state.dart';
+import 'package:auto_park/features/estacionamentos/widgets/card_estacionamento.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:auto_park/features/vagas/widget/card_vagas.dart';
 
-class Vagas extends StatefulWidget {
-  final VagasCubit vagasCubit;
-  final int parkingId;
-  const Vagas({
+class Estacionamentos extends StatefulWidget {
+  final EstacionamentoCubit estacionamentoCubit;
+
+  const Estacionamentos({
     super.key,
-    required this.vagasCubit,
-    required this.parkingId,
+    required this.estacionamentoCubit,
   });
 
   @override
-  State<Vagas> createState() => _VagasState();
+  State<Estacionamentos> createState() => _EstacionamentosState();
 }
 
-class _VagasState extends State<Vagas> {
+class _EstacionamentosState extends State<Estacionamentos> {
   @override
   void initState() {
-    widget.vagasCubit.getVagas(parkingId: widget.parkingId);
+    widget.estacionamentoCubit.init();
     super.initState();
   }
 
@@ -32,26 +30,23 @@ class _VagasState extends State<Vagas> {
             MediaQuery.of(context).padding.top +
             kBottomNavigationBarHeight));
     return Scaffold(
-      body: BlocBuilder<VagasCubit, VagasState>(
-          bloc: widget.vagasCubit,
+      body: BlocBuilder<EstacionamentoCubit, EstacionamentoState>(
+          bloc: widget.estacionamentoCubit,
           builder: (context, state) {
             return Column(
               children: [
-                SizedBox(
-                  height: availableHeight * 0.15,
-                  child: SelectorVagas(
-                    vagasCubit: widget.vagasCubit,
-                  ),
-                ),
                 Visibility(
-                  visible: state.statusVagas == StatusVagas.buscandoVagas,
+                  visible: state.statusEstacionamento ==
+                      StatusEstacionamento.buscandoEstacionamentos,
                   replacement: SizedBox(
                     height: availableHeight * 0.80,
                     child: ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      itemCount: state.listSelected.length,
+                      itemCount: state.listEstacionamentos.length,
                       itemBuilder: (context, index) {
-                        return CardVagas(vagaEntity: state.listSelected[index]);
+                        return CardEstacionamento(
+                            estacionamentoEntity:
+                                state.listEstacionamentos[index]);
                       },
                     ),
                   ),
