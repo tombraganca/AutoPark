@@ -15,10 +15,11 @@ model Account {
   email        String         @unique
   name         String
   password     String
-  Car          Car[]
-  RefreshToken RefreshToken[]
-  AccountToken AccountToken[]
-  Access       Access[]
+  car          Car[]
+  refreshToken RefreshToken[]
+  accountToken AccountToken[]
+  access       Access[]
+  parking      Parking[]
 
   @@map("accounts")
 }
@@ -58,7 +59,7 @@ model AccountToken {
   token     String
   device    String
   accountId String
-  Account   Account @relation(fields: [accountId], references: [id])
+  account   Account @relation(fields: [accountId], references: [id])
 
   @@map("account_tokens")
 }
@@ -69,17 +70,20 @@ model Vacancies {
   description String
   type        String
   situation   String?
-  businessId  String
-  parking     Business @relation(fields: [businessId], references: [id])
+  parkingId   String
+  plateCar    String?
+  parking     Parking @relation(fields: [parkingId], references: [id])
 
   @@map("vacancies")
 }
 
-model Business {
-  id          String  @id @default(uuid())
-  name        String  @unique
-  location    String
-  Vacancies   Vacancies[]
+model Parking {
+  id       String      @id @default(uuid())
+  name     String
+  location Json
+  ownerId  String
+  owner    Account     @relation(fields: [ownerId], references: [id])
+  vacancy  Vacancies[]
 
-  @@map("business")
+  @@map("parking")
 }

@@ -11,6 +11,7 @@ import createAccessRegisterRouter from "./useCases/createAccessRegister/router";
 import listVacanciesRouter from "./useCases/listVacancies/router";
 import createVacancyRouter from "./useCases/createVacancies/router";
 import listRegistersRouter from "./useCases/listRegisters/router"
+import createBusinessRouter from "./useCases/createBusiness/router";
 
 const router = express();
 
@@ -26,5 +27,6 @@ router.use(createAccessRegisterRouter);
 router.use(listVacanciesRouter);
 router.use(createVacancyRouter);
 router.use(listRegistersRouter);
+router.use(createBusinessRouter);
 
 export default router;
