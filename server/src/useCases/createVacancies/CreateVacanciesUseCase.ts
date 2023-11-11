@@ -5,6 +5,7 @@ interface IVacanciesProps {
     description?: string;
     type: 'normal' | 'deficient' | 'senior';
     situation: 'busy' | 'free' | 'alert';
+    parkingId: string;
 
 }
 
@@ -16,7 +17,8 @@ export class CreateVacanciesUseCase {
                 title: props.title,
                 description: props.description || '',
                 type: props.type,
-                situation: props.situation
+                situation: props.situation,
+                parkingId: props.parkingId
             }
         });
         return vacanciesCreated;

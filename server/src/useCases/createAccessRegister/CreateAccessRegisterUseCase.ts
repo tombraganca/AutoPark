@@ -10,6 +10,7 @@ interface ICreateAccessRegisterRequestDTO {
 
 export class CreateAccessRegisterUseCase {
     async execute({ date, accessType, plate, ownerId }: ICreateAccessRegisterRequestDTO) {
+        
         if (!date || !accessType || !plate) {
             throw new Error('Invalid data')
         }

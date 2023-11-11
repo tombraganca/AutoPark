@@ -5,6 +5,7 @@ import cors from 'cors';
 import router from './router';
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from './swagger.json';
+import { client } from './providers/prisma/client';
 
 const PORT = config.port;
 const app = express();
@@ -27,6 +28,13 @@ app.get('/', (request, response) => {
 
 
 app.listen(PORT, () => {
+    client.$connect().then(() => {
+        console.info("%cConnected to database");
+    }
+    ).catch((error) => {
+        console.warn("Error connecting to database: ", error);
+    });
+    
     console.log(`Server is running on port ${PORT}`);
 });
 

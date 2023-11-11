@@ -55,20 +55,20 @@ CREATE TABLE "vacancies" (
     "description" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "situation" TEXT,
-    "businessId" TEXT NOT NULL,
+    "parkingId" TEXT NOT NULL,
     "plateCar" TEXT,
 
     CONSTRAINT "vacancies_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "business" (
+CREATE TABLE "parking" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "location" JSONB NOT NULL,
     "ownerId" TEXT NOT NULL,
 
-    CONSTRAINT "business_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "parking_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -90,7 +90,7 @@ ALTER TABLE "accesses" ADD CONSTRAINT "accesses_ownerId_fkey" FOREIGN KEY ("owne
 ALTER TABLE "account_tokens" ADD CONSTRAINT "account_tokens_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "accounts"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "vacancies" ADD CONSTRAINT "vacancies_businessId_fkey" FOREIGN KEY ("businessId") REFERENCES "business"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "vacancies" ADD CONSTRAINT "vacancies_parkingId_fkey" FOREIGN KEY ("parkingId") REFERENCES "parking"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "business" ADD CONSTRAINT "business_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "accounts"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "parking" ADD CONSTRAINT "parking_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "accounts"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -11,22 +11,24 @@ import createAccessRegisterRouter from "./useCases/createAccessRegister/router";
 import listVacanciesRouter from "./useCases/listVacancies/router";
 import createVacancyRouter from "./useCases/createVacancies/router";
 import listRegistersRouter from "./useCases/listRegisters/router"
-import createBusinessRouter from "./useCases/createBusiness/router";
+import createParkingRouter from "./useCases/createParking/router";
+import listParkingsRouter from "./useCases/listParkings/router";
 
 const router = express();
 
-router.use(createUserRouter);
 router.use(authUserRouter);
+router.use(createUserRouter);
 router.use(createCarRouter);
-router.use(listCarRouter);
-router.use(refreshTokenRouter);
-router.use(pushNotificationRouter);
 router.use(createTokenUser);
-router.use(receivedRequestAccessRouter);
 router.use(createAccessRegisterRouter);
-router.use(listVacanciesRouter);
 router.use(createVacancyRouter);
+router.use(createParkingRouter);
+router.use(listCarRouter);
+router.use(listVacanciesRouter);
 router.use(listRegistersRouter);
-router.use(createBusinessRouter);
+router.use(listParkingsRouter)
+router.use(pushNotificationRouter);
+router.use(refreshTokenRouter);
+router.use(receivedRequestAccessRouter);
 
 export default router;
