@@ -1,100 +1,41 @@
-[  
-     {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "id": "1",
-        "type": "deficient",
-        "center": {"x":  5 , "y": 170},
-        
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "id": "2",
-        "type": "deficient",
-        "center": {"x":  60 , "y": 170},
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "id": "3",
-        "type": "senior",
-        "center": {"x":  120 , "y": 170},
+[
+    {"title": "Vaga 1", "description": "Primeira esquerda", "id": "1", "type": "deficient", "center": {"x": 5, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 2", "description": "Primeira esquerda", "id": "2", "type": "deficient", "center": {"x": 60, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 3", "description": "Primeira esquerda", "id": "3", "type": "senior", "center": {"x": 120, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 4", "description": "Primeira esquerda", "id": "4", "type": "senior", "center": {"x": 180, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 5", "description": "Primeira esquerda", "id": "5", "type": "normal", "center": {"x": 240, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 6", "description": "Primeira esquerda", "id": "6", "type": "normal", "center": {"x": 300, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 7", "description": "Primeira esquerda", "id": "7", "type": "normal", "center": {"x": 350, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 8", "description": "Primeira esquerda", "id": "8", "type": "normal", "center": {"x": 400, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 9", "description": "Primeira esquerda", "id": "9", "type": "normal", "center": {"x": 450, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 10", "description": "Primeira esquerda", "id": "10", "type": "normal", "center": {"x": 500, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 11", "description": "Primeira esquerda", "id": "11", "type": "normal", "center": {"x": 570, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 12", "description": "Primeira esquerda", "id": "12", "type": "normal", "center": {"x": 630, "y": 170}, "situation": "free", "section": 1},
+    {"title": "Vaga 73", "description": "Primeira esquerda", "id": "73", "type": "normal", "center": {"x":73, "y": 67} , "situation": "free", "section": 2},
+    {"title": "Vaga 139", "description": "Primeira esquerda", "id": "139", "type": "normal", "center": {"x":139, "y": 72} , "situation": "free", "section": 2},
+    {"title": "Vaga 180", "description": "Primeira esquerda", "id": "180", "type": "normal", "center": {"x":180, "y": 72} , "situation": "free", "section": 2},
+    {"title": "Vaga 214", "description": "Primeira esquerda", "id": "214", "type": "normal", "center": {"x":214, "y": 72} , "situation": "free", "section": 2},
+    {"title": "Vaga 265", "description": "Primeira esquerda", "id": "265", "type": "normal", "center": {"x":265, "y": 71} , "situation": "free", "section": 2},
+    {"title": "Vaga 317", "description": "Primeira esquerda", "id": "317", "type": "normal", "center": {"x":317, "y": 69} , "situation": "free", "section": 2},
+    {"title": "Vaga 357", "description": "Primeira esquerda", "id": "357", "type": "normal", "center": {"x":357, "y": 74} , "situation": "free", "section": 2},
+    {"title": "Vaga 397", "description": "Primeira esquerda", "id": "397", "type": "normal", "center": {"x":397, "y": 75} , "situation": "free", "section": 2},
+    {"title": "Vaga 439", "description": "Primeira esquerda", "id": "439", "type": "normal", "center": {"x":439, "y": 69} , "situation": "free", "section": 2},
+    {"title": "Vaga 491", "description": "Primeira esquerda", "id": "491", "type": "normal", "center": {"x":491, "y": 69} , "situation": "free", "section": 2},
+    {"title": "Vaga 529", "description": "Primeira esquerda", "id": "529", "type": "normal", "center": {"x":529, "y": 78} , "situation": "free", "section": 2},
+    {"title": "Vaga 571", "description": "Primeira esquerda", "id": "571", "type": "normal", "center": {"x":571, "y": 75} , "situation": "free", "section": 2},
+    {"title": "Vaga 618", "description": "Primeira esquerda", "id": "618", "type": "normal", "center": {"x":618, "y": 72} , "situation": "free", "section": 2},
+    {"title": "Vaga 129", "description": "Primeira esquerda", "id": "129", "type": "normal", "center": {"x":129, "y": 539} , "situation": "free", "section": 3},
+    {"title": "Vaga 265", "description": "Primeira esquerda", "id": "265", "type": "normal", "center": {"x":245, "y": 555} , "situation": "free", "section": 3},
+    {"title": "Vaga 378", "description": "Primeira esquerda", "id": "378", "type": "normal", "center": {"x":358, "y": 568} , "situation": "free", "section": 3},
+    {"title": "Vaga 512", "description": "Primeira esquerda", "id": "512", "type": "normal", "center": {"x":502, "y": 574} , "situation": "free", "section": 3},
+    {"title": "Vaga 662", "description": "Primeira esquerda", "id": "662", "type": "normal", "center": {"x":632, "y": 584} , "situation": "free", "section": 3},
+    {"title": "Vaga 800", "description": "Primeira esquerda", "id": "800", "type": "normal", "center": {"x":780, "y": 581} , "situation": "free", "section": 3},
+    {"title": "Vaga 953", "description": "Primeira esquerda", "id": "953", "type": "normal", "center": {"x":923, "y": 584} , "situation": "free", "section": 3},
+    {"title": "Vaga 1144", "description": "Primeira esquerda", "id": "1144", "type": "normal", "center": {"x":1114, "y": 588} , "situation": "free", "section": 3},
+    {"title": "Vaga 1296", "description": "Primeira esquerda", "id": "1296", "type": "normal", "center": {"x":1266, "y": 593} , "situation": "free", "section": 3},
+    {"title": "Vaga 1453", "description": "Primeira esquerda", "id": "1453", "type": "normal", "center": {"x":1423, "y": 590} , "situation": "free", "section": 3},
+    {"title": "Vaga 1592", "description": "Primeira esquerda", "id": "1592", "type": "normal", "center": {"x":1562, "y": 583} , "situation": "free", "section": 3},
+    {"title": "Vaga 1717", "description": "Primeira esquerda", "id": "1717", "type": "normal", "center": {"x":1620, "y": 575} , "situation": "free", "section": 3},
+    {"title": "Vaga 1832", "description": "Primeira esquerda", "id": "1832", "type": "normal", "center": {"x":1782, "y": 571} , "situation": "free", "section": 3}
 
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "center": {"x":  180 , "y": 170},
-        "id": "4",
-        "type": "senior",
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "id": "5",
-        "center": {"x":  240 , "y": 170},
-        "type": "normal",
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "id": "6",
-        "center": {"x":  300 , "y": 170},
-        "type": "normal",
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "center": {"x":  350 , "y": 170},
-        "id": "7",
-        "type": "normal",
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "center": {"x":  400 , "y": 170},
-        "id": "8",
-        "type": "normal",
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "center": {"x":  450 , "y": 170},
-        "id": "9",
-        "type": "normal",
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "center": {"x":  500, "y":  170 },
-        "id": "10",
-        "type": "normal",
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "center": {"x":  570, "y":  170 },
-        "id": "11",
-        "type": "normal",
-        "situation": "free"
-    },
-    {
-        "title": "V",
-        "description": "Primeira esquerda",
-        "center": {"x":  630, "y":  170 },
-        "id": "12",
-        "type": "normal",
-        "situation": "free"
-    }
 ]

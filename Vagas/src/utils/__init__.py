@@ -16,3 +16,17 @@ def check_vaga_status(vaga, x, y, dist_treshold):
 
 def resize_image(image, width, height):
     return cv2.resize(np.array(image), (width, height))
+
+def atualizar_situacao_vagas(lista_vagas, ids_ocupados):
+    vagas_atualizadas = []
+
+    for vaga in lista_vagas:
+        vaga_id = vaga["id"]
+        if vaga_id in ids_ocupados:
+            vaga["situation"] = "busy"
+        else:
+            vaga["situation"] = "free"
+        
+        vagas_atualizadas.append({"id": vaga_id, "situation": vaga["situation"]})
+
+    return vagas_atualizadas
