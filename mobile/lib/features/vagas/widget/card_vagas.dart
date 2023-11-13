@@ -22,7 +22,11 @@ class CardVagas extends StatelessWidget {
                     ? const Color.fromARGB(255, 0, 73, 25)
                     : vagaEntity.situacao.toLowerCase().contains('busy')
                         ? Colors.red
-                        : Colors.orange,
+                        : vagaEntity.situacao
+                                .toLowerCase()
+                                .contains('reservation')
+                            ? Colors.deepPurpleAccent
+                            : Colors.orange,
                 width: 10),
           ),
         ),

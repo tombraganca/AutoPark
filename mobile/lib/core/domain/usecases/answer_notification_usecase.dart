@@ -3,8 +3,11 @@ import 'package:auto_park/core/failures/failure.dart';
 import 'package:either_dart/either.dart';
 
 abstract class AnswerNotificationUseCase {
-  Future<Either<Failure, bool>> answerNotification(
-      {required String placa, required bool answer});
+  Future<Either<Failure, bool>> answerNotification({
+    required String placa,
+    required bool answer,
+    required String parkingId,
+  });
 }
 
 class AnswerNotificationUseCaseImp implements AnswerNotificationUseCase {
@@ -13,8 +16,10 @@ class AnswerNotificationUseCaseImp implements AnswerNotificationUseCase {
 
   @override
   Future<Either<Failure, bool>> answerNotification(
-      {required String placa, required bool answer}) async {
+      {required String placa,
+      required bool answer,
+      required String parkingId}) async {
     return await _answerNotificationRepository.answerNotification(
-        placa, answer);
+        placa, answer, parkingId);
   }
 }

@@ -19,7 +19,7 @@ class VagasDataSourceImp implements VagasDataSource {
       {required String parkingId, required String token}) async {
     try {
       Response response = await _httpConnectionsService.get(
-        'vacancies?filter=all&parkingId?=${parkingId.toString()}',
+        'vacancies?filter=all&parkingId=${parkingId.toString()}',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token'

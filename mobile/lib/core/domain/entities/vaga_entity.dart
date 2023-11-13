@@ -5,7 +5,7 @@ class VagaEntity {
   final String description;
   final String situacao;
   final TipoVaga tipoVaga;
-  final int id;
+  final String id;
   VagaEntity({
     required this.id,
     required this.name,

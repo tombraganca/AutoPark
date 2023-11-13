@@ -11,15 +11,15 @@ class VagaDto extends VagaEntity {
 
   factory VagaDto.fromJson(Map<String, dynamic> json) {
     return VagaDto(
-      name: json['title'],
-      description: json['description'],
-      situacao: json['situation'],
+      name: json['title'] ?? "",
+      description: json['description'] ?? "",
+      situacao: json['situation'] ?? "",
       tipoVaga: json['type'].toString().toLowerCase().contains('normal')
           ? TipoVaga.commun
           : json['type'].toString().toLowerCase().contains('deficient')
               ? TipoVaga.pcd
               : TipoVaga.idoso,
-      id: int.parse(json['id']),
+      id: json['id'] ?? "",
     );
   }
 

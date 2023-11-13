@@ -15,10 +15,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> with Validators {
   LoginCubit loginCubit = GetIt.I<LoginCubit>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController =
-      TextEditingController(text: 'teste2@gmail.com');
-  TextEditingController senhaController =
-      TextEditingController(text: 'senha123');
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController senhaController = TextEditingController(text: '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

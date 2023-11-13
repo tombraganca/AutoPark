@@ -33,6 +33,10 @@ class VagasCubit extends Cubit<VagasState> {
               .where(
                   (element) => element.situacao.toLowerCase().contains('free'))
               .toList(),
+          SelectListVagas.reservadas: listVagas
+              .where((element) =>
+                  element.situacao.toLowerCase().contains('reservation'))
+              .toList(),
           SelectListVagas.todas: listVagas,
         },
         selectListVagas: SelectListVagas.disponivel,
