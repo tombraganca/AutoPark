@@ -3,18 +3,15 @@
 #include <ESP32Servo.h>
 #include <PubSubClient.h>
 #include <MillisTimerLib.h>
+#include <WiFiManager.h>
 
-enum State {
+enum State
+{
   STATE_IDLE,
   STATE_OPENING,
   STATE_WAIT_FOR_CLOSE,
 };
 
-// Configurações da rede Wi-Fi
-const char *ssid = "BRAGANCA";
-const char *password = "16210115";
-
-// Configurações do broker MQTT
 const char *mqttServer = "test.mosquitto.org";
 const int mqttPort = 1883;
 const char *mqtt_topic_cancela = "autopark/accessPort";
@@ -27,18 +24,30 @@ Servo myservo;
 State currentState = STATE_IDLE;
 unsigned long stateStartTime = 0;
 
-
-
 void setup()
 {
-  // Inicializa a conexão Wi-Fi
+  // Create an instance of WiFiManager
+  WiFiManager wifiManager;
+
+  // Uncomment the following line for initial setup to clear stored WiFi credentials
+  // wifiManager.resetSettings();
+
+  // Set configuration parameters
+  WiFiManagerParameter custom_mqtt_server("mqtt_server", "MQTT Server", mqttServer, 40);
+  WiFiManagerParameter custom_mqtt_port("mqtt_port", "MQTT Port", String(mqttPort).c_str(), 6);
+
+  // Add parameters to WiFiManager
+  wifiManager.addParameter(&custom_mqtt_server);
+  wifiManager.addParameter(&custom_mqtt_port);
+
+  // Connect to Wi-Fi
+  wifiManager.autoConnect("AutoParkAccessPoint");
+
+  // Get configuration values
+  mqttServer = custom_mqtt_server.getValue();
+  mqttPort = atoi(custom_mqtt_port.getValue());
+
   Serial.begin(4800);
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(1000);
-    Serial.println("Conectando ao WiFi...");
-  }
   myservo.attach(13);
 
   // Inicializa a conexão com o broker MQTT
@@ -46,15 +55,6 @@ void setup()
   client.setCallback(callback);
 
   reconnectMQTT();
-}
-
-void loop()
-{
-  if (!client.connected())
-  {
-    reconnectMQTT();
-  }
-  client.loop();
 }
 
 void callback(char *topic, byte *payload, unsigned int length)
@@ -68,28 +68,40 @@ void callback(char *topic, byte *payload, unsigned int length)
     message += (char)payload[i];
   }
   Serial.println("Conteúdo da mensagem: " + message);
-  
-  if (mensagem == "open" && currentState == STATE_IDLE) {
+
+  String inputString = message;
+  int dotIndex = inputString.indexOf(':');
+  String incomingParkId = inputString.substring(0, dotIndex);
+  String action = inputString.substring(firstDotIndex + 1);
+
+  if (incomingParkId.equals(parkingIds))
+  {
+    if (action == "open" && currentState == STATE_IDLE)
+    {
       currentState = STATE_OPENING;
       stateStartTime = millis();
       openCancela();
     }
+  }
 
-    switch (currentState) {
-    case STATE_OPENING:
-      if (millis() - stateStartTime >= 10000) {
-        currentState = STATE_WAIT_FOR_CLOSE;
-        stateStartTime = millis();
-        fecharCancela();
-      }
-      break;
-      
-    case STATE_WAIT_FOR_CLOSE:
-      if (millis() - stateStartTime >= 5000) {
-        currentState = STATE_IDLE;
-        Serial.println("Estado Idle");
-      }
-      break;
+  switch (currentState)
+  {
+  case STATE_OPENING:
+    if (millis() - stateStartTime >= 10000)
+    {
+      currentState = STATE_WAIT_FOR_CLOSE;
+      stateStartTime = millis();
+      fecharCancela();
+    }
+    break;
+
+  case STATE_WAIT_FOR_CLOSE:
+    if (millis() - stateStartTime >= 5000)
+    {
+      currentState = STATE_IDLE;
+      Serial.println("Estado Idle");
+    }
+    break;
   }
 }
 
