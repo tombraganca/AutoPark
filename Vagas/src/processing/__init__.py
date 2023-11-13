@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw
+import numpy as np
 from dotenv import dotenv_values
 from utils import centralize, check_vaga_status, resize_image
 
@@ -7,8 +8,8 @@ dist_treshold = float(values['dist_treshold'])
 verbose = int(values['verbose'])
 
 def process_results(results, vagas):
+    vagas_busy = []
     for result in results:
-        vagas_busy = []
         source_img = Image.fromarray(result.orig_img.copy())
         draw = ImageDraw.Draw(source_img)
 

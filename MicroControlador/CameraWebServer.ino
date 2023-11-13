@@ -4,71 +4,71 @@
 #define CAMERA_MODEL_AI_THINKER
 #include "camera_pins.h"
 #include <MQTT.h>
+#include <iostream>
+#include <string>
+#include <DNSServer.h>
+#include <WiFiManager.h>
 
-
-const char* ssid = "";
-const char* password = "";
-
-//void startCameraServer();
-
-#define ESP32CAM_PUBLISH_TOPIC "esp32/cam_0"
+// Constants
+#define ESP32CAM_PUBLISH_TOPIC "autopark/cam_0"
 const int bufferSize = 1024 * 23;  // 23552 bytes
+int max_attempts = 10;  // max mqqt conection attempts
 
-WiFiClient net;
-MQTTClient client(bufferSize);
+WiFiClient wClient;
+MQTTClient client(bufferSize); // bufferSize set directly in MQTTClient constructor
+WiFiManager wifiManager;
 
-const char broker[] = "192.168.1.12";
-int port = 1883;
 
-void waitWifiConnect() {
-  Serial.println("Booting");
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
+int stoi(const char *str, int defaultValue);
+void setupESPCam();
+void grabImage();
+String getChipIdAsString();
+void setupWiFiManager();
+void setupAPandMQTT();
+void connectToWiFi();
+void connectToMQTT();
 
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+void setup() {
+  Serial.begin(115200);
+  Serial.setDebugOutput(true);
+  Serial.println();
+
+  setupESPCam();
+  setupAPandMQTT();
+}
+
+void loop() {
+  delay(10); // every 10 ms, grab the ESP-CAM image
+  client.loop();
+  if (client.connected()) {
+    grabImage();
   }
+}
 
-  if (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("Connection Failed! Rebooting...");
+void setupWiFiManager() {
+  Serial.println("Setting up WiFi Manager");
+  wifiManager.setConfigPortalTimeout(240);
+  wifiManager.resetSettings(); // to remove
+
+  String AccessPointSSID = String("TORRE") + getChipIdAsString();
+  if (!wifiManager.autoConnect(AccessPointSSID.c_str(), "AutoPark123")) {
+    Serial.println(F("Failed to connect. Resetting and trying again..."));
+    delay(3000);
+    ESP.restart();
     delay(5000);
-    ESP.restart();
   }
+}
 
 
-  client.begin(broker, net);
-
-  Serial.print("Attempting to connect to the MQTT broker: ");
-  Serial.println(broker);
-
-
-  Serial.print("\nconnecting...");
-  while (!client.connect(broker)) {
-    Serial.print(".");
-    delay(1000);
-  }
-
-
-  Serial.println("You're connected to the MQTT broker!");
-  Serial.println();
-
-  Serial.print("Subscribing to topic: ");
-  Serial.println(ESP32CAM_PUBLISH_TOPIC);
-  Serial.println();
-
-  // subscribe to a topic
-  client.subscribe(ESP32CAM_PUBLISH_TOPIC);
-
-  if (!client.connected()) {
-    Serial.println(" IoT Timeout!");
-    ESP.restart();
-    return;
-  }
-
-
-  Serial.println("");
-  Serial.println("WiFi connected");
+int stoi(const char* str, int defaultValue) {
+    try {
+        return std::stoi(str);
+    } catch (const std::invalid_argument&) {
+        std::cerr << "Invalid argument: Unable to convert to integer." << std::endl;
+    } catch (const std::out_of_range&) {
+        std::cerr << "Out of range error: Unable to convert to integer." << std::endl;
+    }
+    return defaultValue;
 }
 
 void setupESPCam() {
@@ -130,10 +130,6 @@ void grabImage() {
     Serial.print("Image Length: ");
     Serial.print(fb->len);
     Serial.print("\t Publish Image: ");
-    // mqttClient.beginMessage(ESP32CAM_PUBLISH_TOPIC);
-    // mqttClient.print((const char*)fb->buf);
-    // mqttClient.endMessage();
-
     bool result = client.publish(ESP32CAM_PUBLISH_TOPIC, (const char*)fb->buf, fb->len);
     Serial.println(result);
 
@@ -145,23 +141,73 @@ void grabImage() {
   delay(10000);
 }
 
-void setup() {
-  Serial.begin(115200);
-  Serial.setDebugOutput(true);
-  Serial.println();
+String getChipIdAsString() {
+  // Get ESP32 Chip ID
+  uint64_t chipId = ESP.getEfuseMac();
 
-  setupESPCam();
-  waitWifiConnect();
-  //startCameraServer();
+  // Convert Chip ID to a string
+  String chipIdString = String(chipId, HEX);
 
-  Serial.print("Camera Ready! Use 'http://");
-  Serial.print(WiFi.localIP());
-  Serial.println("' to connect");
+  return chipIdString;
 }
 
-void loop() {
-  //ArduinoOTA.handle();
-  delay(10);
-  client.loop();
-  if (client.connected()) grabImage();
+void setupAPandMQTT() {
+  WiFiManagerParameter custom_mqtt_server("server", "MQTT Server", "192.168.1.4", 40);
+  WiFiManagerParameter custom_mqtt_port("port", "MQTT Port", "1883", 5);
+  WiFiManagerParameter custom_mqtt_user("user", "MQTT User", "", 40);
+  WiFiManagerParameter custom_mqtt_pass("pass", "MQTT Password", "", 40);
+
+  wifiManager.addParameter(&custom_mqtt_server);
+  wifiManager.addParameter(&custom_mqtt_port);
+  wifiManager.addParameter(&custom_mqtt_user);
+  wifiManager.addParameter(&custom_mqtt_pass);
+
+  setupWiFiManager();
+
+  const char *mqtt_server = custom_mqtt_server.getValue();
+  const char *mqtt_portStr = custom_mqtt_port.getValue();
+  int mqtt_port = stoi(mqtt_portStr, 1883);
+  const char *mqtt_user = custom_mqtt_user.getValue();
+  const char *mqtt_pass = custom_mqtt_pass.getValue();
+
+  client.begin(mqtt_server, wClient);
+
+  Serial.print("Attempting to connect to the MQTT broker: ");
+  Serial.println(mqtt_server);
+
+  Serial.print("\nConnecting to MQTT");
+
+  int attempts = 1;
+  bool isMqttConnected = false;
+
+  while (!isMqttConnected) {
+    if (strlen(mqtt_user) > 0 && strlen(mqtt_pass) > 0) {
+      isMqttConnected = client.connect(mqtt_server, mqtt_user, mqtt_pass);
+    } else {
+      isMqttConnected = client.connect(mqtt_server);
+    }
+    Serial.print(".");
+    delay(1000);
+    if (attempts > max_attempts) {
+      wifiManager.resetSettings();
+      ESP.restart();
+      break;
+    }
+    attempts++;
+  }
+
+  if (isMqttConnected) {
+    Serial.println("\nConnected to MQTT");
+    Serial.print("Subscribing to topic: ");
+    Serial.println(ESP32CAM_PUBLISH_TOPIC);
+
+    // subscribe to a topic
+    client.subscribe(ESP32CAM_PUBLISH_TOPIC);
+
+
+  } else {
+    Serial.println("\nFailed to connect to MQTT. IoT Timeout!");
+    ESP.restart();
+  }
 }
+
