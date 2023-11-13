@@ -1,5 +1,6 @@
 import 'package:auto_park/features/home/cubit/home_cubit.dart';
 import 'package:auto_park/features/home/cubit/home_state.dart';
+import 'package:auto_park/features/minha_conta/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:line_icons/line_icons.dart';
@@ -33,21 +34,82 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final availableHeight = MediaQuery.sizeOf(context).height -
+        (MediaQuery.of(context).padding.top);
     return Scaffold(
       drawer: Drawer(
         child: Column(
           children: [
-            Container(
-                child: const DrawerHeader(
-              child: null,
-            ))
+            SizedBox(
+              height: availableHeight * 0.3,
+              child: DrawerHeader(
+                padding: EdgeInsets.zero,
+                margin: EdgeInsets.zero,
+                child: Column(
+                  children: [
+                    Center(
+                        child: Image.asset(
+                      'assets/images/default_user.png',
+                      width: MediaQuery.sizeOf(context).width * 0.2,
+                      height: MediaQuery.sizeOf(context).height * 0.2,
+                    )),
+                    const Text('Toninho da Borracharia')
+                  ],
+                ),
+              ),
+            ),
+            const Divider(
+              color: Colors.white,
+              height: 10,
+            ),
+            SizedBox(
+              height: availableHeight * 0.6,
+              child: Column(
+                children: [
+                  CustomButton(
+                      onPressed: () => Navigator.pushNamed(
+                            context,
+                            'MINHA_CONTA',
+                          ),
+                      label: 'Minha Conta'),
+                  CustomButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, 'DADOS_BANCARIOS'),
+                      label: 'Dados Bancários'),
+                ],
+              ),
+            ),
+            const Divider(
+              color: Colors.white,
+              height: 10,
+            ),
+            SizedBox(
+              height: availableHeight * 0.1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  OutlinedButton.icon(
+                    icon: const Icon(
+                      Icons.exit_to_app,
+                      color: Colors.white,
+                    ),
+                    label: const Text(
+                      'Sair',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                        context, 'LOGIN', (route) => false),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, 'MINHA_CONTA'),
             icon: const Icon(Icons.person),
           ),
         ],

@@ -15,6 +15,8 @@ abstract class HttpConnectionsService {
   });
   Future post(String path, Map<String, dynamic> postData,
       {Map<String, String>? headers});
+  Future put(String path, Map<String, dynamic> postData,
+      {Map<String, String>? headers});
   Future delete(String path, Map<String, dynamic> postData,
       {Map<String, String>? headers});
 }

@@ -4,5 +4,5 @@ import 'package:either_dart/either.dart';
 
 abstract class VagasRepository {
   Future<Either<Failure, List<VagaEntity>>> getVagas(
-      {required int parkingId, required String token});
+      {required String parkingId, required String token});
 }

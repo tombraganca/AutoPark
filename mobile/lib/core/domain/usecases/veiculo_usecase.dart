@@ -6,8 +6,7 @@ import 'package:either_dart/either.dart';
 abstract class VehicleUseCase {
   Future<Either<Failure, List<VehicleEntity>>> getVehicles(String token);
   Future<Either<Failure, bool>> addVehicle(
-      String marca, String modelo, String placa, String token);
-  Future<Either<Failure, bool>> deleteVehicle(String token);
+      isUpdate, String marca, String modelo, String placa, String token);
 }
 
 class VehicleUseCaseImp implements VehicleUseCase {
@@ -15,13 +14,9 @@ class VehicleUseCaseImp implements VehicleUseCase {
   VehicleUseCaseImp(this._vehicleRepository);
   @override
   Future<Either<Failure, bool>> addVehicle(
-      String marca, String modelo, String placa, String token) async {
-    return await _vehicleRepository.addVehicle(marca, modelo, placa, token);
-  }
-
-  @override
-  Future<Either<Failure, bool>> deleteVehicle(String token) async {
-    return await _vehicleRepository.deleteVehicle(token);
+      isUpdate, String marca, String modelo, String placa, String token) async {
+    return await _vehicleRepository.addVehicle(
+        isUpdate, marca, modelo, placa, token);
   }
 
   @override

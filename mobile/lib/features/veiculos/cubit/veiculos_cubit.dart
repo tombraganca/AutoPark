@@ -24,10 +24,15 @@ class VeiculosCubit extends Cubit<VeiculosState> with ToastMessages {
     });
   }
 
-  Future<void> addVeiculo(String placa, String marca, String modelo) async {
+  Future<void> addVeiculo(
+    bool isUpdate,
+    String placa,
+    String marca,
+    String modelo,
+  ) async {
     emit(state.copyWith(statusVeiculos: StatusVeiculos.adicionandoVeiculo));
-    var result = await vehicleUseCase.addVehicle(
-        marca, modelo, placa, GetIt.I.get<UserDtoGlobal>().getUser().token);
+    var result = await vehicleUseCase.addVehicle(isUpdate, marca, modelo, placa,
+        GetIt.I.get<UserDtoGlobal>().getUser().token);
     result.fold((left) {
       emit(state.copyWith(
           erroMsg: left.msg.contains('exists')

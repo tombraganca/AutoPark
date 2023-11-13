@@ -29,4 +29,6 @@ class EstacionamentoState extends Equatable {
 enum StatusEstacionamento {
   initial,
   buscandoEstacionamentos,
+  loadedListEstacionamentos,
+  failureGetListEstacionamentos,
 }

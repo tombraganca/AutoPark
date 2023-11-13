@@ -9,7 +9,7 @@ class HomeState extends Equatable {
 
   const HomeState(
       {required this.statusHome,
-      this.titleContentCurrentWidget = 'Vagas',
+      this.titleContentCurrentWidget = 'Estacionamentos',
       this.indexCurrentContentHome = 0,
       this.contentCurrentWidget = const SizedBox.shrink()});
   @override

@@ -1,17 +1,29 @@
 import 'package:auto_park/core/functions/validators.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:auto_park/features/veiculos/cubit/veiculos_cubit.dart';
 import 'package:auto_park/features/veiculos/cubit/veiculos_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DialogCadastroVeiculo with Validators {
-  final TextEditingController modeloController = TextEditingController();
-  final TextEditingController marcaController = TextEditingController();
-  final TextEditingController placaController = TextEditingController();
+  final String modelo;
+  final String placa;
+  final String marca;
+  final bool isUpdate;
   final BuildContext context;
   final VeiculosCubit veiculosCubit;
-  DialogCadastroVeiculo({required this.context, required this.veiculosCubit}) {
+  DialogCadastroVeiculo({
+    required this.context,
+    required this.veiculosCubit,
+    this.isUpdate = false,
+    this.modelo = '',
+    this.marca = '',
+    this.placa = '',
+  }) {
     final formKey = GlobalKey<FormState>();
+    final modeloController = TextEditingController(text: modelo);
+    final marcaController = TextEditingController(text: marca);
+    final placaController = TextEditingController(text: placa);
     showDialog(
         context: context,
         builder: (context) {
@@ -24,6 +36,8 @@ class DialogCadastroVeiculo with Validators {
                   return true;
                 },
                 child: Dialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
@@ -51,7 +65,7 @@ class DialogCadastroVeiculo with Validators {
                                       ]),
                                       controller: modeloController,
                                       decoration: const InputDecoration(
-                                          label: Text('Modelo'),
+                                          label: Text('Modelo:'),
                                           labelStyle:
                                               TextStyle(color: Colors.white)),
                                     ),
@@ -65,7 +79,7 @@ class DialogCadastroVeiculo with Validators {
                                         ]),
                                         controller: marcaController,
                                         decoration: const InputDecoration(
-                                            label: Text('Marca'),
+                                            label: Text('Marca:'),
                                             labelStyle:
                                                 TextStyle(color: Colors.white)),
                                       ),
@@ -76,8 +90,18 @@ class DialogCadastroVeiculo with Validators {
                                         (value) => isNotEmpty(value),
                                       ]),
                                       controller: placaController,
+                                      inputFormatters: [
+                                        MaskTextInputFormatter(
+                                          mask: "AAA#X##",
+                                          filter: {
+                                            "#": RegExp(r'[0-9]'),
+                                            "A": RegExp(r'[A-Za-z]'),
+                                            "X": RegExp(r'[A-Ja-j0-9]'),
+                                          },
+                                        )
+                                      ],
                                       decoration: const InputDecoration(
-                                          label: Text('Placa'),
+                                          label: Text('Placa:'),
                                           labelStyle:
                                               TextStyle(color: Colors.white)),
                                     ),
@@ -90,6 +114,7 @@ class DialogCadastroVeiculo with Validators {
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
                                         veiculosCubit.addVeiculo(
+                                            isUpdate,
                                             placaController.text,
                                             marcaController.text,
                                             modeloController.text);

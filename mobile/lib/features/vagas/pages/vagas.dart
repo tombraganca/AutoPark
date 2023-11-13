@@ -7,7 +7,7 @@ import 'package:auto_park/features/vagas/widget/card_vagas.dart';
 
 class Vagas extends StatefulWidget {
   final VagasCubit vagasCubit;
-  final int parkingId;
+  final String parkingId;
   const Vagas({
     super.key,
     required this.vagasCubit,
@@ -32,13 +32,17 @@ class _VagasState extends State<Vagas> {
             MediaQuery.of(context).padding.top +
             kBottomNavigationBarHeight));
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Vagas'),
+      ),
       body: BlocBuilder<VagasCubit, VagasState>(
           bloc: widget.vagasCubit,
           builder: (context, state) {
             return Column(
               children: [
                 SizedBox(
-                  height: availableHeight * 0.15,
+                  height: availableHeight * 0.12,
                   child: SelectorVagas(
                     vagasCubit: widget.vagasCubit,
                   ),
@@ -46,13 +50,18 @@ class _VagasState extends State<Vagas> {
                 Visibility(
                   visible: state.statusVagas == StatusVagas.buscandoVagas,
                   replacement: SizedBox(
-                    height: availableHeight * 0.80,
-                    child: ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      itemCount: state.listSelected.length,
-                      itemBuilder: (context, index) {
-                        return CardVagas(vagaEntity: state.listSelected[index]);
-                      },
+                    height: availableHeight * 0.95,
+                    child: RefreshIndicator(
+                      onRefresh: () => widget.vagasCubit
+                          .getVagas(parkingId: widget.parkingId),
+                      child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        itemCount: state.listSelected.length,
+                        itemBuilder: (context, index) {
+                          return CardVagas(
+                              vagaEntity: state.listSelected[index]);
+                        },
+                      ),
                     ),
                   ),
                   child: SizedBox(

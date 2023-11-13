@@ -51,23 +51,26 @@ class _RegistrosPageState extends State<RegistrosPage> {
                         state.statusRegistros == StatusRegistros.loadingList,
                     replacement: Visibility(
                       visible: state.listRegistros.isEmpty,
-                      replacement: ListView.separated(
-                          itemBuilder: (context, index) {
-                            return CardRegistros(
-                                title: state.listRegistros[index].title,
-                                placa: state.listRegistros[index].placa,
-                                date: state.listRegistros[index].date);
-                          },
-                          separatorBuilder: (context, index) {
-                            return const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              child: Divider(
-                                color: Colors.white,
-                                height: 5,
-                              ),
-                            );
-                          },
-                          itemCount: state.listRegistros.length),
+                      replacement: RefreshIndicator(
+                        onRefresh: () => widget.registrosCubit.gerRegistros(),
+                        child: ListView.separated(
+                            itemBuilder: (context, index) {
+                              return CardRegistros(
+                                  title: state.listRegistros[index].title,
+                                  placa: state.listRegistros[index].placa,
+                                  date: state.listRegistros[index].date);
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 15),
+                                child: Divider(
+                                  color: Colors.white,
+                                  height: 5,
+                                ),
+                              );
+                            },
+                            itemCount: state.listRegistros.length),
+                      ),
                       child: const Center(
                         child: Text(
                           'Nenhum registro encontrado',

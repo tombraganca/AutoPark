@@ -18,7 +18,7 @@ class VagasCubit extends Cubit<VagasState> {
           ? StatusVagas.refrashselectList
           : StatusVagas.selectList));
 
-  Future<void> getVagas({required int parkingId}) async {
+  Future<void> getVagas({required String parkingId}) async {
     emit(state.copyWith(statusVagas: StatusVagas.buscandoVagas));
     var result = await vagasUseCase.getVagas(
         token: GetIt.I.get<UserDtoGlobal>().getUser().token,

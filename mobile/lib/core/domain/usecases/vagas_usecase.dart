@@ -5,7 +5,7 @@ import 'package:either_dart/either.dart';
 
 abstract class VagasUseCase {
   Future<Either<Failure, List<VagaEntity>>> getVagas(
-      {required int parkingId, required String token});
+      {required String parkingId, required String token});
 }
 
 class VagasUseCaseImp implements VagasUseCase {
@@ -13,7 +13,7 @@ class VagasUseCaseImp implements VagasUseCase {
   VagasUseCaseImp(this._vagasRepository);
   @override
   Future<Either<Failure, List<VagaEntity>>> getVagas(
-      {required int parkingId, required String token}) async {
+      {required String parkingId, required String token}) async {
     return await _vagasRepository.getVagas(parkingId: parkingId, token: token);
   }
 }

@@ -8,7 +8,7 @@ import 'package:http/http.dart';
 
 abstract class VagasDataSource {
   Future<List<VagaEntity>> getVagas(
-      {required int parkingId, required String token});
+      {required String parkingId, required String token});
 }
 
 class VagasDataSourceImp implements VagasDataSource {
@@ -16,10 +16,10 @@ class VagasDataSourceImp implements VagasDataSource {
   VagasDataSourceImp(this._httpConnectionsService);
   @override
   Future<List<VagaEntity>> getVagas(
-      {required int parkingId, required String token}) async {
+      {required String parkingId, required String token}) async {
     try {
       Response response = await _httpConnectionsService.get(
-        'vacancies?filter=all&parkingId?=$parkingId',
+        'vacancies?filter=all&parkingId?=${parkingId.toString()}',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token'

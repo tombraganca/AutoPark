@@ -8,26 +8,26 @@ import 'package:http/http.dart';
 
 abstract class VehicleDataSource {
   Future<List<VehicleEntity>> getVehicle(String token);
-  Future<bool> deleteVehicle(String token);
   Future<bool> addVehicle(
-      String marca, String modelo, String placa, String token);
+      bool isUpdate, String marca, String modelo, String placa, String token);
 }
 
 class VehicleDataSourceImp implements VehicleDataSource {
   final HttpConnectionsService _httpConnectionsService;
   VehicleDataSourceImp(this._httpConnectionsService);
   @override
-  Future<bool> addVehicle(
-      String marca, String modelo, String placa, String token) async {
+  Future<bool> addVehicle(bool isUpdate, String marca, String modelo,
+      String placa, String token) async {
     try {
-      Response response = await _httpConnectionsService.post(
-        'car',
-        {'manufacturer': marca, 'model': modelo, 'plate': placa},
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token'
-        },
-      );
+      final postData = {'manufacturer': marca, 'model': modelo, 'plate': placa};
+      final headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      };
+      final response = isUpdate
+          ? await _httpConnectionsService.put('car', postData, headers: headers)
+          : await _httpConnectionsService.post('car', postData,
+              headers: headers);
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
         if (body['ownerId'] != null) return true;
@@ -37,12 +37,6 @@ class VehicleDataSourceImp implements VehicleDataSource {
     } catch (e) {
       throw VeiculosFailure(e.toString());
     }
-  }
-
-  @override
-  Future<bool> deleteVehicle(String token) {
-    // TODO: implement deleteVehicles
-    throw UnimplementedError();
   }
 
   @override

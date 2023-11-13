@@ -1,7 +1,7 @@
 import 'package:auto_park/core/domain/entities/localizacao_entity.dart';
 
 class EstacionamentoEntity {
-  final int parkingId;
+  final String parkingId;
   final String nomeEstacionamento;
   final String endereco;
   final LocalizacaoEntity localizacaoEntity;

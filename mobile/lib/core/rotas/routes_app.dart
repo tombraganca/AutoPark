@@ -1,10 +1,13 @@
 import 'package:auto_park/core/data/dtos/notification_dto.dart';
-import 'package:auto_park/core/data/dtos/user_dto.dart';
-import 'package:auto_park/core/injects/userSingleton/user_global_singleton.dart';
 import 'package:auto_park/features/cadastro/pages/cadastro.dart';
+import 'package:auto_park/features/dados_bancarios/cubit/dados_bancarios_cubit.dart';
+import 'package:auto_park/features/dados_bancarios/pages/dados_bancarios.dart';
 import 'package:auto_park/features/home/cubit/home_cubit.dart';
 import 'package:auto_park/features/home/pages/home.dart';
 import 'package:auto_park/features/login/pages/login.dart';
+import 'package:auto_park/features/minha_conta/cubit/minha_conta_cubit.dart';
+import 'package:auto_park/features/minha_conta/pages/editar_dados.dart';
+import 'package:auto_park/features/minha_conta/pages/minha_conta.dart';
 import 'package:auto_park/features/notificacao/widgets/dialog_acesso.dart';
 import 'package:auto_park/features/vagas/cubit/vagas_cubit.dart';
 import 'package:auto_park/features/vagas/pages/vagas.dart';
@@ -45,12 +48,33 @@ class RoutesApp {
           settings: settings,
           builder: (context) => const Cadastro(),
         );
+      case 'MINHA_CONTA':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => MinhaConta(
+            minhaContaCubit: GetIt.I.get<MinhaContaCubit>(),
+          ),
+        );
+      case 'DADOS_BANCARIOS':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => DadosBancariosPage(
+            dadosBancariosCubit: GetIt.I.get<DadosBancariosCubit>(),
+          ),
+        );
+      case 'EDITAR_DADOS':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => EditarDados(
+            minhaContaCubit: args as MinhaContaCubit,
+          ),
+        );
       case 'VAGAS':
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => Vagas(
             vagasCubit: GetIt.I.get<VagasCubit>(),
-            parkingId: args as int,
+            parkingId: args as String,
           ),
         );
       default:

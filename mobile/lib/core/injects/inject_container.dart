@@ -1,10 +1,12 @@
 import 'package:auto_park/core/injects/inject_answer_notification.dart';
 import 'package:auto_park/core/injects/inject_auth.dart';
+import 'package:auto_park/core/injects/inject_dados_bancarios.dart';
 import 'package:auto_park/core/injects/inject_estacionamento.dart';
 import 'package:auto_park/core/injects/inject_fcm.dart';
 import 'package:auto_park/core/injects/inject_firebase_messaging.dart';
 import 'package:auto_park/core/injects/inject_home.dart';
 import 'package:auto_park/core/injects/inject_http.dart';
+import 'package:auto_park/core/injects/inject_minha_conta.dart';
 import 'package:auto_park/core/injects/inject_notificacao.dart';
 import 'package:auto_park/core/injects/inject_notification_service.dart';
 import 'package:auto_park/core/injects/inject_pagamentos.dart';
@@ -29,5 +31,7 @@ Future<void> injectContainer() async {
   initInjectNotificacao(getIt);
   injectPagamentos(getIt);
   injectEstacionamento(getIt);
+  injectDadosBancarios(getIt);
+  injectMinhaConta(getIt);
   initInjectAnswerNotificacao(getIt);
 }

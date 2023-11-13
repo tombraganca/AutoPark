@@ -19,7 +19,7 @@ class Estacionamentos extends StatefulWidget {
 class _EstacionamentosState extends State<Estacionamentos> {
   @override
   void initState() {
-    widget.estacionamentoCubit.init();
+    widget.estacionamentoCubit.getEstacionamentos();
     super.initState();
   }
 
@@ -33,40 +33,46 @@ class _EstacionamentosState extends State<Estacionamentos> {
       body: BlocBuilder<EstacionamentoCubit, EstacionamentoState>(
           bloc: widget.estacionamentoCubit,
           builder: (context, state) {
-            return Column(
-              children: [
-                Visibility(
-                  visible: state.statusEstacionamento ==
-                      StatusEstacionamento.buscandoEstacionamentos,
-                  replacement: SizedBox(
-                    height: availableHeight * 0.80,
-                    child: ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      itemCount: state.listEstacionamentos.length,
-                      itemBuilder: (context, index) {
-                        return CardEstacionamento(
-                            estacionamentoEntity:
-                                state.listEstacionamentos[index]);
-                      },
-                    ),
-                  ),
-                  child: SizedBox(
-                    height: availableHeight * 0.8,
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(Colors.white)),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text('Carregando as vagas...'),
-                        )
-                      ],
-                    ),
+            return Visibility(
+              visible: state.statusEstacionamento ==
+                  StatusEstacionamento.buscandoEstacionamentos,
+              replacement: SizedBox(
+                height: availableHeight,
+                child: RefreshIndicator(
+                  onRefresh: () =>
+                      widget.estacionamentoCubit.getEstacionamentos(),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    itemCount: state.listEstacionamentos.length,
+                    itemBuilder: (context, index) {
+                      return CardEstacionamento(
+                          estacionamentoEntity:
+                              state.listEstacionamentos[index]);
+                    },
                   ),
                 ),
-              ],
+              ),
+              child: SizedBox(
+                height: availableHeight,
+                width: MediaQuery.sizeOf(context).width,
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.white)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Text(
+                        'Buscando estacionamentos...',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             );
           }),
     );

@@ -73,7 +73,9 @@ class _VeiculosState extends State<Veiculos> {
                         itemCount: state.listVehicles.length,
                         itemBuilder: (context, index) {
                           return CardVeiculo(
-                              vehicleEntity: state.listVehicles[index]);
+                            vehicleEntity: state.listVehicles[index],
+                            veiculosCubit: widget.veiculosCubit,
+                          );
                         },
                         separatorBuilder: (context, index) {
                           return const Padding(

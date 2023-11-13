@@ -1,5 +1,6 @@
 import 'package:auto_park/core/domain/entities/estacionamento_entity.dart';
 import 'package:auto_park/features/notificacao/widgets/custom_text.dart';
+import 'package:auto_park/packages/open_url.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -13,10 +14,12 @@ class CardEstacionamento extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, 'VAGAS'),
+      onTap: () => Navigator.pushNamed(context, 'VAGAS',
+          arguments: estacionamentoEntity.parkingId),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
         child: Card(
+          elevation: 20,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Column(
@@ -35,8 +38,9 @@ class CardEstacionamento extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: CustomText(
-                  value: estacionamentoEntity.localizacaoEntity.latitude,
-                  label: 'Endereço: ',
+                  value:
+                      "${estacionamentoEntity.localizacaoEntity.latitude} ${estacionamentoEntity.localizacaoEntity.longiture}",
+                  label: 'Localização: ',
                 ),
               ),
               Row(
@@ -46,7 +50,9 @@ class CardEstacionamento extends StatelessWidget {
                     width: MediaQuery.sizeOf(context).width * 0.4,
                     height: 70,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () => OpenUrl.openWaze(
+                          estacionamentoEntity.localizacaoEntity.latitude,
+                          estacionamentoEntity.localizacaoEntity.longiture),
                       icon: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -60,7 +66,10 @@ class CardEstacionamento extends StatelessWidget {
                     width: MediaQuery.sizeOf(context).width * 0.4,
                     height: 70,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () => OpenUrl.openMaps(
+                        estacionamentoEntity.localizacaoEntity.latitude,
+                        estacionamentoEntity.localizacaoEntity.longiture,
+                      ),
                       icon: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

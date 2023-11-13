@@ -21,6 +21,8 @@ class DialogAcesso {
           bloc: notificacaoCubit,
           builder: (context, state) {
             return Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               child: SizedBox(
                 height: (state.statusNotificacao == StatusNotificacao.falha ||
                         state.statusNotificacao == StatusNotificacao.sucesso)
