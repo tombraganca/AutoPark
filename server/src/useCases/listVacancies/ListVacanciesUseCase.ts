@@ -12,15 +12,10 @@ export class ListVacanciesUseCase {
         const situation = filter === 'all' ? null : 'free';
 
         try {
-            // const vacancier = await client.vacancies.findMany({
-            //     where: {
-            //         parkingId: props.parkingId,
-            //         situation: props.filter === 'all' ? undefined : situation
-            //     }
-            // });
             const vacancies = await prismaClient.vacancies.findMany({
-                where: filter === 'all' ? {} : {
-                    situation
+                where: {
+                    parkingId: parkingId,
+                    situation: filter === 'all' ? {} : situation
                 }
             });
             return vacancies;
