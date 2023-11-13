@@ -44,12 +44,14 @@ model Car {
 }
 
 model Access {
-  id      String   @id @default(uuid())
-  date    DateTime
-  plate   String
-  type    String
-  owner   Account  @relation(fields: [ownerId], references: [id])
-  ownerId String
+  id        String   @id @default(uuid())
+  date      DateTime
+  plate     String
+  type      String
+  parkingId String
+  parking   Parking  @relation(fields: [parkingId], references: [id])
+  owner     Account  @relation(fields: [ownerId], references: [id])
+  ownerId   String
 
   @@map("accesses")
 }
@@ -85,6 +87,7 @@ model Parking {
   ownerId  String
   owner    Account     @relation(fields: [ownerId], references: [id])
   vacancy  Vacancies[]
+  Access   Access[]
 
   @@map("parking")
 }

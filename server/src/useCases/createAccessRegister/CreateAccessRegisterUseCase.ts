@@ -6,10 +6,11 @@ interface ICreateAccessRegisterRequestDTO {
     accessType: string;
     plate: string;
     ownerId: string;
+    parkingId: string;
 }
 
 export class CreateAccessRegisterUseCase {
-    async execute({ date, accessType, plate, ownerId }: ICreateAccessRegisterRequestDTO) {
+    async execute({ date, accessType, plate, ownerId, parkingId }: ICreateAccessRegisterRequestDTO) {
         
         if (!date || !accessType || !plate) {
             throw new Error('Invalid data')
@@ -22,12 +23,13 @@ export class CreateAccessRegisterUseCase {
                     date,
                     type: accessType,
                     plate,
-                    ownerId
+                    ownerId,
+                    parkingId
                 }
             });
 
             // Do Post in mqtt broker
-            connectMqtt.send('open');
+            connectMqtt.send(`${parkingId}:open`);
             return accessRegister;
         } catch (error: any) {
             throw new Error(error.message);

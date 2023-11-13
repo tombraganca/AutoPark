@@ -5,17 +5,24 @@ interface ListVacanciesDTO {
     filter: "all" | "available";
     parkingId: string;
 }
+
+enum VacancySituation {
+    FREE = 'free',
+    OCCUPIED = 'busy',
+    RESERVED = 'reservation',
+    ALERT = 'alert'
+}
 export class ListVacanciesUseCase {
 
     async execute({ filter, parkingId }: ListVacanciesDTO) {
 
-        const situation = filter === 'all' ? null : 'free';
+        const situation = this.defineVacancySituation(filter);
 
         try {
             const vacancies = await prismaClient.vacancies.findMany({
                 where: {
                     parkingId: parkingId,
-                    situation: filter === 'all' ? {} : situation
+                    situation
                 }
             });
             return vacancies;
@@ -24,4 +31,18 @@ export class ListVacanciesUseCase {
             throw new Error(error.message);
         }
     }
+
+    defineVacancySituation(filter: "all" | "available" | "reservation"): VacancySituation | null {
+        switch (filter) {
+            case "all":
+                return null;
+            case "available":
+                return VacancySituation.FREE;
+            case "reservation":
+                return VacancySituation.RESERVED;
+            default:
+                return null;
+        }
+    }
+
 }

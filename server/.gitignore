@@ -3,6 +3,7 @@ package-lock.json
 dist
 .env
 .developement.env
+.prod.env
 src/integrations/firebase/credentials.json
 src/integrations/firebase/serviceAccountKey.json
 ```
