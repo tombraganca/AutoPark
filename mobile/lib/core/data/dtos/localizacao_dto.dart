@@ -8,8 +8,8 @@ class LocalizacaoDto extends LocalizacaoEntity {
 
   static LocalizacaoDto fromJson(Map<String, dynamic> json) {
     return LocalizacaoDto(
-      latitude: json['lat'] ?? "",
-      longiture: json['long'] ?? "",
+      latitude: json['lat'].toString(),
+      longiture: json['long'].toString(),
     );
   }
 }

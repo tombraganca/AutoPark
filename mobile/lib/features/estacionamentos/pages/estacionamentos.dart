@@ -56,6 +56,8 @@ class _EstacionamentosState extends State<Estacionamentos> {
                                   value.length > 3) {
                                 widget.estacionamentoCubit
                                     .filterEstacionamentos(value);
+                              } else {
+                                widget.estacionamentoCubit.clearFilter();
                               }
                             },
                             controller: searchController,

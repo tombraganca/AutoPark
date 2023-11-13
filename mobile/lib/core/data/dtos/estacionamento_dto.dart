@@ -14,6 +14,6 @@ class EstacionamentoDto extends EstacionamentoEntity {
         parkingId: json['id'] ?? "",
         endereco: json['endereco'] ?? "",
         nomeEstacionamento: json['name'] ?? '',
-        localizacaoEntity: LocalizacaoDto.fromJson(json));
+        localizacaoEntity: LocalizacaoDto.fromJson(json['location']));
   }
 }

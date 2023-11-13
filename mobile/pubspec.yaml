@@ -52,6 +52,7 @@ dependencies:
   url_launcher: ^6.2.1
   flutter_credit_card: ^4.0.1
   permission_handler: ^10.3.0
+  map_launcher: ^3.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

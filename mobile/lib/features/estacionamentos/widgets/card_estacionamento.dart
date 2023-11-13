@@ -39,7 +39,7 @@ class CardEstacionamento extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: CustomText(
                   value:
-                      "${estacionamentoEntity.localizacaoEntity.latitude} ${estacionamentoEntity.localizacaoEntity.longiture}",
+                      "${estacionamentoEntity.localizacaoEntity.latitude} \n ${estacionamentoEntity.localizacaoEntity.longiture}",
                   label: 'Localização: ',
                 ),
               ),
@@ -52,7 +52,8 @@ class CardEstacionamento extends StatelessWidget {
                     child: IconButton(
                       onPressed: () => OpenUrl.openWaze(
                           estacionamentoEntity.localizacaoEntity.latitude,
-                          estacionamentoEntity.localizacaoEntity.longiture),
+                          estacionamentoEntity.localizacaoEntity.longiture,
+                          estacionamentoEntity.nomeEstacionamento),
                       icon: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -67,9 +68,9 @@ class CardEstacionamento extends StatelessWidget {
                     height: 70,
                     child: IconButton(
                       onPressed: () => OpenUrl.openMaps(
-                        estacionamentoEntity.localizacaoEntity.latitude,
-                        estacionamentoEntity.localizacaoEntity.longiture,
-                      ),
+                          estacionamentoEntity.localizacaoEntity.latitude,
+                          estacionamentoEntity.localizacaoEntity.longiture,
+                          estacionamentoEntity.nomeEstacionamento),
                       icon: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
