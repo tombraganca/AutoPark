@@ -72,9 +72,9 @@ model Vacancies {
   description String
   type        String
   situation   String?
-  center      Json
+  center      Json?
   parkingId   String
-  section     Int
+  section     Int?
   parking     Parking @relation(fields: [parkingId], references: [id])
 
   @@map("vacancies")
