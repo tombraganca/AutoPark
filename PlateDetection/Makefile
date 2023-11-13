@@ -21,11 +21,5 @@ start:
 publish:
 	/bin/python3 src/mqtt_mock.py
 
-test0:
-	/bin/python3 src/test.py 0
-
-test1:
-	/bin/python3 src/test.py 1
-
-test2:
-	/bin/python3 src/test.py 2
+client:
+	/bin/python3 src/client.py

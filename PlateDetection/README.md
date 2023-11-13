@@ -82,9 +82,7 @@ Para executar a detecção de placa em uma imagem local, siga os passos abaixo:
 2. Execute o seguinte comando no terminal:
 
    ```
-   make test0
-   make test1
-   make test2
+   make client
    ```
 
 ### Detecção de Placa em um Tópico MQTT
