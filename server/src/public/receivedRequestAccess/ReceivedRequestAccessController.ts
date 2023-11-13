@@ -8,7 +8,7 @@ export class ReceivedRequestAccessController {
         const receivedRequestUseCase = new ReceivedRequestAccess();
         const result = await receivedRequestUseCase.execute({ plateIds, accessType, parkingId: torreId });
 
-        return response.status(201).json(result);
+        return response.status(200).json(result);
     }
 }
 //365214

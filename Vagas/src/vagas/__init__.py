@@ -15,7 +15,7 @@ def get_vagas():
         "Authorization": f"Bearer {token}"
     }
 
-    response = requests.get(f"{api_url}/vacancies?filter=all", headers=headers)
+    response = requests.get(f"{api_url}/vacancies?filter=all&parkingId=TORRE01", headers=headers)
     vagas = response.json()
     return vagas
 

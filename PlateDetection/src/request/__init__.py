@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 def send_plate(platesPayload):
     print("plates:", platesPayload)
-    return
     load_dotenv()
     if len(platesPayload) == 0:
         return

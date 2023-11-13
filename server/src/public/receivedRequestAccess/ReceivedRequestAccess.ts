@@ -79,7 +79,7 @@ export class ReceivedRequestAccess {
     async findCar(plateIds: Array<string>): Promise<Car>{
 
         let car;
-        for (let plate in plateIds) {
+        for (let plate of plateIds) {
             car = await prismaClient.car.findFirst({
                 where: {
                     plate: plate
