@@ -1,4 +1,4 @@
-import { client } from "../../providers/prisma/client"
+import { prismaClient } from "../../providers/prisma/client"
 
 interface iCarRequest {
     model: string
@@ -15,7 +15,7 @@ export class CreateCarUseCase {
             throw new Error("Missing information");
         }
 
-        const carAlreadyExists = await client.car.findFirst({
+        const carAlreadyExists = await prismaClient.car.findFirst({
             where: {
                 plate
             }
@@ -25,7 +25,7 @@ export class CreateCarUseCase {
             throw new Error("Car already exists");
         }
 
-        const car = await client.car.create({
+        const car = await prismaClient.car.create({
             data: {
                 model,
                 manufacturer,

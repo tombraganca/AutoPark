@@ -1,25 +1,20 @@
 import { MessagingProvider } from "../../providers/messaging/MessagingProvider";
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
+import { Car } from '@prisma/client'
 
 
 interface IPayloadNotification {
-    plate: string;
+    plateIds: Array<string>;
     accessType: 'in' | 'out';
+    parkingId: string;
 }
 
 export class ReceivedRequestAccess {
-    async execute({ plate, accessType }: IPayloadNotification) {
-        const car = await client.car.findFirst({
-            where: {
-                plate: plate
-            }
-        });
+    async execute({ plateIds, accessType, parkingId  }: IPayloadNotification) {
 
-        if (!car) {
-            return { status: 'Error', message: 'Car not found' }
-        }
+        const car = await this.findCar(plateIds);
 
-        const lastAccess = await client.access.findFirst({
+        const lastAccess = await prismaClient.access.findFirst({
             where: {
                 plate: car.plate
             },
@@ -38,7 +33,7 @@ export class ReceivedRequestAccess {
             return { status: 'Error', message: 'Car already outside' }
         }
 
-        const account = await client.account.findFirst({
+        const account = await prismaClient.account.findFirst({
             where: {
                 id: car.ownerId
             }
@@ -49,7 +44,7 @@ export class ReceivedRequestAccess {
         }
 
         //encontrar o token do dono do carro
-        const token = await client.accountToken.findFirst({
+        const token = await prismaClient.accountToken.findFirst({
             where: {
                 accountId: account.id
             }
@@ -71,6 +66,7 @@ export class ReceivedRequestAccess {
                 plate: car.plate,
                 model: car.model,
                 manufacturer: car.manufacturer,
+                parkingId
             },
             token: token?.token
         };
@@ -78,6 +74,23 @@ export class ReceivedRequestAccess {
         await notificationProvider.send(message);
 
         return { status: 'Success', message: 'Notification sent' }
-        
+    }
+
+    async findCar(plateIds: Array<string>): Promise<Car>{
+
+        let car;
+        for (let plate in plateIds) {
+            car = await prismaClient.car.findFirst({
+                where: {
+                    plate: plate
+                }
+            });
+        }
+
+        if (!car) {
+            throw new Error('Car not found');
+        }
+
+        return car;
     }
 }

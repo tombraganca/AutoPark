@@ -1,9 +1,10 @@
 import mqtt from 'mqtt';
 import { ConnectionMoqtt } from './Connection';
+import { config } from '../../config/config';
 
 
 const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8);
-const client = mqtt.connect('mqtt://test.mosquitto.org', { clientId, reconnectPeriod: 1 });
+const client = mqtt.connect(config.mqttUrl, { clientId, reconnectPeriod: 1 });
 
 const connectMqtt = new ConnectionMoqtt(client);
 

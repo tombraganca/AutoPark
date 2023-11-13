@@ -1,4 +1,4 @@
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 
 interface ICreateParkingDTO {
     name: string;
@@ -12,7 +12,7 @@ export class CreateParkingUseCase {
 
             if( !props.name || !props.location || !props.ownerId ) throw new Error("Missing required data");
 
-            const businessCreated = await client.parking.create({
+            const businessCreated = await prismaClient.parking.create({
                 data: {
                     name: props.name,
                     location: props.location,

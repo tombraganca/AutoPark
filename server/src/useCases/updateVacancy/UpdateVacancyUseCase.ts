@@ -1,8 +1,8 @@
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 
 export class UpdateVacancyUseCase {
     async execute({ title, description, type, situation }: any) {
-        const vacancy = await client.vacancies.update({
+        const vacancy = await prismaClient.vacancies.update({
             where: {
                 title
             },

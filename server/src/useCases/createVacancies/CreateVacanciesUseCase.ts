@@ -1,4 +1,4 @@
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 
 interface IVacanciesProps {
     title: string;
@@ -12,7 +12,7 @@ interface IVacanciesProps {
 export class CreateVacanciesUseCase {
 
     async execute(props: IVacanciesProps) {
-        const vacanciesCreated = await client.vacancies.create({
+        const vacanciesCreated = await prismaClient.vacancies.create({
             data: {
                 title: props.title,
                 description: props.description || '',

@@ -47,5 +47,4 @@ export class ConnectionMoqtt {
             console.log("Message sent")
         })
     }
-
 }

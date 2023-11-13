@@ -1,4 +1,4 @@
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 import { hash } from "bcryptjs"
 
 interface IUserRequest {
@@ -14,7 +14,7 @@ export class CreateUserUserCase {
             throw new Error("Missing information");
         }
 
-        const userAlreadyExists = await client.account.findFirst({
+        const userAlreadyExists = await prismaClient.account.findFirst({
             where: {
                 email
             }
@@ -26,7 +26,7 @@ export class CreateUserUserCase {
 
         const passwordHash = await hash(password, 8);
 
-        const user = await client.account.create({
+        const user = await prismaClient.account.create({
             data: {
                 email,
                 password: passwordHash,

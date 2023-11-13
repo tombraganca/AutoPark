@@ -28,16 +28,16 @@ services:
     restart: always
 
   # service in python for stream images
-  auto-park-stream:
-    build:
-      context: ./CamStreaming
-      dockerfile: ./Dockerfile.stream
-    container_name: auto-park-stream
-    depends_on:
-      - auto-park-api
-    ports:
-      - "8000:8000"
-    restart: always
+  # auto-park-stream:
+  #   build:
+  #     context: ./CamStreaming
+  #     dockerfile: ./Dockerfile.stream
+  #   container_name: auto-park-stream
+  #   depends_on:
+  #     - auto-park-api
+  #   ports:
+  #     - "8000:8000"
+  #   restart: always
 
 volumes:
   postgres-data:

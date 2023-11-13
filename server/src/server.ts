@@ -5,7 +5,7 @@ import cors from 'cors';
 import router from './router';
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from './swagger.json';
-import { client } from './providers/prisma/client';
+import { prismaClient } from './providers/prisma/client';
 
 const PORT = config.port;
 const app = express();
@@ -28,7 +28,7 @@ app.get('/', (request, response) => {
 
 
 app.listen(PORT, () => {
-    client.$connect().then(() => {
+    prismaClient.$connect().then(() => {
         console.info("%cConnected to database");
     }
     ).catch((error) => {

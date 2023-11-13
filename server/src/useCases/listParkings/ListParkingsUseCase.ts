@@ -1,4 +1,4 @@
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 
 export class ListParkingsUseCase {
     async execute(filter: string | undefined) {
@@ -6,7 +6,7 @@ export class ListParkingsUseCase {
         try {
             // Busca todos os estacionamentos no banco de dados por name se o filtro for undefined
             // not sentsitive case
-            const parkings = await client.parking.findMany({
+            const parkings = await prismaClient.parking.findMany({
                 where: {
                     name: {
                         contains: filter,

@@ -6,4 +6,5 @@ export const config = {
     brokerUrl: process.env.BROKER_URL,
     jwtSecret: process.env.JWT_SECRET || 'secret',
     mqttTopic: process.env.MQTT_TOPIC || 'test/autopark',
+    mqttUrl: process.env.MQTT_URL || 'mqtt://test.mosquitto.org'
 }

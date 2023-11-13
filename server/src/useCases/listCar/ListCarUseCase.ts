@@ -1,4 +1,4 @@
-import { client } from './../../providers/prisma/client'
+import { prismaClient } from './../../providers/prisma/client'
 
 
 export class ListCarUseCase {
@@ -8,7 +8,7 @@ export class ListCarUseCase {
             throw new Error("Missing information");
         }
 
-        const cars = await client.car.findMany({
+        const cars = await prismaClient.car.findMany({
             where: {
                 ownerId: userId
             }

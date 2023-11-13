@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import { GenerateTokenProvider } from "../../providers/GenerateRefreshToken/GenerateTokenProvider";
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 import { GenerateRefreshTokenProvider } from '../../providers/GenerateRefreshToken/GenereteRefreshTokenProvider';
 
 
 export class RefreshTokenUserCase {
     async execute(refresh_token: string) {
-        const refreshToken = await client.refreshToken.findFirst({
+        const refreshToken = await prismaClient.refreshToken.findFirst({
             where: {
                 id: refresh_token
             }
@@ -22,7 +22,7 @@ export class RefreshTokenUserCase {
         const token = await generateTokenProvider.execute(refreshToken.accountId);
 
         if (refreshTokenExpired) {
-            await client.refreshToken.deleteMany({
+            await prismaClient.refreshToken.deleteMany({
                 where: {
                     id: refreshToken.id
                 }

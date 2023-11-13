@@ -1,5 +1,5 @@
 import { MessagingProvider } from "../../providers/messaging/MessagingProvider";
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 import { v4 as uuid } from 'uuid';
 
 interface IPayloadNotification {
@@ -9,6 +9,7 @@ interface IPayloadNotification {
         date: string;
         model: string;
         manufacturer: string;
+        parkingId: string;
     }
     token: string;
     accoundId: string;
@@ -17,7 +18,7 @@ export class PushNotificationUseCase {
     async execute({ body, token, accoundId }: IPayloadNotification) {
 
         try {
-            const car = await client.car.findFirst({
+            const car = await prismaClient.car.findFirst({
                 where: {
                     plate: body.plate
                 }
@@ -27,7 +28,7 @@ export class PushNotificationUseCase {
                 return { status: 'Error', message: 'Car not found' }
             }
 
-            const account = await client.account.findFirst({
+            const account = await prismaClient.account.findFirst({
                 where: {
                     id: accoundId
                 }
@@ -54,6 +55,7 @@ export class PushNotificationUseCase {
                     plate: body.plate,
                     model: body.model,
                     manufacturer: body.manufacturer,
+                    parkingId: body.parkingId
                 },
                 token: token
             };

@@ -1,4 +1,4 @@
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 
 
 interface IPayloadCreateTokenUser {
@@ -10,7 +10,7 @@ export class CreateTokenUserUseCase {
 
         try {
 
-            const user = client.account.findFirst({
+            const user = prismaClient.account.findFirst({
                 where: {
                     id: accountId
                 }
@@ -20,7 +20,7 @@ export class CreateTokenUserUseCase {
                 return { status: 'Error', message: 'User not found' }
             }
 
-            await client.accountToken.create({
+            await prismaClient.accountToken.create({
                 data: {
                     accountId: accountId,
                     token: token,

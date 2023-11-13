@@ -13,6 +13,7 @@ interface IPayload {
         plate: string;
         model: string;
         manufacturer: string;
+        parkingId: string;
     };
 
     token: string;

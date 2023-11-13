@@ -1,4 +1,4 @@
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 
 export class ListRegisterUseCase {
     async execute(userId: string) {
@@ -8,7 +8,7 @@ export class ListRegisterUseCase {
 
         try {
 
-            const registers = await client.access.findMany({
+            const registers = await prismaClient.access.findMany({
                 where: {
                     ownerId: userId
                 },

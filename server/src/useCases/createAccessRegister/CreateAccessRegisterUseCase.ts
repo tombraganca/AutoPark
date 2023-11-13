@@ -1,4 +1,4 @@
-import { client } from "../../providers/prisma/client";
+import { prismaClient } from "../../providers/prisma/client";
 import { connectMqtt } from "../../providers/mqttProvider/mqttServer";
 
 interface ICreateAccessRegisterRequestDTO {
@@ -17,7 +17,7 @@ export class CreateAccessRegisterUseCase {
 
         try {
 
-            const accessRegister = await client.access.create({
+            const accessRegister = await prismaClient.access.create({
                 data: {
                     date,
                     type: accessType,
