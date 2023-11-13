@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
     widget.homeCubit
       ..setIndexInit(0)
       ..getPermissionNotification();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.showDialogAcesso != null) {
         widget.showDialogAcesso!();

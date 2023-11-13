@@ -38,6 +38,7 @@ class FirebaseMessagingServiceImp
         if (message.notification != null) {
           _notificationDto = NotificationDto(
             id: message.data['orderId'] ?? '',
+            parkingId: message.data['parkingId'] ?? '',
             body: message.notification!.body!,
             title: message.notification!.title!,
             datahora: message.data['orderDate'] ?? '',
@@ -62,7 +63,7 @@ class FirebaseMessagingServiceImp
   void _goToPageAfterMessage(RemoteMessage message) {
     if (GetIt.I.get<UserDtoGlobal>().getUser().token.isNotEmpty) {
       RoutesApp.navigatorKey!.currentState!
-          .pushReplacementNamed('NOTIFICACAO', arguments: _notificationDto);
+          .pushNamed('NOTIFICACAO', arguments: _notificationDto);
     } else {
       showMessageError('Realize o login para prosseguir');
     }

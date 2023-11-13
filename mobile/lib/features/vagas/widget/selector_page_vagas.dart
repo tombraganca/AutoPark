@@ -27,7 +27,7 @@ class SelectorVagas extends StatelessWidget {
                     vagasCubit.changeList(SelectListVagas.disponivel);
                   },
                   child: Container(
-                    width: MediaQuery.sizeOf(context).width / 2.2,
+                    width: MediaQuery.sizeOf(context).width / 3.2,
                     decoration: BoxDecoration(
                       color: state.selectListVagas == SelectListVagas.disponivel
                           ? const Color.fromRGBO(74, 68, 88, 1)
@@ -50,11 +50,27 @@ class SelectorVagas extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    vagasCubit.changeList(SelectListVagas.todas);
-                  },
+                  onTap: () =>
+                      vagasCubit.changeList(SelectListVagas.reservadas),
                   child: Container(
-                    width: MediaQuery.sizeOf(context).width / 2.2,
+                    width: MediaQuery.sizeOf(context).width / 3.2,
+                    decoration: BoxDecoration(
+                      color: state.selectListVagas == SelectListVagas.reservadas
+                          ? const Color.fromRGBO(74, 68, 88, 1)
+                          : null,
+                      border: Border.all(width: 1.0, color: Colors.white),
+                    ),
+                    child: const Tab(
+                      child: Text('Reservadas',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () => vagasCubit.changeList(SelectListVagas.todas),
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width / 3.2,
                     decoration: BoxDecoration(
                       color: state.selectListVagas == SelectListVagas.todas
                           ? const Color.fromRGBO(74, 68, 88, 1)
@@ -69,7 +85,7 @@ class SelectorVagas extends StatelessWidget {
                       child: Text(
                         'Todas',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

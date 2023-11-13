@@ -1,3 +1,4 @@
+import 'package:auto_park/features/common/widget/search_filter.dart';
 import 'package:auto_park/features/estacionamentos/cubit/estacionamento_cubit.dart';
 import 'package:auto_park/features/estacionamentos/cubit/estacionamento_state.dart';
 import 'package:auto_park/features/estacionamentos/widgets/card_estacionamento.dart';
@@ -17,6 +18,7 @@ class Estacionamentos extends StatefulWidget {
 }
 
 class _EstacionamentosState extends State<Estacionamentos> {
+  final searchController = TextEditingController();
   @override
   void initState() {
     widget.estacionamentoCubit.getEstacionamentos();
@@ -30,51 +32,83 @@ class _EstacionamentosState extends State<Estacionamentos> {
             MediaQuery.of(context).padding.top +
             kBottomNavigationBarHeight));
     return Scaffold(
-      body: BlocBuilder<EstacionamentoCubit, EstacionamentoState>(
-          bloc: widget.estacionamentoCubit,
-          builder: (context, state) {
-            return Visibility(
-              visible: state.statusEstacionamento ==
-                  StatusEstacionamento.buscandoEstacionamentos,
-              replacement: SizedBox(
-                height: availableHeight,
-                child: RefreshIndicator(
-                  onRefresh: () =>
-                      widget.estacionamentoCubit.getEstacionamentos(),
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                    itemCount: state.listEstacionamentos.length,
-                    itemBuilder: (context, index) {
-                      return CardEstacionamento(
-                          estacionamentoEntity:
-                              state.listEstacionamentos[index]);
-                    },
-                  ),
-                ),
-              ),
-              child: SizedBox(
-                height: availableHeight,
-                width: MediaQuery.sizeOf(context).width,
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(Colors.white)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text(
-                        'Buscando estacionamentos...',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SingleChildScrollView(
+          child: BlocBuilder<EstacionamentoCubit, EstacionamentoState>(
+              bloc: widget.estacionamentoCubit,
+              builder: (context, state) {
+                return Visibility(
+                  visible: state.statusEstacionamento ==
+                      StatusEstacionamento.buscandoEstacionamentos,
+                  replacement: Column(
+                    children: [
+                      SizedBox(
+                        height: availableHeight * 0.1,
+                        width: MediaQuery.sizeOf(context).width * 0.95,
+                        child: Center(
+                          child: SearchFilterComponent(
+                            onTapOutside: (_) =>
+                                FocusScope.of(context).unfocus(),
+                            onChange: (value) {
+                              if (value != null &&
+                                  value.isNotEmpty &&
+                                  value.length > 3) {
+                                widget.estacionamentoCubit
+                                    .filterEstacionamentos(value);
+                              }
+                            },
+                            controller: searchController,
+                            onPressed: () {
+                              widget.estacionamentoCubit.clearFilter();
+                              searchController.clear();
+                            },
+                          ),
+                        ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-            );
-          }),
+                      SizedBox(
+                        height: availableHeight * 0.9,
+                        child: RefreshIndicator(
+                          onRefresh: () =>
+                              widget.estacionamentoCubit.getEstacionamentos(),
+                          child: ListView.builder(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            itemCount: state.listEstacionamentos.length,
+                            itemBuilder: (context, index) {
+                              return CardEstacionamento(
+                                  estacionamentoEntity:
+                                      state.listEstacionamentos[index]);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  child: SizedBox(
+                    height: availableHeight,
+                    width: MediaQuery.sizeOf(context).width,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                          child: Text(
+                            'Buscando estacionamentos...',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              }),
+        ),
+      ),
     );
   }
 }

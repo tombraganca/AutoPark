@@ -14,9 +14,6 @@ class EditarDados extends StatefulWidget {
 }
 
 class _EditarDadosState extends State<EditarDados> with Validators {
-  final senhaController = TextEditingController();
-  final newSenhaController = TextEditingController();
-  final confirmNewSenhaController = TextEditingController();
   final emailController = TextEditingController();
   final nomeController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -68,50 +65,6 @@ class _EditarDadosState extends State<EditarDados> with Validators {
                           decoration: const InputDecoration(
                               label: Text('Nome:'),
                               labelStyle: TextStyle(color: Colors.white)),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        child: TextFormField(
-                          validator: (value) => combineValidators(value, [
-                            (value) => isNotEmpty(value),
-                            (value) => hasSeisCaracteres(value!),
-                          ]),
-                          controller: senhaController,
-                          obscureText: state.obscureText,
-                          decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                icon: state.obscureText
-                                    ? const Icon(Icons.remove_red_eye_outlined)
-                                    : const Icon(Icons.remove_red_eye),
-                                onPressed: () =>
-                                    widget.minhaContaCubit.changeObscureText(),
-                              ),
-                              label: const Text('Nova Senha:'),
-                              labelStyle: const TextStyle(color: Colors.white)),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        child: TextFormField(
-                          validator: (value) => combineValidators(value, [
-                            (value) => isNotEmpty(value),
-                            (value) => hasSeisCaracteres(value!),
-                          ]),
-                          obscureText: state.obscureText,
-                          controller: confirmNewSenhaController,
-                          decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                icon: state.obscureText
-                                    ? const Icon(Icons.remove_red_eye_outlined)
-                                    : const Icon(Icons.remove_red_eye),
-                                onPressed: () =>
-                                    widget.minhaContaCubit.changeObscureText(),
-                              ),
-                              label: const Text('Confirme a nova senha:'),
-                              labelStyle: const TextStyle(color: Colors.white)),
                         ),
                       ),
                     ],

@@ -41,7 +41,7 @@ class _LoginState extends State<Login> with Validators {
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 35),
                     child: Text(
-                      'Bem-Vindo ao Auto Park',
+                      'Bem-Vindo ao Smart Park',
                       style: TextStyle(
                         fontSize: 22,
                       ),

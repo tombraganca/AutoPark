@@ -62,6 +62,11 @@ class MinhaConta extends StatelessWidget {
                         arguments: minhaContaCubit),
                     label: 'Editar dados'),
                 CustomButton(
+                    onPressed: () => Navigator.pushNamed(
+                        context, 'ALTERAR_SENHA',
+                        arguments: minhaContaCubit),
+                    label: 'Alterar senha'),
+                CustomButton(
                     onPressed: () => Navigator.pushNamedAndRemoveUntil(
                         context, 'LOGIN', (route) => false),
                     label: 'Sair'),

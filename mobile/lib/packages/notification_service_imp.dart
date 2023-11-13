@@ -48,7 +48,7 @@ class NotificationServiceImp with ToastMessages implements NotificationService {
   @override
   void onSelectNotification(String? payload) {
     if (payload != null && payload.isNotEmpty) {
-      Navigator.pushReplacementNamed(
+      Navigator.pushNamed(
           RoutesApp.navigatorKey!.currentContext!, payload.toUpperCase(),
           arguments: _notificationDto);
     }

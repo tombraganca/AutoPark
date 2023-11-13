@@ -4,7 +4,7 @@ import 'package:auto_park/features/vagas/cubit/vagas_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-enum SelectListVagas { disponivel, todas }
+enum SelectListVagas { disponivel, todas, reservadas }
 
 class VagasCubit extends Cubit<VagasState> {
   final VagasUseCase vagasUseCase;

@@ -3,13 +3,15 @@ import 'package:auto_park/core/domain/entities/vehicle_entity.dart';
 import 'package:intl/intl.dart';
 
 class NotificationDto extends NotificationEntity {
-  NotificationDto(
-      {required super.id,
-      required super.title,
-      required super.body,
-      required super.vehicleEntity,
-      required super.datahora,
-      required super.tipoDeAcesso});
+  NotificationDto({
+    required super.id,
+    required super.title,
+    required super.body,
+    required super.vehicleEntity,
+    required super.datahora,
+    required super.tipoDeAcesso,
+    required super.parkingId,
+  });
 
   factory NotificationDto.empty() {
     return NotificationDto(
@@ -17,6 +19,7 @@ class NotificationDto extends NotificationEntity {
         body: '',
         vehicleEntity: VehicleEntity.empty(),
         datahora: '',
+        parkingId: '',
         tipoDeAcesso: '',
         id: '');
   }
@@ -25,6 +28,7 @@ class NotificationDto extends NotificationEntity {
     return NotificationDto(
         title: json['notification']['title'],
         body: json['notification']['body'],
+        parkingId: json['parkingId'] ?? "",
         vehicleEntity: VehicleEntity(
           id: '',
           marca: json['data']['manufacturer'],

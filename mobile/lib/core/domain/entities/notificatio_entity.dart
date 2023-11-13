@@ -8,6 +8,7 @@ class NotificationEntity {
   final VehicleEntity vehicleEntity;
   final String datahora;
   final String tipoDeAcesso;
+  final String parkingId;
   NotificationEntity({
     required this.id,
     required this.title,
@@ -15,5 +16,6 @@ class NotificationEntity {
     required this.vehicleEntity,
     required this.datahora,
     required this.tipoDeAcesso,
+    required this.parkingId,
   });
 }

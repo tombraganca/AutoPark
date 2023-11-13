@@ -1,4 +1,4 @@
-import 'package:auto_park/core/data/dtos/notification_dto.dart';
+import 'package:auto_park/core/domain/entities/notificatio_entity.dart';
 import 'package:auto_park/features/cadastro/pages/cadastro.dart';
 import 'package:auto_park/features/dados_bancarios/cubit/dados_bancarios_cubit.dart';
 import 'package:auto_park/features/dados_bancarios/pages/dados_bancarios.dart';
@@ -6,9 +6,11 @@ import 'package:auto_park/features/home/cubit/home_cubit.dart';
 import 'package:auto_park/features/home/pages/home.dart';
 import 'package:auto_park/features/login/pages/login.dart';
 import 'package:auto_park/features/minha_conta/cubit/minha_conta_cubit.dart';
+import 'package:auto_park/features/minha_conta/pages/alterar_senha.dart';
 import 'package:auto_park/features/minha_conta/pages/editar_dados.dart';
 import 'package:auto_park/features/minha_conta/pages/minha_conta.dart';
-import 'package:auto_park/features/notificacao/widgets/dialog_acesso.dart';
+import 'package:auto_park/features/notificacao/cubit/notificacao_cubit.dart';
+import 'package:auto_park/features/notificacao/pages/notificacao.dart';
 import 'package:auto_park/features/vagas/cubit/vagas_cubit.dart';
 import 'package:auto_park/features/vagas/pages/vagas.dart';
 import 'package:flutter/material.dart';
@@ -36,12 +38,9 @@ class RoutesApp {
       case 'NOTIFICACAO':
         return MaterialPageRoute(
           settings: settings,
-          builder: (context) => Home(
-            homeCubit: GetIt.I.get<HomeCubit>(),
-            showDialogAcesso: (() => DialogAcesso(
-                    notificationDto: args as NotificationDto, context: context)
-                .show()),
-          ),
+          builder: (context) => Notificacao(
+              notificacaoCubit: GetIt.I.get<NotificacaoCubit>(),
+              notificationEntity: args as NotificationEntity),
         );
       case 'CADASTRO':
         return MaterialPageRoute(
@@ -66,6 +65,13 @@ class RoutesApp {
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => EditarDados(
+            minhaContaCubit: args as MinhaContaCubit,
+          ),
+        );
+      case 'ALTERAR_SENHA':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => AlterarSenha(
             minhaContaCubit: args as MinhaContaCubit,
           ),
         );
