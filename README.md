@@ -1,9 +1,9 @@
-# AutoPark
+# SmartPark
 Auto Park é um estacionamento autônomo que acomoda os carros nas vagas disponíveis e utiliza IA para validar o cadastro dos carros
 
-* [Design](https://www.figma.com/file/bK3G5ll5rnHdS2LEwv4ed3/AutoPark?node-id=0%3A1&t=yP3H130RSt0GWJXg-1)
-* [AutoPark Server](./server/README.md)
-* [AutoPark Stream](./CamStreaming/README.md)
+* [Design](https://www.figma.com/file/bK3G5ll5rnHdS2LEwv4ed3/SmartPark?node-id=0%3A1&t=yP3H130RSt0GWJXg-1)
+* [SmartPark Server](./server/README.md)
+* [SmartPark Stream](./CamStreaming/README.md)
 * [Plate Detection](PlateDetection/README.md)
 * [Vagas Detection](Vagas/README.md)
 
@@ -13,7 +13,7 @@ O Projeto em si é composto por 3 container que executados simutâneamente geram
 
 São eles:
 
-## **autopark-api**
+## **smartpark-api**
 
 É um container que executa todas as todas de requisões http, tanto publicas quanto privadas e faz o acesso ao banco de dados utilizando o ORM Prisma.
 
@@ -21,7 +21,7 @@ São eles:
 
 É uma instância que roda um banco de dados PostgreSql.
 
-## **auto-park-stream**
+## **smart-park-stream**
 
 Cointener que controla toda a questão de processamento de imagem e comunica como a API /request-access quando requisitada.
 

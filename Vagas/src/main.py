@@ -23,7 +23,7 @@ def main():
     check_video_capture(caps)
 
     canvas_width, canvas_height = 1960, 870
-    intervalo_tempo = 200
+    intervalo_tempo = 100
     tempo_atual = 0
 
     while True:
