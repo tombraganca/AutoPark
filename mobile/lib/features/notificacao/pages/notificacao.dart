@@ -118,11 +118,10 @@ class Notificacao extends StatelessWidget {
                       children: [
                         ElevatedButton.icon(
                           onPressed: () => notificacaoCubit.answerNotificacao(
-                            notificationEntity.tipoDeAcesso.toLowerCase() ==
-                                'in',
-                            notificationEntity.vehicleEntity.placa,
-                            notificationEntity.parkingId,
-                          ),
+                              notificationEntity.tipoDeAcesso.toLowerCase() ==
+                                  'in',
+                              notificationEntity.vehicleEntity.placa,
+                              notificationEntity.parkingId),
                           label: const Text(
                             'Sim, sou eu',
                             style: TextStyle(color: Colors.white),

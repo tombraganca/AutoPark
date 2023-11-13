@@ -86,7 +86,7 @@ class _RegistrosPageState extends State<RegistrosPage> {
                                 AlwaysStoppedAnimation<Color>(Colors.white)),
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text('Carregando a lista...'),
+                          child: Text('Carregando os registros...'),
                         )
                       ],
                     ),

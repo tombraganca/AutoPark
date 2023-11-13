@@ -49,6 +49,7 @@ class DadosBancariosPageState extends State<DadosBancariosPage> {
                         cardNumber: state.numeroCartao,
                         expiryDate: state.validadeCartao,
                         cardHolderName: state.nomeCartao,
+                        isHolderNameVisible: true,
                         cvvCode: state.cvvCartao,
                         cardBgColor: Colors.black87,
                         showBackView: state.showBackView,

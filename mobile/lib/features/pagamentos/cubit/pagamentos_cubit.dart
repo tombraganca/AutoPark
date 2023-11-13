@@ -14,28 +14,28 @@ class PagamentosCubit extends Cubit<PagamentosState> {
       SelectListPagamentos.emAberto: [
         PagamentosEntity(
             status: 'em aberto',
-            nomeEstacionamento: 'Estacionamento do josé',
-            valor: '123.312',
-            dataAbertura: '10/11/2023',
-            dataVencimento: '15/11/2023',
+            nomeEstacionamento: 'Estacionamento da Maria',
+            valor: '150.00',
+            dataAbertura: '13/11/2023',
+            dataVencimento: '20/11/2023',
             dataPagamento: '')
       ],
       SelectListPagamentos.pagos: [
         PagamentosEntity(
             status: 'pago',
-            nomeEstacionamento: 'Estacionamento do josé',
-            valor: '123.312',
-            dataAbertura: '10/11/2023',
+            nomeEstacionamento: 'Estacionamento da Maria',
+            valor: '150.00',
+            dataAbertura: '13/10/2023',
             dataVencimento: '',
-            dataPagamento: '15/11/2023')
+            dataPagamento: '18/10/2023')
       ],
       SelectListPagamentos.vencidos: [
         PagamentosEntity(
             status: 'vencido',
-            nomeEstacionamento: 'Estacionamento do josé',
-            valor: '123.312',
-            dataAbertura: '10/11/2023',
-            dataVencimento: '15/11/2023',
+            nomeEstacionamento: 'Estacionamento da Maria',
+            valor: '150.00',
+            dataAbertura: '10/09/2023',
+            dataVencimento: '20/09/2023',
             dataPagamento: '')
       ],
     };

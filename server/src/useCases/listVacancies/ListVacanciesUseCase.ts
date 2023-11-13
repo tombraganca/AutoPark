@@ -32,16 +32,16 @@ export class ListVacanciesUseCase {
         }
     }
 
-    defineVacancySituation(filter: "all" | "available" | "reservation"): VacancySituation | null {
+    defineVacancySituation(filter: "all" | "available" | "reservation"): VacancySituation | Object {
         switch (filter) {
             case "all":
-                return null;
+                return {};
             case "available":
                 return VacancySituation.FREE;
             case "reservation":
                 return VacancySituation.RESERVED;
             default:
-                return null;
+                return {};
         }
     }
 
