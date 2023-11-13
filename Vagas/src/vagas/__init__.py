@@ -20,7 +20,7 @@ def get_vagas():
     return vagas
 
 def send_vagas_ocupadas(vagas_ocupadas):
-    print("id das vagas a serem enviadas:", vagas_ocupadas)
+    print("situacao das vagas:", vagas_ocupadas)
     return
     load_dotenv()
     if len(vagas_ocupadas) == 0:
