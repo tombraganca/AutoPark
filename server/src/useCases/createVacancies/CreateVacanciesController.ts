@@ -3,7 +3,7 @@ import { CreateVacanciesUseCase } from "./CreateVacanciesUseCase";
 
 export class CreateVacanciesController {
     async handle(request: Request, response: Response) {
-        const { title, description, type, situation, businessId } = request.body;
+        const { title, description, type, situation, businessId, center, section } = request.body;
 
         if (!title || !type || !situation) {
             throw new Error("Missing params");
@@ -15,7 +15,9 @@ export class CreateVacanciesController {
             description,
             type,
             situation,
-            parkingId: businessId
+            parkingId: businessId,
+            center,
+            section
         });
         return response.json(vacancies);
     }
